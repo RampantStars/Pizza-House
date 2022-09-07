@@ -2,20 +2,24 @@
 
 .header {
   border-bottom: 1px solid $gray-line;
-  padding: 25px 0;
+  padding: 20px 0;
   margin: 10px 0;
 
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media (max-width: 650px) {
+      flex-direction: column;
+      row-gap: 15px;
+    }
   }
 
   &__logo {
     display: flex;
 
     img {
-      margin-right: 15px;
+      margin-right: 12px;
     }
 
     h1 {
