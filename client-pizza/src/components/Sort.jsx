@@ -8,8 +8,8 @@ function Sort({ value, onChangeSort }) {
     { name: 'Популярности ↓', sortProperty: 'rating', sortOrder: 'desc' },
     { name: 'Цене ↑', sortProperty: 'price', sortOrder: 'asc' },
     { name: 'Цене ↓', sortProperty: 'price', sortOrder: 'desc' },
-    { name: 'Алфавиту ↑', sortProperty: 'title', sortOrder: 'asc' },
-    { name: 'Алфавиту ↓', sortProperty: 'title', sortOrder: 'desc' },
+    { name: 'Алфавиту ↑', sortProperty: 'title', sortOrder: 'desc' },
+    { name: 'Алфавиту ↓', sortProperty: 'title', sortOrder: 'asc' },
   ];
 
   const onClickListItem = (index) => {

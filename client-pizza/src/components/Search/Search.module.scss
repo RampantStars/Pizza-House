@@ -1,0 +1,33 @@
+.root {
+  cursor: pointer;
+  width: 50px;
+  border-radius: 20px;
+  border: none;
+  transition: all 0.3s ease;
+  background-image: url('../../assets/img/Search.svg');
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: transparent;
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
+  &:focus {
+    cursor: text;
+    border: 2px solid #fe9d1e;
+    width: 200px;
+    background-position: 5px center;
+    padding: 12px 10px 12px 30px;
+    color: black;
+    &::placeholder {
+      color: #fe5d1e;
+      opacity: 0.4;
+    }
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: auto;
+    }
+  }
+  &::placeholder {
+    opacity: 0;
+  }
+}

@@ -34,4 +34,9 @@
       color: #7b7b7b;
     }
   }
+  &__right {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 }
