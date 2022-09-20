@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import { Search } from './Search';
+import { Search } from '../Search';
 
-import logoSvg from '../assets/img/pizza-logo.svg';
+import logoSvg from '../../assets/img/pizza-logo.svg';
 
 function Header({ searchValue, setSearchValue }) {
   return (

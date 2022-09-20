@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Sort({ value, onChangeSort }) {
+export function Sort({ value, onChangeSort }) {
   const [isVisible, setIsVisible] = React.useState(false);
 
   const list = [
@@ -55,5 +55,3 @@ function Sort({ value, onChangeSort }) {
     </div>
   );
 }
-
-export default Sort;

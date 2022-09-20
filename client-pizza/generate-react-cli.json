@@ -5,7 +5,7 @@
   "testLibrary": "Testing Library",
   "component": {
     "default": {
-      "cusstomTemlates": {
+      "customTemplates": {
         "component": "templates/default/index.jsx",
         "style": "templates/default/TemplateName.module.scss"
       },
