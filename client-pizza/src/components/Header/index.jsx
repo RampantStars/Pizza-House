@@ -4,7 +4,7 @@ import { Search } from '../Search';
 
 import logoSvg from '../../assets/img/pizza-logo.svg';
 
-function Header({ searchValue, setSearchValue }) {
+function Header() {
   return (
     <div className="header ">
       <div className="container">
@@ -53,7 +53,7 @@ function Header({ searchValue, setSearchValue }) {
               <span>3</span>
             </Link>
           </div>
-          <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+          <Search />
         </div>
       </div>
     </div>
