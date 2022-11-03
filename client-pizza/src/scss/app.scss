@@ -77,7 +77,8 @@ body {
 }
 
 .container {
-  width: $container-width;
+  max-width: $container-width;
+  width: 90%;
   margin: 0 auto;
 
   &--cart {
@@ -151,6 +152,7 @@ body {
   }
 
   &__item {
+    column-gap: 10px;
     display: flex;
     width: 100%;
     padding: 5px 0;
@@ -160,8 +162,6 @@ body {
     &-img {
       display: flex;
       align-items: center;
-      margin-right: 15px;
-      width: 10%;
 
       img {
         width: 80px;
@@ -192,7 +192,8 @@ body {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 13%;
+      column-gap: 5px;
+      width: 100px;
 
       &-minus {
         svg {
