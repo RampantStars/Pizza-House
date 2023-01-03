@@ -1,5 +1,7 @@
 import React from 'react';
 
+import styles from './Sort.module.scss';
+
 export function Sort({ value, onChangeSort }) {
   const [isVisible, setIsVisible] = React.useState(false);
 
@@ -18,8 +20,8 @@ export function Sort({ value, onChangeSort }) {
   };
 
   return (
-    <div className="sort">
-      <div className="sort__label">
+    <div className={styles.sort}>
+      <div className={styles.sort__label}>
         <svg
           width="10"
           height="6"
@@ -35,7 +37,7 @@ export function Sort({ value, onChangeSort }) {
         <span onClick={() => setIsVisible(!isVisible)}>{value.name}</span>
       </div>
       {isVisible && (
-        <div className="sort__popup">
+        <div className={styles.sort__popup}>
           <ul>
             {list.map((obj, i) => (
               <li

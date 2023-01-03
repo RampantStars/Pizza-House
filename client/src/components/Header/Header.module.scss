@@ -1,0 +1,73 @@
+@import '../../scss/variables';
+@import '../../scss/libs/normalize';
+
+.header {
+  border-bottom: 1px solid $gray-line;
+  padding: 20px 0;
+  margin: 10px 0;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: 650px) {
+      flex-direction: column;
+      row-gap: 15px;
+    }
+  }
+
+  .logo {
+    display: flex;
+
+    img {
+      margin-right: 12px;
+    }
+
+    h1 {
+      text-align: start;
+      color: #181818;
+      font-size: 24px;
+      letter-spacing: 1%;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    p {
+      color: #7b7b7b;
+    }
+  }
+}
+.right {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  line-height: 23px;
+  padding: 12px 25px;
+
+  @media (max-width: 650px) {
+    padding: 8px 15px;
+  }
+
+  svg {
+    margin-right: 8px;
+    margin-bottom: 1px;
+  }
+
+  span {
+    font-weight: 600;
+    font-size: 16px;
+  }
+}
+
+.delimiter {
+  width: 1px;
+  height: 25px;
+  background-color: rgba(255, 255, 255, 0.25);
+  margin-left: 14px;
+  margin-right: 14px;
+}

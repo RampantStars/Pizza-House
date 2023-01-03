@@ -1,26 +1,27 @@
-@import '../variables';
+@import '../../scss/variables';
+@import '../../scss/libs/normalize';
 
-.pizza-block {
+.pizza_block {
   width: 280px;
   text-align: center;
 
-  &-container {
+  .container {
     display: flex;
     justify-content: center;
   }
 
-  &__image {
+  .image {
     width: 260px;
   }
 
-  &__title {
+  .title {
     font-size: 20px;
     font-weight: 900;
     letter-spacing: 1%;
     margin-bottom: 20px;
   }
 
-  &__selector {
+  .selector {
     display: flex;
     background-color: #f3f3f3;
     border-radius: 10px;
@@ -52,7 +53,7 @@
     }
   }
 
-  &__bottom {
+  .bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -60,7 +61,7 @@
     padding: 6px;
   }
 
-  &__price {
+  .price {
     font-weight: bold;
     font-size: 22px;
     line-height: 27px;

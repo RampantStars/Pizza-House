@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 import { Search } from '../Search';
 
 import logoSvg from '../../assets/img/pizza-logo.svg';
+import styles from './Header.module.scss';
+import button from '../../scss/button.module.scss';
 
-function Header() {
+export const Header = () => {
   return (
-    <div className="header ">
-      <div className="container">
+    <div className={styles.header}>
+      <div className={`${styles.container}`}>
         <Link to="/">
-          <div className="header__logo">
+          <div className={styles.logo}>
             <img width="38" src={logoSvg} alt="Pizza logo" />
             <div>
               <h1>Pizza House</h1>
@@ -17,11 +19,11 @@ function Header() {
             </div>
           </div>
         </Link>
-        <div className="header__right">
+        <div className={styles.right}>
           <div className="header__cart">
-            <Link to="/cart" className="button button--cart">
+            <Link to="/cart" className={`${button.button} ${styles.button}`}>
               <span>520 ₽</span>
-              <div className="button__delimiter"></div>
+              <div className={styles.delimiter}></div>
               <svg
                 width="18"
                 height="18"
@@ -58,6 +60,4 @@ function Header() {
       </div>
     </div>
   );
-}
-
-export default Header;
+};

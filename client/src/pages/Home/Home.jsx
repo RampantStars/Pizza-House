@@ -1,13 +1,15 @@
 import React from 'react';
 
-import { Categories } from '../components/Categories';
-import { Sort } from '../components/Sort';
-import { PizzaBlock } from '../components/PizzaBlock';
-import { Skeleton } from '../components/PizzaBlock/Skeleton';
-import { Pagination } from '../components/Pagination';
-import { SearchContext } from '../App';
+import { Categories } from '../../components/Categories';
+import { Sort } from '../../components/Sort';
+import { PizzaBlock } from '../../components/PizzaBlock';
+import { Skeleton } from '../../components/PizzaBlock';
+import { Pagination } from '../../components/Pagination';
+import { SearchContext } from '../../App';
 
-const Home = () => {
+import styles from '../../app.module.scss';
+
+export const Home = () => {
   const { searchValue } = React.useContext(SearchContext);
   const [pizzas, setPizzas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -35,13 +37,13 @@ const Home = () => {
   }, [categoryId, sortType, searchValue, currentPage]);
 
   return (
-    <div className="container">
-      <div className="content__top">
+    <div className={styles.container}>
+      <div className={styles.content__top}>
         <Categories value={categoryId} onChangeCategory={(id) => setCategoryId(id)} />
         <Sort value={sortType} onChangeSort={(id) => setSortType(id)} />
       </div>
-      <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">
+      <h2 className={styles.content__title}>Все пиццы</h2>
+      <div className={styles.content__items}>
         {isLoading
           ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
           : pizzas.items.map((item) => <PizzaBlock key={item.id} {...item} />)}
@@ -50,5 +52,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;

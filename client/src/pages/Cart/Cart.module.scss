@@ -1,80 +1,5 @@
-@import './variables';
-@import './libs/normalize';
-
-@import './components/all';
-
-body {
-  background-color: #fff;
-}
-
-.wrapper {
-  width: calc(100vw - 100px);
-  height: 100%;
-  background-color: #fff;
-  margin: 25px auto;
-  border-radius: 10px;
-  max-width: 1400px;
-
-  @media (max-width: 650px) {
-    width: calc(120vw - 100px);
-  }
-}
-
-.content {
-  &__title {
-    font-weight: 800;
-    font-size: 35 px;
-    margin: 35px 0;
-  }
-
-  &__items {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(1, 1fr);
-    grid-column-gap: 11px;
-    grid-row-gap: 25px;
-
-    @media (max-width: 1400px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @media (max-width: 1060px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: 730px) {
-      grid-template-columns: repeat(1, 1fr);
-    }
-  }
-
-  &__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    @media (max-width: 1300px) {
-      flex-direction: column;
-
-      .categories {
-        margin-bottom: 30px;
-
-        ul {
-          li {
-            padding: 8px 20px;
-          }
-        }
-      }
-    }
-
-    @media (max-width: 390px) {
-      .sort {
-        b {
-          display: none;
-        }
-      }
-    }
-  }
-}
+@import '../../scss/variables';
+@import '../../scss/libs/normalize';
 
 .container {
   max-width: $container-width;
@@ -159,7 +84,7 @@ body {
     border-top: 1px solid $gray-line;
     border-bottom: 1px solid $gray-line;
 
-    &-img {
+    &_img {
       display: flex;
       align-items: center;
 
@@ -169,7 +94,7 @@ body {
       }
     }
 
-    &-info {
+    &Info {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -188,17 +113,20 @@ body {
       }
     }
 
-    &-count {
+    &Count {
       display: flex;
       align-items: center;
       justify-content: space-between;
       column-gap: 5px;
       width: 100px;
 
-      &-minus {
+      &Minus {
         svg {
           path:first-of-type {
             display: none;
+          }
+          path {
+            fill: #b6b6b6;
           }
         }
       }
@@ -208,7 +136,7 @@ body {
       }
     }
 
-    &-price {
+    &Price {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -221,7 +149,7 @@ body {
       }
     }
 
-    &-remove {
+    &Remove {
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -257,7 +185,7 @@ body {
   &__bottom {
     margin: 50px 0;
 
-    &-details {
+    &_details {
       display: flex;
       justify-content: space-between;
 
@@ -272,7 +200,7 @@ body {
       }
     }
 
-    &-buttons {
+    &_buttons {
       display: flex;
       justify-content: space-between;
       margin-top: 40px;

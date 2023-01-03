@@ -1,17 +1,20 @@
 import React from 'react';
 
-export function PizzaBlock({ title, price, imageUrl, types, sizes }) {
+import styles from './PizzaBlock.module.scss';
+import button from '../../scss/button.module.scss';
+
+export const PizzaBlock = ({ title, price, imageUrl, types, sizes }) => {
   const [activeTypeIndex, setActiveTypeIndex] = React.useState(0);
   const [activeSizeIndex, setActiveSizeIndex] = React.useState(0);
 
   const pizzaTypes = ['Тонкое', 'Традиционное'];
 
   return (
-    <div className="pizza-block-container">
-      <div className="pizza-block">
-        <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
-        <h4 className="pizza-block__title">{title}</h4>
-        <div className="pizza-block__selector">
+    <div className={styles.container}>
+      <div className={styles.pizza_block}>
+        <img className={styles.image} src={imageUrl} alt="Pizza" />
+        <h4 className={styles.title}>{title}</h4>
+        <div className={styles.selector}>
           <ul>
             {types.map((typeId) => (
               <li
@@ -33,9 +36,9 @@ export function PizzaBlock({ title, price, imageUrl, types, sizes }) {
             ))}
           </ul>
         </div>
-        <div className="pizza-block__bottom">
-          <div className="pizza-block__price">от {price} ₽</div>
-          <button className="button button--outline button--add">
+        <div className={styles.bottom}>
+          <div className={styles.price}>от {price} ₽</div>
+          <button className={`${button.button} ${button.outline} ${button.add}`}>
             <svg
               width="12"
               height="12"
@@ -54,4 +57,4 @@ export function PizzaBlock({ title, price, imageUrl, types, sizes }) {
       </div>
     </div>
   );
-}
+};
