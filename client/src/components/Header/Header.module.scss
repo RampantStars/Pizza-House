@@ -2,9 +2,10 @@
 @import '../../scss/libs/normalize';
 
 .header {
+  width: 95%;
   border-bottom: 1px solid $gray-line;
   padding: 20px 0;
-  margin: 10px 0;
+  margin: 10px auto;
 
   .container {
     display: flex;

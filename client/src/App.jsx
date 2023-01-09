@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Cart } from './pages/Cart';
 import { NotFound } from './pages/NotFound';
+import { Header } from './components/Header';
 
 import styles from './app.module.scss';
 
@@ -15,6 +16,7 @@ function App() {
     <div className={styles.container}>
       <div className={styles.App}>
         <SearchContext.Provider value={{ searchValue, setSearchValue }}>
+          <Header />
           <div className={styles.content}>
             <Routes>
               <Route path="/" element={<Home />} />
