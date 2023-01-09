@@ -8,22 +8,23 @@ import { Pagination } from '../../components/Pagination';
 import { SearchContext } from '../../App';
 
 import styles from '../../app.module.scss';
+import { categoryStore } from '../../Utils/Store/Store';
 
 export const Home = () => {
   const { searchValue } = React.useContext(SearchContext);
   const [pizzas, setPizzas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [categoryId, setCategoryId] = React.useState(0);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [sortType, setSortType] = React.useState({
     name: 'Популярности ↑',
     sortProperty: 'rating',
     sortOrder: 'asc',
   });
+  const currentCategory = categoryStore((state) => state.currentCategory);
 
   React.useEffect(() => {
     setIsLoading(true);
-    const category = categoryId > 0 ? `category=${categoryId}` : '';
+    const category = currentCategory.id > 0 ? `category=${currentCategory.id}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
     fetch(
       `https://62e276b3e8ad6b66d85c02f7.mockapi.io/pizzas/?page=${currentPage}&limit=8&${category}&sortBy=${sortType.sortProperty}&order=${sortType.sortOrder}${search}`,
@@ -34,12 +35,12 @@ export const Home = () => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue, currentPage]);
+  }, [currentCategory, sortType, searchValue, currentPage]);
 
   return (
     <div className={styles.container}>
       <div className={styles.content__top}>
-        <Categories value={categoryId} onChangeCategory={(id) => setCategoryId(id)} />
+        <Categories value={currentCategory.id} />
         <Sort value={sortType} onChangeSort={(id) => setSortType(id)} />
       </div>
       <h2 className={styles.content__title}>Все пиццы</h2>
