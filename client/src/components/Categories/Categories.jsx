@@ -4,7 +4,7 @@ import styles from './Categories.module.scss';
 import { CategorySkeleton } from './Skeleton';
 
 export const Categories = ({ value }) => {
-  const categories = categoryStore((state) => state.category);
+  const categories = categoryStore((state) => state.categories);
   const selectCategory = categoryStore((state) => state.selectCategory);
 
   const isLoading = false;
