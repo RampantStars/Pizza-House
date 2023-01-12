@@ -2,10 +2,11 @@
 @import '../../scss/libs/normalize';
 
 .pizza_block {
+  margin: 0 auto;
   width: 280px;
   text-align: center;
 
-  .container {
+  .PizzaContainer {
     display: flex;
     justify-content: center;
   }

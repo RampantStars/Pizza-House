@@ -10,7 +10,7 @@ export const PizzaBlock = ({ title, price, imageUrl, types, sizes }) => {
   const pizzaTypes = ['Тонкое', 'Традиционное'];
 
   return (
-    <div className={styles.container}>
+    <div className={styles.PizzaContainer}>
       <div className={styles.pizza_block}>
         <img className={styles.image} src={imageUrl} alt="Pizza" />
         <h4 className={styles.title}>{title}</h4>

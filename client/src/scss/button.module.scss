@@ -2,11 +2,13 @@
 @import './libs/normalize';
 
 .button {
+  display: inline-flex;
+  column-gap: 2px;
+  align-items: center;
   background-color: $orange;
   border-radius: 30px;
   padding: 10px 20px;
   min-width: 100px;
-  text-align: center;
   cursor: pointer;
   transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
   border: 1px solid transparent;
