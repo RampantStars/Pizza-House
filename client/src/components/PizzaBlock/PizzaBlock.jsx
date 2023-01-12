@@ -20,7 +20,7 @@ export const PizzaBlock = ({ title, price, imageUrl, types, sizes }) => {
               <li
                 key={typeId}
                 onClick={() => setActiveTypeIndex(typeId)}
-                className={activeTypeIndex === typeId ? 'active' : ' '}>
+                className={activeTypeIndex === typeId ? `${styles.active}` : ' '}>
                 {pizzaTypes[typeId]}
               </li>
             ))}
@@ -30,7 +30,7 @@ export const PizzaBlock = ({ title, price, imageUrl, types, sizes }) => {
               <li
                 key={size}
                 onClick={() => setActiveSizeIndex(index)}
-                className={activeSizeIndex === index ? 'active' : ' '}>
+                className={activeSizeIndex === index ? `${styles.active}` : ' '}>
                 {size}
               </li>
             ))}
