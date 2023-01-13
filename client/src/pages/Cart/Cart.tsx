@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import styles from './Cart.module.scss';
 import button from '../../scss/button.module.scss';
 
-export const Cart = () => {
+export const Cart: React.FC = () => {
   return (
     <div className={`${styles.container} ${styles.container_cart}`}>
       <div className={styles.cart}>
