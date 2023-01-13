@@ -6,7 +6,7 @@ import logoSvg from '../../assets/img/pizza-logo.svg';
 import styles from './Header.module.scss';
 import button from '../../scss/button.module.scss';
 
-export const Header = () => {
+export const Header: React.FC = () => {
   return (
     <div className={styles.header}>
       <div className={`${styles.container}`}>
