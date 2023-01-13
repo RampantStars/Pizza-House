@@ -37,7 +37,7 @@ export const Home: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.content__top}>
-        <Categories value={currentCategory.id} />
+        <Categories />
         <Sort />
       </div>
       <h2 className={styles.content__title}>Все пиццы</h2>
