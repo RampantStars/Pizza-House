@@ -51,6 +51,7 @@ export const Home: React.FC = () => {
           setCurrentPage(number);
         }}
         pizzasCount={pizzas.count}
+        currentPage={currentPage}
       />
     </div>
   );
