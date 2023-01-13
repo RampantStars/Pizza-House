@@ -3,7 +3,15 @@ import React from 'react';
 import styles from './PizzaBlock.module.scss';
 import button from '../../scss/button.module.scss';
 
-export const PizzaBlock = ({ title, price, imageUrl, types, sizes }) => {
+type PizzaBlockProps = {
+  title: string;
+  price: string;
+  imageUrl: string;
+  types: number[];
+  sizes: number[];
+};
+
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({ title, price, imageUrl, types, sizes }) => {
   const [activeTypeIndex, setActiveTypeIndex] = React.useState(0);
   const [activeSizeIndex, setActiveSizeIndex] = React.useState(0);
 
