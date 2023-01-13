@@ -3,7 +3,7 @@ import { SearchContext } from '../../App';
 
 import styles from './Search.module.scss';
 
-export const Search = () => {
+export const Search: React.FC = () => {
   const { searchValue, setSearchValue } = React.useContext(SearchContext);
   return (
     <input
