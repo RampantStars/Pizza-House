@@ -16,7 +16,7 @@ export const Categories = ({ value }) => {
           : categories.map((category) => (
               <li
                 key={category.id}
-                onClick={() => selectCategory(category.id)}
+                onClick={() => selectCategory(category)}
                 className={`${styles.item} ${value === category.id ? `${styles.active}` : ''}`}>
                 {category.value}
               </li>

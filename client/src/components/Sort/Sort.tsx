@@ -1,23 +1,14 @@
 import React from 'react';
+import { filterStore } from '../../Utils/Store/Store';
 
 import styles from './Sort.module.scss';
 
-export function Sort({ value, onChangeSort }) {
+export const Sort: React.FC = () => {
   const [isVisible, setIsVisible] = React.useState(false);
 
-  const list = [
-    { name: 'Популярности ↑', sortProperty: 'rating', sortOrder: 'asc' },
-    { name: 'Популярности ↓', sortProperty: 'rating', sortOrder: 'desc' },
-    { name: 'Цене ↑', sortProperty: 'price', sortOrder: 'asc' },
-    { name: 'Цене ↓', sortProperty: 'price', sortOrder: 'desc' },
-    { name: 'Алфавиту ↑', sortProperty: 'title', sortOrder: 'desc' },
-    { name: 'Алфавиту ↓', sortProperty: 'title', sortOrder: 'asc' },
-  ];
-
-  const onClickListItem = (index) => {
-    onChangeSort(index);
-    setIsVisible(!isVisible);
-  };
+  const filters = filterStore((state) => state.filters);
+  const currentFilter = filterStore((state) => state.currentFilter);
+  const selectedFilter = filterStore((state) => state.selectedFilter);
 
   return (
     <div className={styles.sort}>
@@ -34,17 +25,18 @@ export function Sort({ value, onChangeSort }) {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setIsVisible(!isVisible)}>{value.name}</span>
+        <span onClick={() => setIsVisible(!isVisible)}>{currentFilter.name}</span>
       </div>
       {isVisible && (
         <div className={styles.sort__popup}>
           <ul>
-            {list.map((obj, i) => (
+            {filters.map((obj, id) => (
               <li
-                key={i}
-                onClick={() => onClickListItem(obj)}
+                key={id}
+                onClick={() => selectedFilter(id)}
                 className={
-                  value.sortProperty === obj.sortProperty && value.sortOrder === obj.sortOrder
+                  currentFilter.sortProperty === obj.sortProperty &&
+                  currentFilter.sortOrder === obj.sortOrder
                     ? 'active'
                     : ''
                 }>
@@ -56,4 +48,4 @@ export function Sort({ value, onChangeSort }) {
       )}
     </div>
   );
-}
+};
