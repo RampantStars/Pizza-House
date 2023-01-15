@@ -2,20 +2,40 @@ import React from 'react';
 
 import styles from './PizzaBlock.module.scss';
 import button from '../../scss/button.module.scss';
+import { cartStore } from '../../Utils/Store/Store';
+
+type Category = {
+  id: string;
+  value: string;
+};
 
 type PizzaBlockProps = {
+  id: number;
   title: string;
-  price: string;
+  price: number;
   imageUrl: string;
   types: number[];
   sizes: number[];
+  category: Category[];
 };
 
-export const PizzaBlock: React.FC<PizzaBlockProps> = ({ title, price, imageUrl, types, sizes }) => {
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({
+  id,
+  title,
+  price,
+  imageUrl,
+  types,
+  sizes,
+  category,
+}) => {
   const [activeTypeIndex, setActiveTypeIndex] = React.useState(0);
   const [activeSizeIndex, setActiveSizeIndex] = React.useState(0);
 
   const pizzaTypes = ['Тонкое', 'Традиционное'];
+
+  const { addToCart } = cartStore(({ addToCart }) => ({
+    addToCart,
+  }));
 
   return (
     <div className={styles.PizzaContainer}>
@@ -46,7 +66,20 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({ title, price, imageUrl, 
         </div>
         <div className={styles.bottom}>
           <div className={styles.price}>от {price} ₽</div>
-          <button className={`${button.button} ${button.outline} ${button.add}`}>
+          <button
+            onClick={() =>
+              addToCart({
+                id,
+                title,
+                type: pizzaTypes[activeTypeIndex],
+                size: sizes[activeSizeIndex],
+                imageUrl,
+                price,
+                category,
+                quantity: 1,
+              })
+            }
+            className={`${button.button} ${button.outline} ${button.add}`}>
             <svg
               width="12"
               height="12"
@@ -59,7 +92,6 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({ title, price, imageUrl, 
               />
             </svg>
             <span>Добавить</span>
-            <i>0</i>
           </button>
         </div>
       </div>

@@ -5,8 +5,14 @@ import { Search } from '../Search';
 import logoSvg from '../../assets/img/pizza-logo.svg';
 import styles from './Header.module.scss';
 import button from '../../scss/button.module.scss';
+import { cartStore } from '../../Utils/Store/Store';
 
 export const Header: React.FC = () => {
+  const { getTotalQuantity, getTotalPrice } = cartStore(({ getTotalQuantity, getTotalPrice }) => ({
+    getTotalQuantity,
+    getTotalPrice,
+  }));
+
   return (
     <div className={styles.header}>
       <div className={`${styles.container}`}>
@@ -22,7 +28,7 @@ export const Header: React.FC = () => {
         <div className={styles.right}>
           <div className="header__cart">
             <Link to="/cart" className={`${button.button} ${styles.button}`}>
-              <span>520 ₽</span>
+              <span>{`${getTotalPrice()} ₽`}</span>
               <div className={styles.delimiter}></div>
               <svg
                 width="18"
@@ -52,7 +58,7 @@ export const Header: React.FC = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>3</span>
+              <span>{getTotalQuantity()}</span>
             </Link>
           </div>
           <Search />

@@ -15,7 +15,8 @@
   @include noselect();
 
   &,
-  span {
+  span,
+  b {
     color: #fff;
   }
 
@@ -157,6 +158,5 @@
 .payBtn {
   font-size: 16px;
   font-weight: 600;
-  width: 210px;
   padding: 16px;
 }
