@@ -3,11 +3,7 @@ import React from 'react';
 import styles from './PizzaBlock.module.scss';
 import button from '../../scss/button.module.scss';
 import { cartStore } from '../../Utils/Store/Store';
-
-type Category = {
-  id: string;
-  value: string;
-};
+import { Category } from '../../Utils/types/types';
 
 type PizzaBlockProps = {
   id: number;
@@ -76,7 +72,6 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({
                 imageUrl,
                 price,
                 category,
-                quantity: 1,
               })
             }
             className={`${button.button} ${button.outline} ${button.add}`}>

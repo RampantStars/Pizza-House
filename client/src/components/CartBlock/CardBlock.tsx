@@ -4,24 +4,15 @@ import styles from './CartBlock.module.scss';
 import button from '../../scss/button.module.scss';
 import { cartStore } from '../../Utils/Store/Store';
 import { shallow } from 'zustand/shallow';
+import { PizzaCart } from '../../Utils/types/types';
 
 type CardBlockProps = {
-  id: number;
-  imageUrl: string;
-  title: string;
-  type: number;
-  size: number;
+  id: string;
+  item: PizzaCart;
   quantity: number;
 };
 
-export const CardBlock: React.FC<CardBlockProps> = ({
-  id,
-  imageUrl,
-  title,
-  type,
-  size,
-  quantity,
-}) => {
+export const CardBlock: React.FC<CardBlockProps> = ({ id, item, quantity }) => {
   const { getItemPrice, decrementQuantity, incrementQuantity, removeFromCart } = cartStore(
     ({ getItemPrice, decrementQuantity, incrementQuantity, removeFromCart }) => ({
       getItemPrice,
@@ -35,11 +26,11 @@ export const CardBlock: React.FC<CardBlockProps> = ({
   return (
     <li className={styles.cart__item}>
       <div className={styles.cart__item_img}>
-        <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+        <img className="pizza-block__image" src={item.imageUrl} alt="Pizza" />
       </div>
       <div className={styles.cart__itemInfo}>
-        <h3>{title}</h3>
-        <p>{` ${type}, ${size} см.`}</p>
+        <h3>{item.title}</h3>
+        <p>{` ${item.type}, ${item.size} см.`}</p>
       </div>
       <div className={styles.cart__itemCount}>
         <button

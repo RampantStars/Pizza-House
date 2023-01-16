@@ -6,6 +6,7 @@ import styles from './Cart.module.scss';
 import button from '../../scss/button.module.scss';
 import { cartStore } from '../../Utils/Store/Store';
 import { CardBlock } from '../../components/CartBlock';
+import { CartItem } from '../../Utils/types/types';
 
 export const Cart: React.FC = () => {
   const { cart, getTotalPrice, getTotalQuantity, removeCart } = cartStore(
@@ -94,8 +95,8 @@ export const Cart: React.FC = () => {
           </div>
         </div>
         <ul className={styles.content__items}>
-          {cart.map((item: any) => (
-            <CardBlock key={item.id} {...item} />
+          {cart.map((item: CartItem) => (
+            <CardBlock key={item.id} id={item.id} item={item.item} quantity={item.quantity} />
           ))}
         </ul>
         <div className={styles.cart__bottom}>
