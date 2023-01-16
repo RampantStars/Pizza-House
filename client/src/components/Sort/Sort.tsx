@@ -1,14 +1,16 @@
 import React from 'react';
-import { filterStore } from '../../Utils/Store/Store';
+import { shallow } from 'zustand/shallow';
+import { useFilterStore } from '../../Utils/Stores/FilterStore';
 
 import styles from './Sort.module.scss';
 
 export const Sort: React.FC = () => {
   const [isVisible, setIsVisible] = React.useState(false);
 
-  const filters = filterStore((state) => state.filters);
-  const currentFilter = filterStore((state) => state.currentFilter);
-  const selectedFilter = filterStore((state) => state.selectedFilter);
+  const { filters, currentFilter, selectedFilter } = useFilterStore(
+    ({ filters, currentFilter, selectedFilter }) => ({ filters, currentFilter, selectedFilter }),
+    shallow,
+  );
 
   return (
     <div className={styles.sort}>

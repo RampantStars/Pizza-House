@@ -2,9 +2,9 @@ import React from 'react';
 
 import styles from './CartBlock.module.scss';
 import button from '../../scss/button.module.scss';
-import { cartStore } from '../../Utils/Store/Store';
 import { shallow } from 'zustand/shallow';
 import { PizzaCart } from '../../Utils/types/types';
+import { useCartStore } from '../../Utils/Stores/CartStore';
 
 type CardBlockProps = {
   id: string;
@@ -13,7 +13,7 @@ type CardBlockProps = {
 };
 
 export const CardBlock: React.FC<CardBlockProps> = ({ id, item, quantity }) => {
-  const { getItemPrice, decrementQuantity, incrementQuantity, removeFromCart } = cartStore(
+  const { getItemPrice, decrementQuantity, incrementQuantity, removeFromCart } = useCartStore(
     ({ getItemPrice, decrementQuantity, incrementQuantity, removeFromCart }) => ({
       getItemPrice,
       decrementQuantity,

@@ -4,12 +4,12 @@ import { shallow } from 'zustand/shallow';
 
 import styles from './Cart.module.scss';
 import button from '../../scss/button.module.scss';
-import { cartStore } from '../../Utils/Store/Store';
 import { CardBlock } from '../../components/CartBlock';
 import { CartItem } from '../../Utils/types/types';
+import { useCartStore } from '../../Utils/Stores/CartStore';
 
 export const Cart: React.FC = () => {
-  const { cart, getTotalPrice, getTotalQuantity, removeCart } = cartStore(
+  const { cart, getTotalPrice, getTotalQuantity, removeCart } = useCartStore(
     ({ cart, getTotalPrice, getTotalQuantity, removeCart }) => ({
       cart,
       getTotalPrice,

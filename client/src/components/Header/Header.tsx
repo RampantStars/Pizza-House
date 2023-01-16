@@ -5,13 +5,15 @@ import { Search } from '../Search';
 import logoSvg from '../../assets/img/pizza-logo.svg';
 import styles from './Header.module.scss';
 import button from '../../scss/button.module.scss';
-import { cartStore } from '../../Utils/Store/Store';
+import { useCartStore } from '../../Utils/Stores/CartStore';
 
 export const Header: React.FC = () => {
-  const { getTotalQuantity, getTotalPrice } = cartStore(({ getTotalQuantity, getTotalPrice }) => ({
-    getTotalQuantity,
-    getTotalPrice,
-  }));
+  const { getTotalQuantity, getTotalPrice } = useCartStore(
+    ({ getTotalQuantity, getTotalPrice }) => ({
+      getTotalQuantity,
+      getTotalPrice,
+    }),
+  );
 
   return (
     <div className={styles.header}>

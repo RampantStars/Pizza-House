@@ -2,8 +2,8 @@ import React from 'react';
 
 import styles from './PizzaBlock.module.scss';
 import button from '../../scss/button.module.scss';
-import { cartStore } from '../../Utils/Store/Store';
 import { Category } from '../../Utils/types/types';
+import { useCartStore } from '../../Utils/Stores/CartStore';
 
 type PizzaBlockProps = {
   id: number;
@@ -29,7 +29,7 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({
 
   const pizzaTypes = ['Тонкое', 'Традиционное'];
 
-  const { addToCart } = cartStore(({ addToCart }) => ({
+  const { addToCart } = useCartStore(({ addToCart }) => ({
     addToCart,
   }));
 

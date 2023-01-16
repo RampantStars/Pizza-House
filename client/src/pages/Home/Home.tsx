@@ -8,7 +8,8 @@ import { Pagination } from '../../components/Pagination';
 import { SearchContext } from '../../App';
 
 import styles from '../../app.module.scss';
-import { categoryStore, filterStore } from '../../Utils/Store/Store';
+import { useCategoryStore } from '../../Utils/Stores/CategoryStore';
+import { useFilterStore } from '../../Utils/Stores/FilterStore';
 
 export const Home: React.FC = () => {
   const { searchValue } = React.useContext(SearchContext);
@@ -16,8 +17,8 @@ export const Home: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
 
-  const currentCategory = categoryStore((state) => state.currentCategory);
-  const currentFilter = filterStore((state) => state.currentFilter);
+  const currentCategory = useCategoryStore((state) => state.currentCategory);
+  const currentFilter = useFilterStore((state) => state.currentFilter);
 
   React.useEffect(() => {
     setIsLoading(true);

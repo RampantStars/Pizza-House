@@ -1,12 +1,18 @@
 import React from 'react';
-import { categoryStore } from '../../Utils/Store/Store';
+import { shallow } from 'zustand/shallow';
+import { useCategoryStore } from '../../Utils/Stores/CategoryStore';
 import styles from './Categories.module.scss';
 import { CategorySkeleton } from './Skeleton';
 
 export const Categories: React.FC = () => {
-  const currentCategory = categoryStore((state) => state.currentCategory);
-  const categories = categoryStore((state) => state.categories);
-  const selectCategory = categoryStore((state) => state.selectCategory);
+  const { currentCategory, categories, selectCategory } = useCategoryStore(
+    ({ currentCategory, categories, selectCategory }) => ({
+      currentCategory,
+      categories,
+      selectCategory,
+    }),
+    shallow,
+  );
 
   const isLoading = false;
   return (
