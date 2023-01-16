@@ -10,21 +10,17 @@ import styles from './app.module.scss';
 export const SearchContext = React.createContext();
 
 function App() {
-  const [searchValue, setSearchValue] = React.useState('');
-
   return (
     <div className={styles.container}>
       <div className={styles.App}>
-        <SearchContext.Provider value={{ searchValue, setSearchValue }}>
-          <Header />
-          <div className={styles.content}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-        </SearchContext.Provider>
+        <Header />
+        <div className={styles.content}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );

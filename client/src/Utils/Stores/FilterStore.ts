@@ -10,7 +10,7 @@ interface IFilterStore {
 }
 
 export const useFilterStore = create<IFilterStore>()((set, get) => ({
-  search: ' ',
+  search: '',
   filters: [
     { name: 'Популярности ↑', sortProperty: 'rating', sortOrder: 'asc' },
     { name: 'Популярности ↓', sortProperty: 'rating', sortOrder: 'desc' },

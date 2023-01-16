@@ -5,27 +5,31 @@ import { Sort } from '../../components/Sort';
 import { PizzaBlock } from '../../components/PizzaBlock';
 import { Skeleton } from '../../components/PizzaBlock';
 import { Pagination } from '../../components/Pagination';
-import { SearchContext } from '../../App';
 
 import styles from '../../app.module.scss';
 import { useCategoryStore } from '../../Utils/Stores/CategoryStore';
 import { useFilterStore } from '../../Utils/Stores/FilterStore';
+import { shallow } from 'zustand/shallow';
 
 export const Home: React.FC = () => {
-  const { searchValue } = React.useContext(SearchContext);
   const [pizzas, setPizzas] = React.useState<any>([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
 
   const currentCategory = useCategoryStore((state) => state.currentCategory);
-  const currentFilter = useFilterStore((state) => state.currentFilter);
+  const { search, currentFilter } = useFilterStore(
+    ({ search, currentFilter }) => ({
+      search,
+      currentFilter,
+    }),
+    shallow,
+  );
 
   React.useEffect(() => {
     setIsLoading(true);
-    const category = currentCategory.id !== '0' ? `category=${currentCategory.id}` : '';
-    const search = searchValue ? `&search=${searchValue}` : '';
+    const category = currentCategory.id !== '0' ? `&category=${currentCategory.id}` : '';
     fetch(
-      `https://62e276b3e8ad6b66d85c02f7.mockapi.io/pizzas/?page=${currentPage}&limit=8&${category}&sortBy=${currentFilter.sortProperty}&order=${currentFilter.sortOrder}${search}`,
+      `https://62e276b3e8ad6b66d85c02f7.mockapi.io/pizzas/?page=${currentPage}&limit=8&sortBy=${currentFilter.sortProperty}&order=${currentFilter.sortOrder}$&search=${search}${category}`,
     )
       .then((response) => response.json())
       .then((json) => {
@@ -33,7 +37,7 @@ export const Home: React.FC = () => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [currentCategory, currentFilter, searchValue, currentPage]);
+  }, [currentCategory, currentFilter, search, currentPage]);
 
   return (
     <div className={styles.container}>
