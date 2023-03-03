@@ -1,0 +1,1 @@
+{"version":3,"file":"create-role.dto.js","sourceRoot":"","sources":["../../../src/role/dto/create-role.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,gEAA8D;AAE9D,MAAa,aAAa;CAKzB;AAJC;IAAC,IAAA,wBAAW,EAAC,EAAE,OAAO,EAAE,OAAO,EAAE,WAAW,EAAE,eAAe,EAAE,CAAC;;4CACzC;AACvB;IAAC,IAAA,wBAAW,EAAC,EAAE,OAAO,EAAE,eAAe,EAAE,WAAW,EAAE,eAAe,EAAE,CAAC;;kDAC3C;AAJ/B,sCAKC"}

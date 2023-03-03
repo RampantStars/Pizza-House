@@ -7,23 +7,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const role_module_1 = require("./role/role.module");
+const role_entity_1 = require("./role/entities/role.entity");
 const modules_1 = require("@nestjs/common/decorators/modules");
-const sequelize_module_1 = require("@nestjs/sequelize/dist/sequelize.module");
+const config_1 = require("@nestjs/config");
+const typeorm_1 = require("@nestjs/typeorm");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, modules_1.Module)({
         imports: [
-            sequelize_module_1.SequelizeModule.forRoot({
-                dialect: 'postgres',
-                host: 'localhost',
-                port: 5432,
-                username: 'postgres',
-                password: 'postgres',
-                database: 'pizzaDb',
-                models: [],
-                autoLoadModels: true,
+            config_1.ConfigModule.forRoot({
+                envFilePath: '.env',
             }),
+            typeorm_1.TypeOrmModule.forRoot({
+                type: 'postgres',
+                host: process.env.POSTGRES_HOST,
+                port: Number(process.env.POSTGRES_PORT),
+                username: process.env.POSTGRES_USER,
+                password: process.env.POSTGRES_PASSWORD,
+                database: process.env.POSTGRES_DB,
+                entities: [role_entity_1.Role],
+                synchronize: true,
+            }),
+            role_module_1.RoleModule,
         ],
     })
 ], AppModule);
