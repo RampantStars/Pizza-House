@@ -12,7 +12,7 @@ export class RoleService {
     private roleRepository: Repository<Role>,
   ) {}
 
-  async createRole(CreateRoleDto: CreateRoleDto) {
+  async createRole(CreateRoleDto: CreateRoleDto): Promise<Role> {
     const role = await this.roleRepository.create(CreateRoleDto);
     return this.roleRepository.save(role);
   }
@@ -22,7 +22,7 @@ export class RoleService {
     return roles;
   }
 
-  async findOneRole(id: number): Promise<Role | null> {
+  async findOneRole(id: number): Promise<Role> {
     const role = await this.roleRepository.findOneBy({ id });
     if (!role) {
       throw new NotFoundException(`Role with ID=${id} not found`);
