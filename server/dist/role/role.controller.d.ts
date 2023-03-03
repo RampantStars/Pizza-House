@@ -7,7 +7,7 @@ export declare class RoleController {
     constructor(roleService: RoleService);
     create(createRoleDto: CreateRoleDto): Promise<Role>;
     findAll(): Promise<Role[]>;
-    findOne(id: string): Promise<Role | null>;
+    findOne(id: string): Promise<Role>;
     update(id: string, updateRoleDto: UpdateRoleDto): Promise<Role>;
     remove(id: string): Promise<Role>;
 }

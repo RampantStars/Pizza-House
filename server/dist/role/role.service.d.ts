@@ -7,7 +7,7 @@ export declare class RoleService {
     constructor(roleRepository: Repository<Role>);
     createRole(CreateRoleDto: CreateRoleDto): Promise<Role>;
     findAllRole(): Promise<Role[]>;
-    findOneRole(id: number): Promise<Role | null>;
+    findOneRole(id: number): Promise<Role>;
     updateRole(id: number, updateRoleDto: UpdateRoleDto): Promise<Role>;
     removeRole(id: number): Promise<Role>;
 }
