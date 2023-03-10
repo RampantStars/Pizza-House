@@ -7,11 +7,17 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SizeModule } from './size/size.module';
 import { DoughTypeModule } from './dough-type/dough-type.module';
+import { FilesModule } from './files/files.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import * as path from 'path';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: path.resolve(__dirname, 'client'),
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -26,6 +32,7 @@ import { DoughTypeModule } from './dough-type/dough-type.module';
     RoleModule,
     SizeModule,
     DoughTypeModule,
+    FilesModule,
   ],
 })
 export class AppModule {}

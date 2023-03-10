@@ -16,6 +16,9 @@ const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const size_module_1 = require("./size/size.module");
 const dough_type_module_1 = require("./dough-type/dough-type.module");
+const files_module_1 = require("./files/files.module");
+const serve_static_1 = require("@nestjs/serve-static");
+const path = require("path");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -23,6 +26,9 @@ AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({
                 envFilePath: '.env',
+            }),
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: path.resolve(__dirname, 'client'),
             }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
@@ -37,6 +43,7 @@ AppModule = __decorate([
             role_module_1.RoleModule,
             size_module_1.SizeModule,
             dough_type_module_1.DoughTypeModule,
+            files_module_1.FilesModule,
         ],
     })
 ], AppModule);
