@@ -11,6 +11,6 @@ export declare class IngredientService {
     createIngredient(createIngredientDto: CreateIngredientDto, image: Express.Multer.File): Promise<Ingredient>;
     findAllIngredients(): Promise<Ingredient[]>;
     findOneIngredient(id: number): Promise<Ingredient>;
-    updateIngredient(id: number, updateIngredientDto: UpdateIngredientDto): Promise<Ingredient>;
+    updateIngredient(id: number, updateIngredientDto: UpdateIngredientDto, image: Express.Multer.File): Promise<Ingredient>;
     removeIngredient(id: number): Promise<Ingredient>;
 }

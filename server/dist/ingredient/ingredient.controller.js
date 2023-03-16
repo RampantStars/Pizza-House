@@ -34,8 +34,8 @@ let IngredientController = class IngredientController {
     findOne(id) {
         return this.ingredientService.findOneIngredient(+id);
     }
-    update(id, updateIngredientDto) {
-        return this.ingredientService.updateIngredient(+id, updateIngredientDto);
+    update(id, updateIngredientDto, image) {
+        return this.ingredientService.updateIngredient(+id, updateIngredientDto, image);
     }
     remove(id) {
         return this.ingredientService.removeIngredient(+id);
@@ -71,10 +71,18 @@ __decorate([
 ], IngredientController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
+    (0, decorators_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', {
+        storage: (0, multer_1.diskStorage)({
+            destination: './uploads',
+            filename: file_uploading_utils_1.editFileName,
+        }),
+        fileFilter: file_uploading_utils_1.imageFileFilter,
+    })),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
+    __param(2, (0, decorators_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_ingredient_dto_1.UpdateIngredientDto]),
+    __metadata("design:paramtypes", [String, update_ingredient_dto_1.UpdateIngredientDto, Object]),
     __metadata("design:returntype", void 0)
 ], IngredientController.prototype, "update", null);
 __decorate([

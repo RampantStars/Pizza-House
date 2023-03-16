@@ -47,11 +47,25 @@ export class IngredientController {
   }
 
   @Patch(':id')
+  @UseInterceptors(
+    FileInterceptor('image', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: editFileName,
+      }),
+      fileFilter: imageFileFilter,
+    }),
+  )
   update(
     @Param('id') id: string,
     @Body() updateIngredientDto: UpdateIngredientDto,
+    @UploadedFile() image: Express.Multer.File,
   ) {
-    return this.ingredientService.updateIngredient(+id, updateIngredientDto);
+    return this.ingredientService.updateIngredient(
+      +id,
+      updateIngredientDto,
+      image,
+    );
   }
 
   @Delete(':id')

@@ -8,6 +8,6 @@ export declare class IngredientController {
     create(createIngredientDto: CreateIngredientDto, file: Express.Multer.File): Promise<import("./entities/ingredient.entity").Ingredient>;
     findAll(): Promise<import("./entities/ingredient.entity").Ingredient[]>;
     findOne(id: string): Promise<import("./entities/ingredient.entity").Ingredient>;
-    update(id: string, updateIngredientDto: UpdateIngredientDto): Promise<import("./entities/ingredient.entity").Ingredient>;
+    update(id: string, updateIngredientDto: UpdateIngredientDto, image: Express.Multer.File): Promise<import("./entities/ingredient.entity").Ingredient>;
     remove(id: string): Promise<import("./entities/ingredient.entity").Ingredient>;
 }

@@ -18,6 +18,7 @@ const ingredient_entity_1 = require("./entities/ingredient.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const common_1 = require("@nestjs/common");
 const typeorm_2 = require("typeorm");
+const fs_1 = require("fs");
 let IngredientService = class IngredientService {
     constructor(ingredientRepository, typeIngredientService) {
         this.ingredientRepository = ingredientRepository;
@@ -47,7 +48,7 @@ let IngredientService = class IngredientService {
         }
         return ingredient;
     }
-    async updateIngredient(id, updateIngredientDto) {
+    async updateIngredient(id, updateIngredientDto, image) {
         const ingredient = await this.ingredientRepository.preload(Object.assign({ id: id }, updateIngredientDto));
         if (!ingredient) {
             throw new common_1.NotFoundException(`Ingredient with ID=${id} not found`);
@@ -58,6 +59,16 @@ let IngredientService = class IngredientService {
                 throw new common_1.NotFoundException(`Ingredient with not found`);
             }
             ingredient.typeIngredient = type;
+        }
+        if (image) {
+            (0, fs_1.unlink)(`./uploads/${ingredient.imageUrl}`, (err) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                console.log('file deleted');
+            });
+            ingredient.imageUrl = image.filename;
         }
         return this.ingredientRepository.save(ingredient);
     }
