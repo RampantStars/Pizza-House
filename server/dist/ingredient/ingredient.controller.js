@@ -18,12 +18,15 @@ const ingredient_service_1 = require("./ingredient.service");
 const create_ingredient_dto_1 = require("./dto/create-ingredient.dto");
 const update_ingredient_dto_1 = require("./dto/update-ingredient.dto");
 const decorators_1 = require("@nestjs/common/decorators");
+const platform_express_1 = require("@nestjs/platform-express");
+const multer_1 = require("multer");
+const file_uploading_utils_1 = require("../utils/file-uploading.utils");
 let IngredientController = class IngredientController {
     constructor(ingredientService) {
         this.ingredientService = ingredientService;
     }
-    create(createIngredientDto, image) {
-        return this.ingredientService.createIngredient(createIngredientDto, image);
+    create(createIngredientDto, file) {
+        return this.ingredientService.createIngredient(createIngredientDto, file);
     }
     findAll() {
         return this.ingredientService.findAllIngredients();
@@ -40,6 +43,13 @@ let IngredientController = class IngredientController {
 };
 __decorate([
     (0, common_1.Post)(),
+    (0, decorators_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', {
+        storage: (0, multer_1.diskStorage)({
+            destination: './uploads',
+            filename: file_uploading_utils_1.editFileName,
+        }),
+        fileFilter: file_uploading_utils_1.imageFileFilter,
+    })),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, decorators_1.UploadedFile)()),
     __metadata("design:type", Function),

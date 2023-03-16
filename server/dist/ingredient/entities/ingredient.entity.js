@@ -25,7 +25,7 @@ __decorate([
     __metadata("design:type", String)
 ], Ingredient.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Ingredient.prototype, "imageUrl", void 0);
 __decorate([

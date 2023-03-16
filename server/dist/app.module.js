@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const platform_express_1 = require("@nestjs/platform-express");
 const ingredient_entity_1 = require("./ingredient/entities/ingredient.entity");
 const type_ingredient_entity_1 = require("./type-ingredient/entities/type-ingredient.entity");
 const dough_type_entity_1 = require("./dough-type/entities/dough-type.entity");
@@ -21,11 +22,17 @@ const dough_type_module_1 = require("./dough-type/dough-type.module");
 const type_ingredient_module_1 = require("./type-ingredient/type-ingredient.module");
 const recipe_module_1 = require("./recipe/recipe.module");
 const ingredient_module_1 = require("./ingredient/ingredient.module");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, modules_1.Module)({
         imports: [
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, '..', 'uploads'),
+            }),
+            platform_express_1.MulterModule.register({ dest: './uploads' }),
             config_1.ConfigModule.forRoot({
                 envFilePath: '.env',
             }),

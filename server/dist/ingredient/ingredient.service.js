@@ -28,7 +28,7 @@ let IngredientService = class IngredientService {
         if (!type) {
             throw new common_1.NotFoundException(`Ingredient with not found`);
         }
-        const ingredient = this.ingredientRepository.create(Object.assign(Object.assign({}, createIngredientDto), { typeIngredient: type }));
+        const ingredient = this.ingredientRepository.create(Object.assign(Object.assign({}, createIngredientDto), { imageUrl: image.filename, typeIngredient: type }));
         return this.ingredientRepository.save(ingredient);
     }
     async findAllIngredients() {

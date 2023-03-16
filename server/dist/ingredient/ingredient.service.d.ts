@@ -1,3 +1,4 @@
+/// <reference types="multer" />
 import { TypeIngredientService } from './../type-ingredient/type-ingredient.service';
 import { Ingredient } from './entities/ingredient.entity';
 import { CreateIngredientDto } from './dto/create-ingredient.dto';
@@ -7,7 +8,7 @@ export declare class IngredientService {
     private ingredientRepository;
     private typeIngredientService;
     constructor(ingredientRepository: Repository<Ingredient>, typeIngredientService: TypeIngredientService);
-    createIngredient(createIngredientDto: CreateIngredientDto, image: any): Promise<Ingredient>;
+    createIngredient(createIngredientDto: CreateIngredientDto, image: Express.Multer.File): Promise<Ingredient>;
     findAllIngredients(): Promise<Ingredient[]>;
     findOneIngredient(id: number): Promise<Ingredient>;
     updateIngredient(id: number, updateIngredientDto: UpdateIngredientDto): Promise<Ingredient>;
