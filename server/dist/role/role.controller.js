@@ -49,12 +49,16 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], RoleController.prototype, "create", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Получение всех ролей' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: [role_entity_1.Role] }),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], RoleController.prototype, "findAll", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Получение роли' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: role_entity_1.Role }),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -62,6 +66,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], RoleController.prototype, "findOne", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Обновление роли' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: role_entity_1.Role }),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -70,6 +76,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], RoleController.prototype, "update", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Обновление роли' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: role_entity_1.Role }),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

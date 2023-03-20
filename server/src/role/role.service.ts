@@ -41,7 +41,7 @@ export class RoleService {
     return this.roleRepository.save(role);
   }
 
-  async removeRole(id: number) {
+  async removeRole(id: number): Promise<Role> {
     const role = await this.roleRepository.findOneBy({ id });
     if (!role) {
       throw new NotFoundException(`Role with ID=${id} not found`);
