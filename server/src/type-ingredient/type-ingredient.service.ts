@@ -22,13 +22,18 @@ export class TypeIngredientService {
   }
 
   async findAllTypeIngredient(): Promise<TypeIngredient[]> {
-    const typeIngredients = await this.typeIngredientRepository.find();
+    const typeIngredients = await this.typeIngredientRepository.find({
+      relations: {
+        ingredients: true,
+      },
+    });
     return typeIngredients;
   }
 
   async findOneTypeIngredient(id: number) {
-    const typeIngredient = await this.typeIngredientRepository.findOneBy({
-      id,
+    const typeIngredient = await this.typeIngredientRepository.findOne({
+      where: { id: id },
+      relations: { ingredients: true },
     });
     if (!typeIngredient) {
       throw new NotFoundException(`TypeIngredient with ID=${id} not found`);

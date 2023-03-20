@@ -17,7 +17,7 @@ export class Ingredient {
   @ManyToOne(
     () => TypeIngredient,
     (typeIngredient) => typeIngredient.ingredients,
-    { onDelete: 'CASCADE' },
+    { cascade: ['remove'] },
   )
   typeIngredient: TypeIngredient;
 }

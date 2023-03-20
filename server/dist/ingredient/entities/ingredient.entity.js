@@ -29,7 +29,7 @@ __decorate([
     __metadata("design:type", String)
 ], Ingredient.prototype, "imageUrl", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => type_ingredient_entity_1.TypeIngredient, (typeIngredient) => typeIngredient.ingredients, { onDelete: 'CASCADE' }),
+    (0, typeorm_1.ManyToOne)(() => type_ingredient_entity_1.TypeIngredient, (typeIngredient) => typeIngredient.ingredients, { cascade: ['remove'] }),
     __metadata("design:type", type_ingredient_entity_1.TypeIngredient)
 ], Ingredient.prototype, "typeIngredient", void 0);
 Ingredient = __decorate([

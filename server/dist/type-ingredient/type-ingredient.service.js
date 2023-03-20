@@ -26,12 +26,17 @@ let TypeIngredientService = class TypeIngredientService {
         return this.typeIngredientRepository.save(typeIngredient);
     }
     async findAllTypeIngredient() {
-        const typeIngredients = await this.typeIngredientRepository.find();
+        const typeIngredients = await this.typeIngredientRepository.find({
+            relations: {
+                ingredients: true,
+            },
+        });
         return typeIngredients;
     }
     async findOneTypeIngredient(id) {
-        const typeIngredient = await this.typeIngredientRepository.findOneBy({
-            id,
+        const typeIngredient = await this.typeIngredientRepository.findOne({
+            where: { id: id },
+            relations: { ingredients: true },
         });
         if (!typeIngredient) {
             throw new common_1.NotFoundException(`TypeIngredient with ID=${id} not found`);
