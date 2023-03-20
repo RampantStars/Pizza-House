@@ -21,14 +21,17 @@ __decorate([
     __metadata("design:type", Number)
 ], Ingredient.prototype, "id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Капуста', description: 'Название ингредиента' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Ingredient.prototype, "name", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'url', description: 'Ссылка на изображение' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Ingredient.prototype, "imageUrl", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: type_ingredient_entity_1.TypeIngredient, description: 'Тип ингредиента' }),
     (0, typeorm_1.ManyToOne)(() => type_ingredient_entity_1.TypeIngredient, (typeIngredient) => typeIngredient.ingredients, { cascade: ['remove'] }),
     __metadata("design:type", type_ingredient_entity_1.TypeIngredient)
 ], Ingredient.prototype, "typeIngredient", void 0);

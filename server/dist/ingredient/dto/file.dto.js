@@ -9,21 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateIngredientDto = void 0;
+exports.fileDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
-class CreateIngredientDto {
+class fileDto {
 }
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Капуста', description: 'Название ингредиента' }),
-    __metadata("design:type", String)
-], CreateIngredientDto.prototype, "name", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Файл', description: 'Ссылка на картинку роли' }),
-    __metadata("design:type", String)
-], CreateIngredientDto.prototype, "imageUrl", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ example: '1', description: 'Id типа ингредиента' }),
-    __metadata("design:type", Number)
-], CreateIngredientDto.prototype, "typeIngredientId", void 0);
-exports.CreateIngredientDto = CreateIngredientDto;
-//# sourceMappingURL=create-ingredient.dto.js.map
+    (0, swagger_1.ApiProperty)({ type: 'string', format: 'binary' }),
+    __metadata("design:type", Object)
+], fileDto.prototype, "file", void 0);
+exports.fileDto = fileDto;
+//# sourceMappingURL=file.dto.js.map

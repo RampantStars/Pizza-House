@@ -15,10 +15,7 @@ export class IngredientService {
     private typeIngredientService: TypeIngredientService,
   ) {}
 
-  async createIngredient(
-    createIngredientDto: CreateIngredientDto,
-    image: Express.Multer.File,
-  ) {
+  async createIngredient(createIngredientDto: CreateIngredientDto) {
     const type = await this.typeIngredientService.findOneTypeIngredient(
       createIngredientDto.typeIngredientId,
     );
@@ -28,7 +25,6 @@ export class IngredientService {
 
     const ingredient = this.ingredientRepository.create({
       ...createIngredientDto,
-      imageUrl: image.filename,
       typeIngredient: type,
     });
     return this.ingredientRepository.save(ingredient);

@@ -8,7 +8,7 @@ export declare class IngredientService {
     private ingredientRepository;
     private typeIngredientService;
     constructor(ingredientRepository: Repository<Ingredient>, typeIngredientService: TypeIngredientService);
-    createIngredient(createIngredientDto: CreateIngredientDto, image: Express.Multer.File): Promise<Ingredient>;
+    createIngredient(createIngredientDto: CreateIngredientDto): Promise<Ingredient>;
     findAllIngredients(): Promise<Ingredient[]>;
     findOneIngredient(id: number): Promise<Ingredient>;
     updateIngredient(id: number, updateIngredientDto: UpdateIngredientDto, image: Express.Multer.File): Promise<Ingredient>;

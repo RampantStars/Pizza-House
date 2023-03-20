@@ -8,12 +8,14 @@ export class Ingredient {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty({ example: 'Капуста', description: 'Название ингредиента' })
   @Column()
   name: string;
-
+  @ApiProperty({ example: 'url', description: 'Ссылка на изображение' })
   @Column()
   imageUrl: string;
 
+  @ApiProperty({ example: TypeIngredient, description: 'Тип ингредиента' })
   @ManyToOne(
     () => TypeIngredient,
     (typeIngredient) => typeIngredient.ingredients,

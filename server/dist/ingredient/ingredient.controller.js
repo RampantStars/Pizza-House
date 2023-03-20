@@ -13,6 +13,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IngredientController = void 0;
+const ingredient_entity_1 = require("./entities/ingredient.entity");
+const dist_1 = require("@nestjs/swagger/dist");
 const common_1 = require("@nestjs/common");
 const ingredient_service_1 = require("./ingredient.service");
 const create_ingredient_dto_1 = require("./dto/create-ingredient.dto");
@@ -26,7 +28,10 @@ let IngredientController = class IngredientController {
         this.ingredientService = ingredientService;
     }
     create(createIngredientDto, file) {
-        return this.ingredientService.createIngredient(createIngredientDto, file);
+        if (file) {
+            createIngredientDto.imageUrl = file.filename;
+        }
+        return this.ingredientService.createIngredient(createIngredientDto);
     }
     findAll() {
         return this.ingredientService.findAllIngredients();
@@ -42,6 +47,8 @@ let IngredientController = class IngredientController {
     }
 };
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Добавление ингредиента' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: ingredient_entity_1.Ingredient }),
     (0, common_1.Post)(),
     (0, decorators_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', {
         storage: (0, multer_1.diskStorage)({
@@ -57,12 +64,16 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], IngredientController.prototype, "create", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Получение всех ингредиентов' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: [ingredient_entity_1.Ingredient] }),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], IngredientController.prototype, "findAll", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Получение ингредиента' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: ingredient_entity_1.Ingredient }),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -70,6 +81,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], IngredientController.prototype, "findOne", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Изменение ингредиента' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: ingredient_entity_1.Ingredient }),
     (0, common_1.Patch)(':id'),
     (0, decorators_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', {
         storage: (0, multer_1.diskStorage)({
@@ -86,6 +99,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], IngredientController.prototype, "update", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Удаление ингредиента' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: [ingredient_entity_1.Ingredient] }),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -93,6 +108,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], IngredientController.prototype, "remove", null);
 IngredientController = __decorate([
+    (0, dist_1.ApiTags)('Ингредиенты'),
     (0, common_1.Controller)('ingredient'),
     __metadata("design:paramtypes", [ingredient_service_1.IngredientService])
 ], IngredientController);

@@ -24,12 +24,12 @@ let IngredientService = class IngredientService {
         this.ingredientRepository = ingredientRepository;
         this.typeIngredientService = typeIngredientService;
     }
-    async createIngredient(createIngredientDto, image) {
+    async createIngredient(createIngredientDto) {
         const type = await this.typeIngredientService.findOneTypeIngredient(createIngredientDto.typeIngredientId);
         if (!type) {
             throw new common_1.NotFoundException(`Ingredient with not found`);
         }
-        const ingredient = this.ingredientRepository.create(Object.assign(Object.assign({}, createIngredientDto), { imageUrl: image.filename, typeIngredient: type }));
+        const ingredient = this.ingredientRepository.create(Object.assign(Object.assign({}, createIngredientDto), { typeIngredient: type }));
         return this.ingredientRepository.save(ingredient);
     }
     async findAllIngredients() {
