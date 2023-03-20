@@ -73,7 +73,7 @@ __decorate([
     (0, common_1.Patch)(':id'),
     (0, decorators_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', {
         storage: (0, multer_1.diskStorage)({
-            destination: './uploads',
+            destination: './uploads/ingredient',
             filename: file_uploading_utils_1.editFileName,
         }),
         fileFilter: file_uploading_utils_1.imageFileFilter,
