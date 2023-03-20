@@ -64,7 +64,7 @@ export class IngredientController {
   @UseInterceptors(
     FileInterceptor('image', {
       storage: diskStorage({
-        destination: './uploads/ingredient',
+        destination: './uploads',
         filename: editFileName,
       }),
       fileFilter: imageFileFilter,
