@@ -12,7 +12,7 @@ export class SizeService {
     private sizeRepository: Repository<Size>,
   ) {}
 
-  async createSize(createSizeDto: CreateSizeDto) {
+  async createSize(createSizeDto: CreateSizeDto): Promise<Size> {
     const size = await this.sizeRepository.create(createSizeDto);
     return this.sizeRepository.save(size);
   }
@@ -41,7 +41,7 @@ export class SizeService {
     return this.sizeRepository.save(size);
   }
 
-  async removeSize(id: number) {
+  async removeSize(id: number): Promise<Size> {
     const size = await this.sizeRepository.findOneBy({ id });
     if (!size) {
       throw new NotFoundException(`Size with ID=${id} not found`);

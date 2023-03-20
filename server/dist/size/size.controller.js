@@ -13,6 +13,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SizeController = void 0;
+const dist_1 = require("@nestjs/swagger/dist");
+const size_entity_1 = require("./entities/size.entity");
 const common_1 = require("@nestjs/common");
 const size_service_1 = require("./size.service");
 const create_size_dto_1 = require("./dto/create-size.dto");
@@ -38,6 +40,8 @@ let SizeController = class SizeController {
     }
 };
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Добавление размера пиццы' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: size_entity_1.Size }),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -45,12 +49,16 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], SizeController.prototype, "create", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Получение всех размеров пиццы' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: [size_entity_1.Size] }),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], SizeController.prototype, "findAll", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Получение размера пиццы' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: size_entity_1.Size }),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -58,6 +66,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], SizeController.prototype, "findOne", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Изменение размера пиццы' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: size_entity_1.Size }),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -66,6 +76,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], SizeController.prototype, "update", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Удаление размера пиццы' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: size_entity_1.Size }),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -73,6 +85,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], SizeController.prototype, "remove", null);
 SizeController = __decorate([
+    (0, dist_1.ApiTags)('Размер пиццы'),
     (0, common_1.Controller)('size'),
     __metadata("design:paramtypes", [size_service_1.SizeService])
 ], SizeController);
