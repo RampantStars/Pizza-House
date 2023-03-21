@@ -1,6 +1,14 @@
+import { Recipe } from './../../recipe/entities/recipe.entity';
 import { TypeIngredient } from './../../type-ingredient/entities/type-ingredient.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  JoinTable,
+} from 'typeorm';
 
 @Entity()
 export class Ingredient {
@@ -19,7 +27,11 @@ export class Ingredient {
   @ManyToOne(
     () => TypeIngredient,
     (typeIngredient) => typeIngredient.ingredients,
-    { cascade: ['remove'] },
+    { cascade: true },
   )
   typeIngredient: TypeIngredient;
+
+  // @ManyToMany(() => Recipe, (recipe) => recipe.ingredients, { cascade: true })
+  // @JoinTable()
+  // recipes: Recipe[];
 }

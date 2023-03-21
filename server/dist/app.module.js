@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const recipe_entity_1 = require("./recipe/entities/recipe.entity");
 const platform_express_1 = require("@nestjs/platform-express");
 const ingredient_entity_1 = require("./ingredient/entities/ingredient.entity");
 const type_ingredient_entity_1 = require("./type-ingredient/entities/type-ingredient.entity");
@@ -43,7 +44,7 @@ AppModule = __decorate([
                 username: process.env.POSTGRES_USER,
                 password: process.env.POSTGRES_PASSWORD,
                 database: process.env.POSTGRES_DB,
-                entities: [role_entity_1.Role, size_entity_1.Size, dough_type_entity_1.DoughType, type_ingredient_entity_1.TypeIngredient, ingredient_entity_1.Ingredient],
+                entities: [role_entity_1.Role, size_entity_1.Size, dough_type_entity_1.DoughType, type_ingredient_entity_1.TypeIngredient, ingredient_entity_1.Ingredient, recipe_entity_1.Recipe],
                 synchronize: true,
             }),
             role_module_1.RoleModule,

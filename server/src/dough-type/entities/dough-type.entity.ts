@@ -1,5 +1,12 @@
+import { Recipe } from './../../recipe/entities/recipe.entity';
 import { ApiProperty } from '@nestjs/swagger/dist/decorators';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class DoughType {
@@ -17,4 +24,8 @@ export class DoughType {
   })
   @Column()
   price: number;
+
+  // @ManyToMany(() => Recipe, (recipe) => recipe.doughtTypes, { cascade: true })
+  // @JoinTable()
+  // recipes: Recipe[];
 }

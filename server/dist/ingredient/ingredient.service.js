@@ -56,7 +56,7 @@ let IngredientService = class IngredientService {
         if (updateIngredientDto.typeIngredientId) {
             const type = await this.typeIngredientService.findOneTypeIngredient(updateIngredientDto.typeIngredientId);
             if (!type) {
-                throw new common_1.NotFoundException(`Ingredient with not found`);
+                throw new common_1.NotFoundException(`Type with not found`);
             }
             ingredient.typeIngredient = type;
         }

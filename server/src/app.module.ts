@@ -1,3 +1,4 @@
+import { Recipe } from './recipe/entities/recipe.entity';
 import { MulterModule } from '@nestjs/platform-express';
 import { Ingredient } from './ingredient/entities/ingredient.entity';
 import { TypeIngredient } from './type-ingredient/entities/type-ingredient.entity';
@@ -32,7 +33,7 @@ import { join } from 'path';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      entities: [Role, Size, DoughType, TypeIngredient, Ingredient],
+      entities: [Role, Size, DoughType, TypeIngredient, Ingredient, Recipe],
       synchronize: true,
     }),
     RoleModule,

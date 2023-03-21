@@ -67,7 +67,7 @@ export class IngredientService {
         updateIngredientDto.typeIngredientId,
       );
       if (!type) {
-        throw new NotFoundException(`Ingredient with not found`);
+        throw new NotFoundException(`Type with not found`);
       }
       ingredient.typeIngredient = type;
     }

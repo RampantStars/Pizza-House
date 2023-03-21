@@ -1,3 +1,4 @@
+import { Ingredient } from './../../ingredient/entities/ingredient.entity';
 import { DoughType } from './../../dough-type/entities/dough-type.entity';
 import { Size } from './../../size/entities/size.entity';
 export declare class Recipe {
@@ -7,6 +8,6 @@ export declare class Recipe {
     description: string;
     salePercent: number;
     sizes: Size[];
-    doughTypes: DoughType[];
-    userRecipe: boolean;
+    doughtTypes: DoughType[];
+    ingredients: Ingredient[];
 }

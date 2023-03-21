@@ -1,5 +1,9 @@
-import { CreateRecipeDto } from './create-recipe.dto';
-declare const UpdateRecipeDto_base: import("@nestjs/common").Type<Partial<CreateRecipeDto>>;
-export declare class UpdateRecipeDto extends UpdateRecipeDto_base {
+export declare class UpdateRecipeDto {
+    readonly name?: string;
+    imageUrl?: string;
+    readonly description?: string;
+    readonly salePercent?: number;
+    readonly sizes?: string[];
+    readonly doughTypes?: string[];
+    readonly ingredients?: string[];
 }
-export {};

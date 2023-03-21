@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Recipe = void 0;
+const ingredient_entity_1 = require("./../../ingredient/entities/ingredient.entity");
 const dough_type_entity_1 = require("./../../dough-type/entities/dough-type.entity");
 const size_entity_1 = require("./../../size/entities/size.entity");
 const swagger_1 = require("@nestjs/swagger");
@@ -22,35 +23,67 @@ __decorate([
     __metadata("design:type", Number)
 ], Recipe.prototype, "id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 'Пицца 4 перца',
+        description: 'Название рецепта пиццы',
+    }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Recipe.prototype, "name", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 'url',
+        description: 'Изображение пиццы',
+    }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Recipe.prototype, "imageUrl", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, swagger_1.ApiProperty)({
+        example: 'Для тех кто любит поострей',
+        description: 'Описание пиццы',
+    }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Recipe.prototype, "description", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, swagger_1.ApiProperty)({
+        example: '10',
+        description: 'Процент скидки на пиццу пиццы',
+    }),
+    (0, typeorm_1.Column)({ nullable: true, default: 0 }),
     __metadata("design:type", Number)
 ], Recipe.prototype, "salePercent", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: [size_entity_1.Size],
+        example: size_entity_1.Size,
+        description: 'Какие размеры будут в данном рецепте у пиццы',
+    }),
     (0, typeorm_1.ManyToMany)(() => size_entity_1.Size, { cascade: true }),
     (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
 ], Recipe.prototype, "sizes", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: [dough_type_entity_1.DoughType],
+        example: dough_type_entity_1.DoughType,
+        description: 'Какие типы теста будут в данном рецепте у пиццы',
+    }),
     (0, typeorm_1.ManyToMany)(() => dough_type_entity_1.DoughType, { cascade: true }),
     (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
-], Recipe.prototype, "doughTypes", void 0);
+], Recipe.prototype, "doughtTypes", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: false }),
-    __metadata("design:type", Boolean)
-], Recipe.prototype, "userRecipe", void 0);
+    (0, swagger_1.ApiProperty)({
+        type: [ingredient_entity_1.Ingredient],
+        example: ingredient_entity_1.Ingredient,
+        description: 'Какие ингредиенты будут в данном рецепте у пиццы',
+    }),
+    (0, typeorm_1.ManyToMany)(() => ingredient_entity_1.Ingredient, { cascade: true }),
+    (0, typeorm_1.JoinTable)(),
+    __metadata("design:type", Array)
+], Recipe.prototype, "ingredients", void 0);
 Recipe = __decorate([
     (0, typeorm_1.Entity)()
 ], Recipe);
