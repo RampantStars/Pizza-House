@@ -36,6 +36,13 @@ let RoleService = class RoleService {
         }
         return role;
     }
+    async findOneRoleByValue(value) {
+        const role = await this.roleRepository.findOneBy({ value });
+        if (!role) {
+            throw new common_1.NotFoundException(`Role with ID=${value} not found`);
+        }
+        return role;
+    }
     async updateRole(id, updateRoleDto) {
         const role = await this.roleRepository.preload(Object.assign({ id: id }, updateRoleDto));
         if (!role) {

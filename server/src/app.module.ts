@@ -1,3 +1,4 @@
+import { User } from './user/entities/user.entity';
 import { OrderStatus } from './order-status/entities/order-status.entity';
 import { Recipe } from './recipe/entities/recipe.entity';
 import { MulterModule } from '@nestjs/platform-express';
@@ -18,6 +19,7 @@ import { IngredientModule } from './ingredient/ingredient.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { OrderStatusModule } from './order-status/order-status.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -43,6 +45,7 @@ import { OrderStatusModule } from './order-status/order-status.module';
         Ingredient,
         Recipe,
         OrderStatus,
+        User,
       ],
       synchronize: true,
     }),
@@ -53,6 +56,7 @@ import { OrderStatusModule } from './order-status/order-status.module';
     RecipeModule,
     IngredientModule,
     OrderStatusModule,
+    UserModule,
   ],
 })
 export class AppModule {}

@@ -8,6 +8,7 @@ export declare class RoleService {
     createRole(CreateRoleDto: CreateRoleDto): Promise<Role>;
     findAllRole(): Promise<Role[]>;
     findOneRole(id: number): Promise<Role>;
+    findOneRoleByValue(value: string): Promise<Role>;
     updateRole(id: number, updateRoleDto: UpdateRoleDto): Promise<Role>;
     removeRole(id: number): Promise<Role>;
 }
