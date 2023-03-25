@@ -1,3 +1,4 @@
+import { OrderStatus } from './order-status/entities/order-status.entity';
 import { Recipe } from './recipe/entities/recipe.entity';
 import { MulterModule } from '@nestjs/platform-express';
 import { Ingredient } from './ingredient/entities/ingredient.entity';
@@ -16,6 +17,7 @@ import { RecipeModule } from './recipe/recipe.module';
 import { IngredientModule } from './ingredient/ingredient.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { OrderStatusModule } from './order-status/order-status.module';
 
 @Module({
   imports: [
@@ -33,7 +35,15 @@ import { join } from 'path';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      entities: [Role, Size, DoughType, TypeIngredient, Ingredient, Recipe],
+      entities: [
+        Role,
+        Size,
+        DoughType,
+        TypeIngredient,
+        Ingredient,
+        Recipe,
+        OrderStatus,
+      ],
       synchronize: true,
     }),
     RoleModule,
@@ -42,6 +52,7 @@ import { join } from 'path';
     TypeIngredientModule,
     RecipeModule,
     IngredientModule,
+    OrderStatusModule,
   ],
 })
 export class AppModule {}

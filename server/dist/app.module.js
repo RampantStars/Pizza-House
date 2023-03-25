@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const order_status_entity_1 = require("./order-status/entities/order-status.entity");
 const recipe_entity_1 = require("./recipe/entities/recipe.entity");
 const platform_express_1 = require("@nestjs/platform-express");
 const ingredient_entity_1 = require("./ingredient/entities/ingredient.entity");
@@ -25,6 +26,7 @@ const recipe_module_1 = require("./recipe/recipe.module");
 const ingredient_module_1 = require("./ingredient/ingredient.module");
 const serve_static_1 = require("@nestjs/serve-static");
 const path_1 = require("path");
+const order_status_module_1 = require("./order-status/order-status.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -44,7 +46,15 @@ AppModule = __decorate([
                 username: process.env.POSTGRES_USER,
                 password: process.env.POSTGRES_PASSWORD,
                 database: process.env.POSTGRES_DB,
-                entities: [role_entity_1.Role, size_entity_1.Size, dough_type_entity_1.DoughType, type_ingredient_entity_1.TypeIngredient, ingredient_entity_1.Ingredient, recipe_entity_1.Recipe],
+                entities: [
+                    role_entity_1.Role,
+                    size_entity_1.Size,
+                    dough_type_entity_1.DoughType,
+                    type_ingredient_entity_1.TypeIngredient,
+                    ingredient_entity_1.Ingredient,
+                    recipe_entity_1.Recipe,
+                    order_status_entity_1.OrderStatus,
+                ],
                 synchronize: true,
             }),
             role_module_1.RoleModule,
@@ -53,6 +63,7 @@ AppModule = __decorate([
             type_ingredient_module_1.TypeIngredientModule,
             recipe_module_1.RecipeModule,
             ingredient_module_1.IngredientModule,
+            order_status_module_1.OrderStatusModule,
         ],
     })
 ], AppModule);
