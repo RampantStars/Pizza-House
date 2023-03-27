@@ -13,6 +13,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TypeIngredientController = void 0;
+const type_ingredient_entity_1 = require("./entities/type-ingredient.entity");
+const dist_1 = require("@nestjs/swagger/dist");
 const common_1 = require("@nestjs/common");
 const type_ingredient_service_1 = require("./type-ingredient.service");
 const create_type_ingredient_dto_1 = require("./dto/create-type-ingredient.dto");
@@ -38,6 +40,8 @@ let TypeIngredientController = class TypeIngredientController {
     }
 };
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Добавление типа ингредиента' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: type_ingredient_entity_1.TypeIngredient }),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -45,12 +49,16 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], TypeIngredientController.prototype, "create", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Получение всех типов ингредиента' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: [type_ingredient_entity_1.TypeIngredient] }),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], TypeIngredientController.prototype, "findAll", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Получение типа ингредиента' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: type_ingredient_entity_1.TypeIngredient }),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -58,6 +66,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], TypeIngredientController.prototype, "findOne", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Изменение типа ингредиента' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: type_ingredient_entity_1.TypeIngredient }),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -66,6 +76,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], TypeIngredientController.prototype, "update", null);
 __decorate([
+    (0, dist_1.ApiOperation)({ summary: 'Удаление типа ингредиента' }),
+    (0, dist_1.ApiResponse)({ status: 200, type: type_ingredient_entity_1.TypeIngredient }),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -73,6 +85,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], TypeIngredientController.prototype, "remove", null);
 TypeIngredientController = __decorate([
+    (0, dist_1.ApiTags)('Тип ингредиента'),
     (0, common_1.Controller)('typeIngredient'),
     __metadata("design:paramtypes", [type_ingredient_service_1.TypeIngredientService])
 ], TypeIngredientController);
