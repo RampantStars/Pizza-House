@@ -27,7 +27,6 @@ export class Ingredient {
   @ManyToOne(
     () => TypeIngredient,
     (typeIngredient) => typeIngredient.ingredients,
-    { cascade: true },
   )
   typeIngredient: TypeIngredient;
 

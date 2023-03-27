@@ -32,7 +32,7 @@ __decorate([
 ], Ingredient.prototype, "imageUrl", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: type_ingredient_entity_1.TypeIngredient, description: 'Тип ингредиента' }),
-    (0, typeorm_1.ManyToOne)(() => type_ingredient_entity_1.TypeIngredient, (typeIngredient) => typeIngredient.ingredients, { cascade: true }),
+    (0, typeorm_1.ManyToOne)(() => type_ingredient_entity_1.TypeIngredient, (typeIngredient) => typeIngredient.ingredients),
     __metadata("design:type", type_ingredient_entity_1.TypeIngredient)
 ], Ingredient.prototype, "typeIngredient", void 0);
 Ingredient = __decorate([
