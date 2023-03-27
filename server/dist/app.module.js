@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const additional_ingredient_entity_1 = require("./additional-ingredient/entities/additional-ingredient.entity");
 const user_entity_1 = require("./user/entities/user.entity");
 const order_status_entity_1 = require("./order-status/entities/order-status.entity");
 const recipe_entity_1 = require("./recipe/entities/recipe.entity");
@@ -29,6 +30,7 @@ const serve_static_1 = require("@nestjs/serve-static");
 const path_1 = require("path");
 const order_status_module_1 = require("./order-status/order-status.module");
 const user_module_1 = require("./user/user.module");
+const additional_ingredient_module_1 = require("./additional-ingredient/additional-ingredient.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -57,6 +59,7 @@ AppModule = __decorate([
                     recipe_entity_1.Recipe,
                     order_status_entity_1.OrderStatus,
                     user_entity_1.User,
+                    additional_ingredient_entity_1.AdditionalIngredient,
                 ],
                 synchronize: true,
             }),
@@ -68,6 +71,7 @@ AppModule = __decorate([
             ingredient_module_1.IngredientModule,
             order_status_module_1.OrderStatusModule,
             user_module_1.UserModule,
+            additional_ingredient_module_1.AdditionalIngredientModule,
         ],
     })
 ], AppModule);

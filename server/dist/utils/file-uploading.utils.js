@@ -15,7 +15,7 @@ const editFileName = (req, file, callback) => {
     const name = file.originalname.split('.')[0];
     const fileExtName = (0, path_1.extname)(file.originalname);
     const randomName = uuid.v4();
-    callback(null, `${name}${randomName}${fileExtName}`);
+    callback(null, `${name}-${randomName}${fileExtName}`);
 };
 exports.editFileName = editFileName;
 //# sourceMappingURL=file-uploading.utils.js.map

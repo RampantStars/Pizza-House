@@ -27,5 +27,5 @@ export const editFileName = (
   const name = file.originalname.split('.')[0];
   const fileExtName = extname(file.originalname);
   const randomName = uuid.v4();
-  callback(null, `${name}${randomName}${fileExtName}`);
+  callback(null, `${name}-${randomName}${fileExtName}`);
 };
