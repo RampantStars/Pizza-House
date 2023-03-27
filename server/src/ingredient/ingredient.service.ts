@@ -90,6 +90,13 @@ export class IngredientService {
     if (!ingredient) {
       throw new NotFoundException(`Ingredient with ID=${id} not found`);
     }
+    unlink(`./uploads/${ingredient.imageUrl}`, (err) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log('file deleted');
+    });
     return this.ingredientRepository.remove(ingredient);
   }
 }

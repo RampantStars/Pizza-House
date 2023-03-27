@@ -77,6 +77,13 @@ let IngredientService = class IngredientService {
         if (!ingredient) {
             throw new common_1.NotFoundException(`Ingredient with ID=${id} not found`);
         }
+        (0, fs_1.unlink)(`./uploads/${ingredient.imageUrl}`, (err) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            console.log('file deleted');
+        });
         return this.ingredientRepository.remove(ingredient);
     }
 };
