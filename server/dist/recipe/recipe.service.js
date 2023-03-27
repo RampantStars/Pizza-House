@@ -114,6 +114,13 @@ let RecipeService = class RecipeService {
         if (!recipe) {
             throw new common_1.NotFoundException(`Recipe with ID=${id} not found`);
         }
+        (0, fs_1.unlink)(`./uploads/${recipe.imageUrl}`, (err) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            console.log('file deleted');
+        });
         return this.recipeRepository.remove(recipe);
     }
 };

@@ -154,6 +154,13 @@ export class RecipeService {
     if (!recipe) {
       throw new NotFoundException(`Recipe with ID=${id} not found`);
     }
+    unlink(`./uploads/${recipe.imageUrl}`, (err) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log('file deleted');
+    });
     return this.recipeRepository.remove(recipe);
   }
 }
