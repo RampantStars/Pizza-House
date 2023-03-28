@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DoughType = void 0;
+const pizza_variation_entity_1 = require("./../../pizza-variation/entities/pizza-variation.entity");
 const decorators_1 = require("@nestjs/swagger/dist/decorators");
 const typeorm_1 = require("typeorm");
 let DoughType = class DoughType {
@@ -32,6 +33,12 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], DoughType.prototype, "price", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => pizza_variation_entity_1.PizzaVariation, (pizzaVariation) => pizzaVariation.doughType, {
+        onUpdate: 'CASCADE',
+    }),
+    __metadata("design:type", Array)
+], DoughType.prototype, "pizzaVariations", void 0);
 DoughType = __decorate([
     (0, typeorm_1.Entity)()
 ], DoughType);

@@ -36,6 +36,7 @@ let RecipeService = class RecipeService {
             throw new common_1.NotFoundException(`Ошибка в поиске`);
         }
         const recipe = this.recipeRepository.create({
+            price: createRecipeDto.price,
             name: createRecipeDto.name,
             description: createRecipeDto.description,
             imageUrl: createRecipeDto.imageUrl,
@@ -98,7 +99,7 @@ let RecipeService = class RecipeService {
             }
             recipe.doughtTypes = [...doughtTypes];
         }
-        if (updateRecipeDto) {
+        if (updateRecipeDto.imageUrl) {
             (0, fs_1.unlink)(`./uploads/${recipe.imageUrl}`, (err) => {
                 if (err) {
                     console.error(err);

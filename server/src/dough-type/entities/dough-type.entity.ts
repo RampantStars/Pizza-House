@@ -1,3 +1,4 @@
+import { PizzaVariation } from './../../pizza-variation/entities/pizza-variation.entity';
 import { Recipe } from './../../recipe/entities/recipe.entity';
 import { ApiProperty } from '@nestjs/swagger/dist/decorators';
 import {
@@ -5,6 +6,7 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -25,6 +27,14 @@ export class DoughType {
   @Column()
   price: number;
 
+  @OneToMany(
+    () => PizzaVariation,
+    (pizzaVariation) => pizzaVariation.doughType,
+    {
+      onUpdate: 'CASCADE',
+    },
+  )
+  pizzaVariations: PizzaVariation[];
   // @ManyToMany(() => Recipe, (recipe) => recipe.doughtTypes, { cascade: true })
   // @JoinTable()
   // recipes: Recipe[];

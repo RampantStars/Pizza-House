@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Recipe = void 0;
+const pizza_variation_entity_1 = require("./../../pizza-variation/entities/pizza-variation.entity");
 const ingredient_entity_1 = require("./../../ingredient/entities/ingredient.entity");
 const dough_type_entity_1 = require("./../../dough-type/entities/dough-type.entity");
 const size_entity_1 = require("./../../size/entities/size.entity");
@@ -92,6 +93,13 @@ __decorate([
     (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
 ], Recipe.prototype, "ingredients", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => pizza_variation_entity_1.PizzaVariation, (pizzaVariation) => pizzaVariation.recipe, {
+        nullable: true,
+        onUpdate: 'CASCADE',
+    }),
+    __metadata("design:type", Array)
+], Recipe.prototype, "pizzaVariations", void 0);
 Recipe = __decorate([
     (0, typeorm_1.Entity)()
 ], Recipe);

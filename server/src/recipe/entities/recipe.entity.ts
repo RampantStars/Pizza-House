@@ -1,3 +1,4 @@
+import { PizzaVariation } from './../../pizza-variation/entities/pizza-variation.entity';
 import { Ingredient } from './../../ingredient/entities/ingredient.entity';
 import { DoughType } from './../../dough-type/entities/dough-type.entity';
 import { Size } from './../../size/entities/size.entity';
@@ -7,6 +8,7 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -77,4 +79,10 @@ export class Recipe {
   @ManyToMany(() => Ingredient, { cascade: true })
   @JoinTable()
   ingredients: Ingredient[];
+
+  @OneToMany(() => PizzaVariation, (pizzaVariation) => pizzaVariation.recipe, {
+    nullable: true,
+    onUpdate: 'CASCADE',
+  })
+  pizzaVariations: PizzaVariation[];
 }

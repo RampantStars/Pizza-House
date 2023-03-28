@@ -1,3 +1,4 @@
+import { PizzaVariation } from './pizza-variation/entities/pizza-variation.entity';
 import { AdditionalIngredient } from './additional-ingredient/entities/additional-ingredient.entity';
 import { User } from './user/entities/user.entity';
 import { OrderStatus } from './order-status/entities/order-status.entity';
@@ -22,6 +23,7 @@ import { join } from 'path';
 import { OrderStatusModule } from './order-status/order-status.module';
 import { UserModule } from './user/user.module';
 import { AdditionalIngredientModule } from './additional-ingredient/additional-ingredient.module';
+import { PizzaVariationModule } from './pizza-variation/pizza-variation.module';
 
 @Module({
   imports: [
@@ -49,6 +51,7 @@ import { AdditionalIngredientModule } from './additional-ingredient/additional-i
         OrderStatus,
         User,
         AdditionalIngredient,
+        PizzaVariation,
       ],
       synchronize: true,
     }),
@@ -61,6 +64,7 @@ import { AdditionalIngredientModule } from './additional-ingredient/additional-i
     OrderStatusModule,
     UserModule,
     AdditionalIngredientModule,
+    PizzaVariationModule,
   ],
 })
 export class AppModule {}

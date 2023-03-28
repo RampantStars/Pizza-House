@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const pizza_variation_entity_1 = require("./pizza-variation/entities/pizza-variation.entity");
 const additional_ingredient_entity_1 = require("./additional-ingredient/entities/additional-ingredient.entity");
 const user_entity_1 = require("./user/entities/user.entity");
 const order_status_entity_1 = require("./order-status/entities/order-status.entity");
@@ -31,6 +32,7 @@ const path_1 = require("path");
 const order_status_module_1 = require("./order-status/order-status.module");
 const user_module_1 = require("./user/user.module");
 const additional_ingredient_module_1 = require("./additional-ingredient/additional-ingredient.module");
+const pizza_variation_module_1 = require("./pizza-variation/pizza-variation.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -60,6 +62,7 @@ AppModule = __decorate([
                     order_status_entity_1.OrderStatus,
                     user_entity_1.User,
                     additional_ingredient_entity_1.AdditionalIngredient,
+                    pizza_variation_entity_1.PizzaVariation,
                 ],
                 synchronize: true,
             }),
@@ -72,6 +75,7 @@ AppModule = __decorate([
             order_status_module_1.OrderStatusModule,
             user_module_1.UserModule,
             additional_ingredient_module_1.AdditionalIngredientModule,
+            pizza_variation_module_1.PizzaVariationModule,
         ],
     })
 ], AppModule);
