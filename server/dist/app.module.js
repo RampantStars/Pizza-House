@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const order_line_entity_1 = require("./order-line/entities/order-line.entity");
 const pizza_variation_entity_1 = require("./pizza-variation/entities/pizza-variation.entity");
 const additional_ingredient_entity_1 = require("./additional-ingredient/entities/additional-ingredient.entity");
 const user_entity_1 = require("./user/entities/user.entity");
@@ -33,6 +34,7 @@ const order_status_module_1 = require("./order-status/order-status.module");
 const user_module_1 = require("./user/user.module");
 const additional_ingredient_module_1 = require("./additional-ingredient/additional-ingredient.module");
 const pizza_variation_module_1 = require("./pizza-variation/pizza-variation.module");
+const order_line_module_1 = require("./order-line/order-line.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -52,6 +54,7 @@ AppModule = __decorate([
                 username: process.env.POSTGRES_USER,
                 password: process.env.POSTGRES_PASSWORD,
                 database: process.env.POSTGRES_DB,
+                schema: 'public',
                 entities: [
                     role_entity_1.Role,
                     size_entity_1.Size,
@@ -63,6 +66,7 @@ AppModule = __decorate([
                     user_entity_1.User,
                     additional_ingredient_entity_1.AdditionalIngredient,
                     pizza_variation_entity_1.PizzaVariation,
+                    order_line_entity_1.OrderLine,
                 ],
                 synchronize: true,
             }),
@@ -76,6 +80,7 @@ AppModule = __decorate([
             user_module_1.UserModule,
             additional_ingredient_module_1.AdditionalIngredientModule,
             pizza_variation_module_1.PizzaVariationModule,
+            order_line_module_1.OrderLineModule,
         ],
     })
 ], AppModule);

@@ -1,3 +1,4 @@
+import { OrderLine } from './order-line/entities/order-line.entity';
 import { PizzaVariation } from './pizza-variation/entities/pizza-variation.entity';
 import { AdditionalIngredient } from './additional-ingredient/entities/additional-ingredient.entity';
 import { User } from './user/entities/user.entity';
@@ -24,6 +25,7 @@ import { OrderStatusModule } from './order-status/order-status.module';
 import { UserModule } from './user/user.module';
 import { AdditionalIngredientModule } from './additional-ingredient/additional-ingredient.module';
 import { PizzaVariationModule } from './pizza-variation/pizza-variation.module';
+import { OrderLineModule } from './order-line/order-line.module';
 
 @Module({
   imports: [
@@ -41,6 +43,7 @@ import { PizzaVariationModule } from './pizza-variation/pizza-variation.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
+      schema: 'public',
       entities: [
         Role,
         Size,
@@ -52,6 +55,7 @@ import { PizzaVariationModule } from './pizza-variation/pizza-variation.module';
         User,
         AdditionalIngredient,
         PizzaVariation,
+        OrderLine,
       ],
       synchronize: true,
     }),
@@ -65,6 +69,7 @@ import { PizzaVariationModule } from './pizza-variation/pizza-variation.module';
     UserModule,
     AdditionalIngredientModule,
     PizzaVariationModule,
+    OrderLineModule,
   ],
 })
 export class AppModule {}
