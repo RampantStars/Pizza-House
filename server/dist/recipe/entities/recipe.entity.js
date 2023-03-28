@@ -32,6 +32,14 @@ __decorate([
 ], Recipe.prototype, "name", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
+        example: '350',
+        description: 'Стоимость рецепта пиццы',
+    }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Recipe.prototype, "price", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
         example: 'url',
         description: 'Изображение пиццы',
     }),

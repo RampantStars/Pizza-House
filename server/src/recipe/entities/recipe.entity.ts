@@ -24,6 +24,13 @@ export class Recipe {
   name: string;
 
   @ApiProperty({
+    example: '350',
+    description: 'Стоимость рецепта пиццы',
+  })
+  @Column()
+  price: number;
+
+  @ApiProperty({
     example: 'url',
     description: 'Изображение пиццы',
   })

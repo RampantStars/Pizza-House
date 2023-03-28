@@ -18,6 +18,10 @@ __decorate([
     __metadata("design:type", String)
 ], CreateRecipeDto.prototype, "name", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: '350', description: 'Стоимость рецепта пиццы' }),
+    __metadata("design:type", Number)
+], CreateRecipeDto.prototype, "price", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({
         name: 'url',
         description: 'Изображение пиццы',

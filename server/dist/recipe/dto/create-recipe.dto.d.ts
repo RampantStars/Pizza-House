@@ -1,5 +1,6 @@
 export declare class CreateRecipeDto {
     readonly name: string;
+    readonly price: number;
     imageUrl?: string;
     readonly description: string;
     readonly salePercent?: number;

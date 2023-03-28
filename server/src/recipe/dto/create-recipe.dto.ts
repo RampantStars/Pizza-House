@@ -3,6 +3,9 @@ export class CreateRecipeDto {
   @ApiProperty({ name: 'Пицца 4 перца', description: 'Название рецепта пиццы' })
   readonly name: string;
 
+  @ApiProperty({ example: '350', description: 'Стоимость рецепта пиццы' })
+  readonly price: number;
+
   @ApiProperty({
     name: 'url',
     description: 'Изображение пиццы',
