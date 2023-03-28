@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserModule = void 0;
+const order_entity_1 = require("../order/entities/order.entity");
 const role_module_1 = require("./../role/role.module");
 const user_entity_1 = require("./entities/user.entity");
 const role_entity_1 = require("./../role/entities/role.entity");
@@ -19,7 +20,7 @@ let UserModule = class UserModule {
 UserModule = __decorate([
     (0, common_1.Module)({
         controllers: [user_controller_1.UserController],
-        imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User, role_entity_1.Role]), role_module_1.RoleModule],
+        imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User, role_entity_1.Role, order_entity_1.Order]), role_module_1.RoleModule],
         providers: [user_service_1.UserService],
         exports: [user_service_1.UserService],
     })

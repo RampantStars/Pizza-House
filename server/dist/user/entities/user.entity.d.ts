@@ -1,3 +1,4 @@
+import { Order } from './../../order/entities/order.entity';
 import { Role } from './../../role/entities/role.entity';
 export declare class User {
     id: number;
@@ -6,4 +7,5 @@ export declare class User {
     email: string;
     address: string;
     roles: Role[];
+    orders: Order[];
 }

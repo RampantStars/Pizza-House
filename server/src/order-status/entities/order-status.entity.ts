@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Order } from 'src/order/entities/order.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class OrderStatus {
@@ -10,4 +11,7 @@ export class OrderStatus {
   @ApiProperty({ example: 'В обработке', description: 'Значение статуса' })
   @Column()
   name: string;
+
+  @OneToMany(() => Order, (order) => order.orderStatus)
+  order: Order[];
 }

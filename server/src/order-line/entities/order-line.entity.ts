@@ -1,3 +1,4 @@
+import { Order } from 'src/order/entities/order.entity';
 import { PizzaVariation } from './../../pizza-variation/entities/pizza-variation.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import {
@@ -5,6 +6,7 @@ import {
   Entity,
   JoinColumn,
   JoinTable,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -33,4 +35,7 @@ export class OrderLine {
   @OneToOne(() => PizzaVariation)
   @JoinColumn()
   pizzaVariation: PizzaVariation;
+
+  @ManyToOne(() => Order, (order) => order.orderLines)
+  order: Order;
 }

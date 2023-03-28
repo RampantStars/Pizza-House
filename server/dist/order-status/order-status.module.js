@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderStatusModule = void 0;
+const order_entity_1 = require("../order/entities/order.entity");
 const order_status_entity_1 = require("./entities/order-status.entity");
 const common_1 = require("@nestjs/common");
 const order_status_service_1 = require("./order-status.service");
@@ -18,7 +19,7 @@ OrderStatusModule = __decorate([
     (0, common_1.Module)({
         controllers: [order_status_controller_1.OrderStatusController],
         providers: [order_status_service_1.OrderStatusService],
-        imports: [typeorm_1.TypeOrmModule.forFeature([order_status_entity_1.OrderStatus])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([order_status_entity_1.OrderStatus, order_entity_1.Order])],
         exports: [order_status_service_1.OrderStatusService],
     })
 ], OrderStatusModule);

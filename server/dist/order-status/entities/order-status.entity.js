@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderStatus = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const order_entity_1 = require("../../order/entities/order.entity");
 const typeorm_1 = require("typeorm");
 let OrderStatus = class OrderStatus {
 };
@@ -24,6 +25,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], OrderStatus.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => order_entity_1.Order, (order) => order.orderStatus),
+    __metadata("design:type", Array)
+], OrderStatus.prototype, "order", void 0);
 OrderStatus = __decorate([
     (0, typeorm_1.Entity)()
 ], OrderStatus);

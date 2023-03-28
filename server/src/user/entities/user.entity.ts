@@ -1,3 +1,4 @@
+import { Order } from './../../order/entities/order.entity';
 import { Role } from './../../role/entities/role.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import {
@@ -5,6 +6,7 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 @Entity()
@@ -42,4 +44,7 @@ export class User {
   @ManyToMany(() => Role, { cascade: true })
   @JoinTable()
   roles: Role[];
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
 }

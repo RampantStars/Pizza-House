@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
+const order_entity_1 = require("./../../order/entities/order.entity");
 const role_entity_1 = require("./../../role/entities/role.entity");
 const swagger_1 = require("@nestjs/swagger");
 const typeorm_1 = require("typeorm");
@@ -56,6 +57,10 @@ __decorate([
     (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
 ], User.prototype, "roles", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => order_entity_1.Order, (order) => order.user),
+    __metadata("design:type", Array)
+], User.prototype, "orders", void 0);
 User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

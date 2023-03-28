@@ -1,3 +1,4 @@
+import { Order } from 'src/order/entities/order.entity';
 import { OrderLine } from './order-line/entities/order-line.entity';
 import { PizzaVariation } from './pizza-variation/entities/pizza-variation.entity';
 import { AdditionalIngredient } from './additional-ingredient/entities/additional-ingredient.entity';
@@ -26,6 +27,7 @@ import { UserModule } from './user/user.module';
 import { AdditionalIngredientModule } from './additional-ingredient/additional-ingredient.module';
 import { PizzaVariationModule } from './pizza-variation/pizza-variation.module';
 import { OrderLineModule } from './order-line/order-line.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -56,6 +58,7 @@ import { OrderLineModule } from './order-line/order-line.module';
         AdditionalIngredient,
         PizzaVariation,
         OrderLine,
+        Order,
       ],
       synchronize: true,
     }),
@@ -70,6 +73,7 @@ import { OrderLineModule } from './order-line/order-line.module';
     AdditionalIngredientModule,
     PizzaVariationModule,
     OrderLineModule,
+    OrderModule,
   ],
 })
 export class AppModule {}
