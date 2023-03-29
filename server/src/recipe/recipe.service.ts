@@ -1,3 +1,10 @@
+import { PaginateQuery } from 'nestjs-paginate/lib/decorator';
+import {
+  FilterOperator,
+  FilterSuffix,
+  paginate,
+  Paginated,
+} from 'nestjs-paginate/lib/paginate';
 import { unlink } from 'fs';
 import { DoughType } from './../dough-type/entities/dough-type.entity';
 import { Size } from './../size/entities/size.entity';
@@ -59,9 +66,19 @@ export class RecipeService {
     return this.recipeRepository.save(recipe);
   }
 
-  async findAllRecipe(): Promise<Recipe[]> {
-    const recipes = await this.recipeRepository.find({
-      relations: { ingredients: true, doughtTypes: true, sizes: true },
+  async findAllRecipe(query: PaginateQuery): Promise<Paginated<Recipe>> {
+    // const recipes = await this.recipeRepository.find({
+    //   relations: { ingredients: true, doughtTypes: true, sizes: true },
+    // });
+    const recipes = await paginate(query, this.recipeRepository, {
+      relations: ['ingredients', 'doughtTypes', 'sizes'],
+      sortableColumns: ['id', 'name', 'price'],
+      nullSort: 'last',
+      defaultSortBy: [['id', 'ASC']],
+      searchableColumns: ['name'],
+      filterableColumns: {
+        name: [FilterOperator.EQ, FilterSuffix.NOT],
+      },
     });
     return recipes;
   }

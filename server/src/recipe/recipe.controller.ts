@@ -16,6 +16,10 @@ import {
 import { RecipeService } from './recipe.service';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
+import { Paginate } from 'nestjs-paginate';
+import { PaginateQuery } from 'nestjs-paginate/lib/decorator';
+import { Paginated } from 'nestjs-paginate/lib/paginate';
+import { IPaginateQuery, queryPaginate } from 'src/utils/paginateQuery';
 
 @ApiTags('Рецепт пиццы')
 @Controller('recipe')
@@ -46,9 +50,10 @@ export class RecipeController {
 
   @ApiOperation({ summary: 'Получение всех рецептов пицц' })
   @ApiResponse({ status: 200, type: Recipe })
+  @IPaginateQuery(...queryPaginate)
   @Get()
-  findAll() {
-    return this.recipeService.findAllRecipe();
+  findAll(@Paginate() query: PaginateQuery): Promise<Paginated<Recipe>> {
+    return this.recipeService.findAllRecipe(query);
   }
 
   @ApiOperation({ summary: 'Получение рецепта пиццы' })
