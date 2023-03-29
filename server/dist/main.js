@@ -11,6 +11,7 @@ async function bootstrap() {
         .setTitle('PizzaHouse')
         .setDescription('Документация по REST API для дипломного проекта')
         .setVersion('1.0')
+        .addBearerAuth()
         .build();
     const document = dist_1.SwaggerModule.createDocument(app, config);
     dist_1.SwaggerModule.setup('/api/docks', app, document);

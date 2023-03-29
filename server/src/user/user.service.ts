@@ -21,7 +21,7 @@ export class UserService {
 
   async createUser(createUserDto: CreateUserDto): Promise<User> {
     const user = await this.userRepository.create(createUserDto);
-    const role = await this.roleService.findOneRoleByValue('ADMIN');
+    const role = await this.roleService.findOneRoleByValue('USER');
     user.roles = [role];
     return this.userRepository.save(user);
   }
@@ -58,6 +58,17 @@ export class UserService {
     if (!user) {
       throw new NotFoundException(`User with ID=${id} not found`);
     }
+    return user;
+  }
+
+  async getUserByEmail(email: string) {
+    const user = await this.userRepository.findOne({
+      where: { email: email },
+      relations: { roles: true },
+    });
+    // if (!user) {
+    //   throw new NotFoundException(`User with email=${email} not found`);
+    // }
     return user;
   }
 

@@ -25,7 +25,7 @@ let UserService = class UserService {
     }
     async createUser(createUserDto) {
         const user = await this.userRepository.create(createUserDto);
-        const role = await this.roleService.findOneRoleByValue('ADMIN');
+        const role = await this.roleService.findOneRoleByValue('USER');
         user.roles = [role];
         return this.userRepository.save(user);
     }
@@ -55,6 +55,13 @@ let UserService = class UserService {
         if (!user) {
             throw new common_1.NotFoundException(`User with ID=${id} not found`);
         }
+        return user;
+    }
+    async getUserByEmail(email) {
+        const user = await this.userRepository.findOne({
+            where: { email: email },
+            relations: { roles: true },
+        });
         return user;
     }
     async updateUser(id, updateUserDto) {

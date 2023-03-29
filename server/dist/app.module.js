@@ -37,6 +37,7 @@ const additional_ingredient_module_1 = require("./additional-ingredient/addition
 const pizza_variation_module_1 = require("./pizza-variation/pizza-variation.module");
 const order_line_module_1 = require("./order-line/order-line.module");
 const order_module_1 = require("./order/order.module");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -85,6 +86,7 @@ AppModule = __decorate([
             pizza_variation_module_1.PizzaVariationModule,
             order_line_module_1.OrderLineModule,
             order_module_1.OrderModule,
+            auth_module_1.AuthModule,
         ],
     })
 ], AppModule);

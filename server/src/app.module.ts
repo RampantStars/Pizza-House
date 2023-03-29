@@ -28,6 +28,7 @@ import { AdditionalIngredientModule } from './additional-ingredient/additional-i
 import { PizzaVariationModule } from './pizza-variation/pizza-variation.module';
 import { OrderLineModule } from './order-line/order-line.module';
 import { OrderModule } from './order/order.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -74,6 +75,7 @@ import { OrderModule } from './order/order.module';
     PizzaVariationModule,
     OrderLineModule,
     OrderModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

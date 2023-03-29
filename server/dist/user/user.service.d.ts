@@ -12,6 +12,7 @@ export declare class UserService {
     setRole(userRoleDto: UserRoleDto): Promise<User>;
     findAllUser(): Promise<User[]>;
     findOneUser(id: number): Promise<User>;
+    getUserByEmail(email: string): Promise<User | null>;
     updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User>;
     removeUser(id: number): Promise<User>;
     removeRole(userRoleDto: UserRoleDto): Promise<User>;
