@@ -1,3 +1,5 @@
+import { RolesGuard } from './../auth/roles.guard';
+import { Roles } from './../auth/role-auth.decorator';
 import { editFileName, imageFileFilter } from './../utils/file-uploading.utils';
 import { diskStorage } from 'multer';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -12,6 +14,7 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { RecipeService } from './recipe.service';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
@@ -51,6 +54,8 @@ export class RecipeController {
   @ApiOperation({ summary: 'Получение всех рецептов пицц' })
   @ApiResponse({ status: 200, type: Recipe })
   @IPaginateQuery(...queryPaginate)
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard)
   @Get()
   findAll(@Paginate() query: PaginateQuery): Promise<Paginated<Recipe>> {
     return this.recipeService.findAllRecipe(query);

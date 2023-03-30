@@ -6,11 +6,15 @@ import { Size } from './../size/entities/size.entity';
 import { Module } from '@nestjs/common';
 import { RecipeService } from './recipe.service';
 import { RecipeController } from './recipe.controller';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   controllers: [RecipeController],
   providers: [RecipeService],
-  imports: [TypeOrmModule.forFeature([Recipe, Size, Ingredient, DoughType])],
+  imports: [
+    TypeOrmModule.forFeature([Recipe, Size, Ingredient, DoughType]),
+    AuthModule,
+  ],
   exports: [RecipeService],
 })
 export class RecipeModule {}
