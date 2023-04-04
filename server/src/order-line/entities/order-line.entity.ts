@@ -5,7 +5,6 @@ import {
   Column,
   Entity,
   JoinColumn,
-  JoinTable,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -32,7 +31,7 @@ export class OrderLine {
     example: PizzaVariation,
     description: 'Какой товар заказан',
   })
-  @OneToOne(() => PizzaVariation)
+  @OneToOne(() => PizzaVariation, { onDelete: 'CASCADE' })
   @JoinColumn()
   pizzaVariation: PizzaVariation;
 

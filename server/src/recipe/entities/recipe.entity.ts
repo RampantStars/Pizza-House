@@ -37,7 +37,7 @@ export class Recipe {
     description: 'Изображение пиццы',
   })
   @Column()
-  imageUrl: string;
+  imageUrl?: string;
 
   @ApiProperty({
     example: 'Для тех кто любит поострей',

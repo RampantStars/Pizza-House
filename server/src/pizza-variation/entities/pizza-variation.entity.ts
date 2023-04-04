@@ -57,6 +57,7 @@ export class PizzaVariation {
   })
   @ManyToOne(() => Recipe, (recipe) => recipe.pizzaVariations, {
     onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
   })
   recipe: Recipe;
 }
