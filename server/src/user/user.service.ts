@@ -17,6 +17,8 @@ import { Order } from 'src/order/entities/order.entity';
 export class UserService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(Order)
+    private readonly orderRepository: Repository<Order>,
     private readonly roleService: RoleService,
   ) {}
 
@@ -51,23 +53,16 @@ export class UserService {
     return users;
   }
   async findAllOrders(id: number): Promise<Order[]> {
-    const user = await this.userRepository.findOne({
-      where: { id: id },
+    const orders = await this.orderRepository.find({
+      where: { user: { id: id } },
       relations: [
-        'orders.orderStatus',
-        'orders.orderLines.pizzaVariation.recipe.ingredients',
-        'orders.orderLines.pizzaVariation.additionalIngredients',
-        'orders.orderLines.pizzaVariation.size',
-        'orders.orderLines.pizzaVariation.doughType',
+        'orderStatus',
+        'orderLines.pizzaVariation.recipe.ingredients',
+        'orderLines.pizzaVariation.additionalIngredients',
+        'orderLines.pizzaVariation.size',
+        'orderLines.pizzaVariation.doughType',
       ],
     });
-    if (!user) {
-      throw new HttpException(
-        'Пользователь или роль не найдены',
-        HttpStatus.NOT_FOUND,
-      );
-    }
-    const orders = [...user.orders];
     return orders;
   }
 
