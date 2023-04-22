@@ -11,6 +11,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
+import { Order } from 'src/order/entities/order.entity';
 
 @Injectable()
 export class UserService {
@@ -20,7 +21,7 @@ export class UserService {
   ) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<User> {
-    const user = await this.userRepository.create(createUserDto);
+    const user = this.userRepository.create(createUserDto);
     const role = await this.roleService.findOneRoleByValue('USER');
     user.roles = [role];
     return this.userRepository.save(user);
@@ -45,15 +46,35 @@ export class UserService {
 
   async findAllUser(): Promise<User[]> {
     const users = await this.userRepository.find({
-      relations: { roles: true },
+      relations: ['roles'],
     });
     return users;
+  }
+  async findAllOrders(id: number): Promise<Order[]> {
+    const user = await this.userRepository.findOne({
+      where: { id: id },
+      relations: [
+        'orders.orderStatus',
+        'orders.orderLines.pizzaVariation.recipe.ingredients',
+        'orders.orderLines.pizzaVariation.additionalIngredients',
+        'orders.orderLines.pizzaVariation.size',
+        'orders.orderLines.pizzaVariation.doughType',
+      ],
+    });
+    if (!user) {
+      throw new HttpException(
+        'Пользователь или роль не найдены',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    const orders = [...user.orders];
+    return orders;
   }
 
   async findOneUser(id: number): Promise<User> {
     const user = await this.userRepository.findOne({
       where: { id: id },
-      relations: { roles: true },
+      relations: ['roles'],
     });
     if (!user) {
       throw new NotFoundException(`User with ID=${id} not found`);
@@ -66,9 +87,9 @@ export class UserService {
       where: { email: email },
       relations: { roles: true },
     });
-    // if (!user) {
-    //   throw new NotFoundException(`User with email=${email} not found`);
-    // }
+    if (!user) {
+      throw new NotFoundException(`User with email=${email} not found`);
+    }
     return user;
   }
 

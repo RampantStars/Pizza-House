@@ -18,7 +18,6 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Roles } from 'src/auth/role-auth.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
 
 @ApiTags('Пользователи')
@@ -43,18 +42,23 @@ export class UserController {
   @ApiOperation({ summary: 'Получение пользователей' })
   @ApiResponse({ status: 200, type: [User] })
   @ApiBearerAuth()
-  @Roles('ADMIN')
+  // @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Get()
-  findAll() {
-    return this.userService.findAllUser();
-  }
+  findAll() {}
 
   @ApiOperation({ summary: 'Получение пользователя' })
   @ApiResponse({ status: 200, type: User })
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOneUser(+id);
+  }
+
+  @ApiOperation({ summary: 'Получение заказов пользователя' })
+  @ApiResponse({ status: 200, type: User })
+  @Get(':id/order')
+  findAllOrder(@Param('id') id: string) {
+    return this.userService.findAllOrders(+id);
   }
 
   @ApiOperation({ summary: 'Изменение пользователя' })
