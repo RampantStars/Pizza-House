@@ -6,8 +6,12 @@ import logoSvg from '../../assets/img/pizza-logo.svg';
 import styles from './Header.module.scss';
 import button from '../../scss/button.module.scss';
 import { useCartStore } from '../../Utils/Stores/CartStore';
+import { useUserStore } from '../../Utils/Stores/UserStore';
 
 export const Header: React.FC = () => {
+  const isAuth = useUserStore((state) => state.isAuth);
+  const user = useUserStore((state) => state.user);
+
   const { getTotalQuantity, getTotalPrice } = useCartStore(
     ({ getTotalQuantity, getTotalPrice }) => ({
       getTotalQuantity,
@@ -64,6 +68,16 @@ export const Header: React.FC = () => {
             </Link>
           </div>
           <Search />
+
+          {!!isAuth ? (
+            <Link to={'/user'}>
+              <h6 className={`${button.button} ${styles.button} ${styles.user}`}>{user.login}</h6>
+            </Link>
+          ) : (
+            <Link to={'/registration'} className={`${button.button} ${styles.button}`}>
+              Регистрация
+            </Link>
+          )}
         </div>
       </div>
     </div>

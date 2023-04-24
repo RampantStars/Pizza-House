@@ -22,17 +22,10 @@ export const useCartStore = create<ICartStore>()(
       cart: [],
       addToCart: (newPizza: PizzaCart) => {
         const { cart } = get();
-        const itemInCart = cart.find(
-          (i) =>
-            i.item.id === newPizza.id &&
-            i.item.size === newPizza.size &&
-            i.item.type === newPizza.type,
-        );
+        const itemInCart = cart.find((i) => JSON.stringify(i.item) === JSON.stringify(newPizza));
         const newCart = itemInCart
           ? cart.map((i) =>
-              i.item.id === newPizza.id &&
-              i.item.size === newPizza.size &&
-              i.item.type === newPizza.type
+              JSON.stringify(i.item) === JSON.stringify(newPizza)
                 ? { ...i, quantity: i.quantity + 1 }
                 : i,
             )

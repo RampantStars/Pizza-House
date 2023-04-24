@@ -65,6 +65,16 @@
   }
 }
 
+.user {
+  font-size: 14px;
+  color: #181818;
+  background-color: aquamarine;
+
+  &:hover {
+    background-color: aqua;
+  }
+}
+
 .delimiter {
   width: 1px;
   height: 25px;

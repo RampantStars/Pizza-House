@@ -35,3 +35,109 @@ export type CartItem = {
   item: PizzaCart;
   quantity: number;
 };
+
+export type Role = {
+  id: number;
+  value: string;
+  description: string;
+};
+
+export type Error = {
+  statusCode: number;
+  massage: string;
+  error: string;
+};
+
+export type TypeIngredient = {
+  id: number;
+  name: string;
+  ingredients: Ingredient[];
+};
+
+export type Ingredient = {
+  id: number;
+  name: string;
+  imageUrl: string;
+  typeIngredient: TypeIngredient;
+};
+
+export type Size = {
+  id: number;
+  name: string;
+  price: number;
+  pizzaVariations: PizzaVariation[];
+};
+
+export type DoughType = {
+  id: number;
+  name: string;
+  price: number;
+  pizzaVariations: PizzaVariation[];
+};
+
+export type Recipe = {
+  id: number;
+  name: string;
+  price: number;
+  imageUrl?: string;
+  description: string;
+  salePercent: number;
+  sizes: Size[];
+  doughtTypes: DoughType[];
+  ingredients: Ingredient[];
+  pizzaVariations: PizzaVariation[];
+};
+
+export type AdditionalIngredient = {
+  id: number;
+  name: string;
+  imageUrl: string;
+  price: number;
+  weight: number;
+  maxCount: number;
+  inStock: boolean;
+};
+
+export type PizzaVariation = {
+  id: number;
+  price: number;
+  additionalIngredients: AdditionalIngredient[];
+  size: Size;
+  doughType: DoughType;
+  recipe: Recipe;
+};
+
+export type OrderLine = {
+  id: number;
+  price: number;
+  quantity: number;
+  pizzaVariation: PizzaVariation;
+  order: Order;
+};
+
+export type OrderStatus = {
+  id: number;
+  name: string;
+  order: Order[];
+};
+
+export type Order = {
+  id: number;
+  price: number;
+  date: Date;
+  address: string;
+  quantityItem: number;
+  comment: string;
+  user: User;
+  orderStatus: OrderStatus;
+  orderLines: OrderLine[];
+};
+
+export type User = {
+  id: number;
+  login: string;
+  password: string;
+  email: string;
+  address: string;
+  roles: Role[];
+};

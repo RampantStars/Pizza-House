@@ -82,9 +82,6 @@ export class UserService {
       where: { email: email },
       relations: { roles: true },
     });
-    if (!user) {
-      throw new NotFoundException(`User with email=${email} not found`);
-    }
     return user;
   }
 

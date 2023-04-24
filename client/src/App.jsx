@@ -6,6 +6,7 @@ import { NotFound } from './pages/NotFound';
 import { Header } from './components/Header';
 
 import styles from './app.module.scss';
+import { Registration } from './pages/Registration';
 
 export const SearchContext = React.createContext();
 
@@ -16,6 +17,7 @@ function App() {
         <Header />
         <div className={styles.content}>
           <Routes>
+            <Route path="/registration" element={<Registration />} />
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="*" element={<NotFound />} />

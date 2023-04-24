@@ -6,14 +6,16 @@
   "component": {
     "default": {
       "customTemplates": {
-        "component": "templates/default/index.jsx",
+        "index": "templates/default/index.ts",
+        "component": "templates/default/TemplateName.jsx",
         "style": "templates/default/TemplateName.module.scss"
       },
       "path": "src/components",
       "withLazy": false,
       "withStory": false,
       "withStyle": true,
-      "withTest": true
+      "withTest": true,
+      "withIndex": true
     },
     "page": {
       "path": "src/pages",
