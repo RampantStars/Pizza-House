@@ -4,33 +4,20 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useUserStore } from '../../Utils/Stores/UserStore';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 
 import styles from './RegistrationForm.module.scss';
 import button from '../../scss/button.module.scss';
-import 'react-toastify/dist/ReactToastify.css';
+import { Error } from '../../Utils/types/types';
+import { onErrorToast } from '../../Utils/toast';
 
 export const RegistrationForm = () => {
   const registrationUser = useUserStore((state) => state.registrationUser);
   const navigate = useNavigate();
 
-  const onError = (e: any) => {
-    toast.error(`🦄 ${e.message}`, {
-      position: 'top-center',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: 'colored',
-    });
-  };
-
   const schema = yup
     .object({
       login: yup.string().required('Это обязательное поле'),
-      email: yup.string().email().required('Это обязательное поле'),
+      email: yup.string().email('Не корректный email').required('Это обязательное поле'),
       password: yup.string().required('Это обязательное поле'),
       address: yup.string().optional(),
     })
@@ -41,13 +28,14 @@ export const RegistrationForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IRegistration>({ resolver: yupResolver(schema) });
+
   const onSubmit: SubmitHandler<IRegistration> = async (data) => {
     try {
       await registrationUser(data);
       navigate('/');
     } catch (e: any) {
-      console.log('e :>> ', e);
-      onError({ ...e });
+      const error = { ...(e as Error) };
+      onErrorToast({ ...error });
     }
   };
 
@@ -88,18 +76,6 @@ export const RegistrationForm = () => {
           Зарегистрироваться
         </button>
       </form>
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover={false}
-        theme="colored"
-      />
     </div>
   );
 };

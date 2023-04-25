@@ -74,9 +74,16 @@ export const Header: React.FC = () => {
               <h6 className={`${button.button} ${styles.button} ${styles.user}`}>{user.login}</h6>
             </Link>
           ) : (
-            <Link to={'/registration'} className={`${button.button} ${styles.button}`}>
-              Регистрация
-            </Link>
+            <div className={styles.button_container}>
+              <Link to={'/login'} className={`${button.button} ${styles.buttonLogin}`}>
+                Войти
+              </Link>
+              <Link
+                to={'/registration'}
+                className={`${button.button} ${styles.buttonRegistration}`}>
+                Регистрация
+              </Link>
+            </div>
           )}
         </div>
       </div>

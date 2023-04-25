@@ -44,7 +44,7 @@ export type Role = {
 
 export type Error = {
   statusCode: number;
-  massage: string;
+  message: string;
   error: string;
 };
 

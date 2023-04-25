@@ -4,9 +4,11 @@ import { Home } from './pages/Home';
 import { Cart } from './pages/Cart';
 import { NotFound } from './pages/NotFound';
 import { Header } from './components/Header';
+import { Registration } from './pages/Registration';
+import { ToastContainer } from 'react-toastify';
 
 import styles from './app.module.scss';
-import { Registration } from './pages/Registration';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const SearchContext = React.createContext();
 
@@ -23,6 +25,18 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover={false}
+          theme="colored"
+        />
       </div>
     </div>
   );

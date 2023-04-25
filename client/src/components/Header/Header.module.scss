@@ -45,23 +45,24 @@
 }
 
 .button {
-  display: flex;
-  align-items: center;
-  line-height: 23px;
-  padding: 12px 25px;
-
-  @media (max-width: 650px) {
-    padding: 8px 15px;
+  &_container {
+    display: flex;
+    flex-direction: row;
   }
-
-  svg {
-    margin-right: 8px;
-    margin-bottom: 1px;
+  &Login,
+  &Registration {
+    text-align: center;
+    display: inline;
+    line-height: 23px;
+    padding: 12px;
   }
-
-  span {
-    font-weight: 600;
-    font-size: 16px;
+  &Login {
+    border-radius: 12px 0 0 12px;
+    border-right: 2px solid #f25c1f;
+  }
+  &Registration {
+    border-radius: 0 12px 12px 0;
+    border-left: 2px solid #f25c1f;
   }
 }
 
