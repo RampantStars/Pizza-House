@@ -1,27 +1,9 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Error, Order, Role, User } from '../types/types';
+import { Error, Order, User } from '../types/types';
 import ky from 'ky';
 import jwtDecode from 'jwt-decode';
-import { IRegistration } from '../interface/interface';
-
-interface IResLogIn {
-  userId: number;
-  roles: Role[];
-}
-
-interface IUserStore {
-  user: User;
-  orders: Order[];
-  token: string;
-  Error: Error;
-  isAuth: boolean;
-  registrationUser: (registration: IRegistration) => void;
-  logIn: (email: string, password: string) => void;
-  logOut: () => void;
-  fetchOrder: (id: number) => void;
-  fetchUser: (id: number) => void;
-}
+import { ILogin, IRegistration, IResLogIn, IUserStore } from '../interface/interface';
 
 export const useUserStore = create<IUserStore>()(
   persist(
@@ -31,6 +13,7 @@ export const useUserStore = create<IUserStore>()(
       token: '',
       Error: {} as Error,
       isAuth: false,
+
       fetchUser: async (id: number) => {
         try {
           const user: User = await ky.get(`http://localhost:5000/user/${id}`).json();
@@ -38,26 +21,25 @@ export const useUserStore = create<IUserStore>()(
             set({ user: { ...user }, Error: {} as Error });
           }
         } catch (error: any) {
-          if (error.name === 'HTTPError') {
-            const errorJson: Error = await error.response.json();
-            set({ Error: { ...errorJson }, user: {} as User });
-          }
+          const errorJson: Error = await error.response.json();
+          set({ Error: { ...errorJson } });
+          throw errorJson;
         }
       },
+
       fetchOrder: async (id: number) => {
         try {
           const orders: Order[] = await ky.get(`http://localhost:5000/user/${id}/order`).json();
-          if (orders) {
-            set({ orders: [...orders] });
-          }
+          set({ orders: [...orders] });
         } catch (error: any) {
-          if (error.name === 'HTTPError') {
-            const errorJson: Error = await error.response.json();
-            set({ Error: { ...errorJson } });
-          }
+          const errorJson: Error = await error.response.json();
+          set({ Error: { ...errorJson } });
+          throw errorJson;
         }
       },
-      logIn: async (email: string, password: string) => {
+
+      logIn: async (login: ILogin) => {
+        const { email, password } = login;
         try {
           const { fetchUser } = get();
           const { token }: { token: string } = await ky
@@ -70,13 +52,12 @@ export const useUserStore = create<IUserStore>()(
           fetchUser(decodeJwt.userId);
           set({ isAuth: true, token: token });
         } catch (error: any) {
-          if (error.name === 'HTTPError') {
-            const errorJson: Error = await error.response.json();
-            set({ Error: { ...errorJson } });
-          }
-          return error;
+          const errorJson: Error = await error.response.json();
+          set({ Error: { ...errorJson } });
+          throw errorJson;
         }
       },
+
       registrationUser: async (registration: IRegistration) => {
         try {
           const { fetchUser } = get();
@@ -87,7 +68,7 @@ export const useUserStore = create<IUserStore>()(
             .json();
           const decodeJwt: IResLogIn = jwtDecode(token);
           fetchUser(decodeJwt.userId);
-          set({ isAuth: true, token: token });
+          set({ isAuth: true, token: `Bearer ${token}` });
         } catch (error: any) {
           const errorJson: Error = await error.response.json();
           set({ Error: { ...errorJson } });
