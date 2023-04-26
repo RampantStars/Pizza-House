@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
 import { Search } from '../Search';
-
 import logoSvg from '../../assets/img/pizza-logo.svg';
 import styles from './Header.module.scss';
 import button from '../../scss/button.module.scss';
@@ -9,8 +8,10 @@ import { useCartStore } from '../../Utils/Stores/CartStore';
 import { useUserStore } from '../../Utils/Stores/UserStore';
 
 export const Header: React.FC = () => {
-  const isAuth = useUserStore((state) => state.isAuth);
-  const user = useUserStore((state) => state.user);
+  const { isAuth, user } = useUserStore(({ isAuth, user }) => ({
+    isAuth,
+    user,
+  }));
 
   const { getTotalQuantity, getTotalPrice } = useCartStore(
     ({ getTotalQuantity, getTotalPrice }) => ({

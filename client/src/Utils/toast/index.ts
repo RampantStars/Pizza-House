@@ -17,7 +17,7 @@ export const onErrorToast = (e: Error) => {
 
 export const onSuccessToast = (e: String) => {
   toast.success(`🍕 ${e}`, {
-    position: 'top-right',
+    position: 'bottom-right',
     autoClose: 5000,
     hideProgressBar: true,
     closeOnClick: true,

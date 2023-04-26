@@ -47,7 +47,6 @@ export const useUserStore = create<IUserStore>()(
               json: { email, password },
             })
             .json();
-
           const decodeJwt: IResLogIn = jwtDecode(token);
           fetchUser(decodeJwt.userId);
           set({ isAuth: true, token: token });
