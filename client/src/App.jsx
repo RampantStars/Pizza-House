@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import styles from './app.module.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import { Login } from './pages/Login';
+import { User } from './pages/User';
 
 export const SearchContext = React.createContext();
 
@@ -20,6 +21,7 @@ function App() {
         <Header />
         <div className={styles.content}>
           <Routes>
+            <Route path="/user" element={<User />} />
             <Route path="/registration" element={<Registration />} />
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />

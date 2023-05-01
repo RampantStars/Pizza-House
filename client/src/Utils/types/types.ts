@@ -137,6 +137,8 @@ export type User = {
   id: number;
   login: string;
   password: string;
+  telephone: string;
+  FCs: string;
   email: string;
   address: string;
   roles: Role[];

@@ -1,0 +1,14 @@
+@import '../../scss/variables';
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.FCs {
+  color: $orange;
+}

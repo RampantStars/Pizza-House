@@ -2,6 +2,8 @@ import { Error, Order, Role, User } from '../types/types';
 
 export interface IRegistration {
   login: string;
+  telephone: string;
+  FCs: string;
   password: string;
   email: string;
   address?: string;

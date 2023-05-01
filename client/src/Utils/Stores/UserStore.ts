@@ -48,7 +48,7 @@ export const useUserStore = create<IUserStore>()(
             })
             .json();
           const decodeJwt: IResLogIn = jwtDecode(token);
-          fetchUser(decodeJwt.userId);
+          await fetchUser(decodeJwt.userId);
           set({ isAuth: true, token: token });
         } catch (error: any) {
           const errorJson: Error = await error.response.json();
@@ -66,7 +66,7 @@ export const useUserStore = create<IUserStore>()(
             })
             .json();
           const decodeJwt: IResLogIn = jwtDecode(token);
-          fetchUser(decodeJwt.userId);
+          await fetchUser(decodeJwt.userId);
           set({ isAuth: true, token: `Bearer ${token}` });
         } catch (error: any) {
           const errorJson: Error = await error.response.json();
@@ -75,7 +75,7 @@ export const useUserStore = create<IUserStore>()(
         }
       },
       logOut: async () => {
-        set({ user: {} as User, isAuth: false });
+        set({ user: {} as User, isAuth: false, token: '' });
       },
     }),
     { name: 'user-persist', getStorage: () => sessionStorage },

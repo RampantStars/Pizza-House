@@ -40,6 +40,7 @@
 }
 .right {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 10px;
 }
@@ -67,12 +68,12 @@
 }
 
 .user {
-  font-size: 14px;
-  color: #181818;
-  background-color: aquamarine;
-
-  &:hover {
-    background-color: aqua;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  &:hover .userBg {
+    fill: #a6e0f0;
   }
 }
 

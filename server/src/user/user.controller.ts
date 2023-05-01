@@ -45,7 +45,9 @@ export class UserController {
   // @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Get()
-  findAll() {}
+  findAll() {
+    return this.userService.findAllUser();
+  }
 
   @ApiOperation({ summary: 'Получение пользователя' })
   @ApiResponse({ status: 200, type: User })

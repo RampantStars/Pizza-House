@@ -28,9 +28,9 @@ export const onSuccessToast = (e: String) => {
   });
 };
 
-export const onInfoToast = (e: Error) => {
-  toast.info(`🍕   ${e.message}`, {
-    position: 'top-right',
+export const onInfoToast = (e: string) => {
+  toast.info(`🍕   ${e}`, {
+    position: 'bottom-right',
     autoClose: 5000,
     hideProgressBar: true,
     closeOnClick: true,

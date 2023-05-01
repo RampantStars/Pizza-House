@@ -1,6 +1,14 @@
 @import './scss/variables';
 @import './scss/libs/normalize';
 
+body::-webkit-scrollbar {
+  width: 5px; /* ширина scrollbar */
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #f8b63c; /* цвет плашки */
+  border-radius: 20px; /* закругления плашки */
+}
+
 .App {
   text-align: center;
 }

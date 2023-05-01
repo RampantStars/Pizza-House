@@ -19,6 +19,14 @@ export class User {
   @Column()
   login: string;
 
+  @ApiProperty({ example: '+7956481354', description: 'Логин пользователя' })
+  @Column()
+  telephone: string;
+
+  @ApiProperty({ example: '+7956481354', description: 'Логин пользователя' })
+  @Column()
+  FCs: string;
+
   @ApiProperty({ example: 'testPassword', description: 'Пароль пользователя' })
   @Column()
   password: string;

@@ -14,10 +14,20 @@ export const RegistrationForm = () => {
   const registrationUser = useUserStore((state) => state.registrationUser);
   const navigate = useNavigate();
 
+  const phoneRegExp = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+
   const schema = yup
     .object({
       login: yup.string().required('Это обязательное поле'),
+      FCs: yup.string().required('Это обязательное поле'),
       email: yup.string().email('Не корректный email').required('Это обязательное поле'),
+      telephone: yup
+        .string()
+        .matches(phoneRegExp, {
+          message: 'Невалидный номер телефона',
+          excludeEmptyString: false,
+        })
+        .required('Это обязательное поле'),
       password: yup.string().required('Это обязательное поле'),
       address: yup.string().optional(),
     })
@@ -54,6 +64,16 @@ export const RegistrationForm = () => {
           <p>{errors.email?.message}</p>
         </label>
         <label className={styles.label}>
+          ФИО
+          <input type="text" {...register('FCs')} placeholder="ФИО" className={styles.input} />
+          <p>{errors.FCs?.message}</p>
+        </label>
+        <label className={styles.label}>
+          Телефон
+          <input type="tel" {...register('telephone')} placeholder="+7" className={styles.input} />
+          <p>{errors.telephone?.message}</p>
+        </label>
+        <label className={styles.label}>
           Пароль
           <input
             type="password"
@@ -64,7 +84,7 @@ export const RegistrationForm = () => {
           <p>{errors.password?.message}</p>
         </label>
         <label className={styles.label}>
-          Адрес проживания
+          Адрес для доставки
           <input
             type="text"
             {...register('address')}

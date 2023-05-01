@@ -24,7 +24,7 @@ export class UserService {
 
   async createUser(createUserDto: CreateUserDto): Promise<User> {
     const user = this.userRepository.create(createUserDto);
-    const role = await this.roleService.findOneRoleByValue('USER');
+    const role = await this.roleService.findOneRoleByValue('ADMIN');
     user.roles = [role];
     return this.userRepository.save(user);
   }
