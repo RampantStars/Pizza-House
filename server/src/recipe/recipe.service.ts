@@ -15,7 +15,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import { Repository } from 'typeorm';
-import { CategoryService } from 'src/category/category.service';
 import { Category } from 'src/category/entities/category.entity';
 
 @Injectable()
@@ -82,13 +81,14 @@ export class RecipeService {
     //   relations: { ingredients: true, doughtTypes: true, sizes: true },
     // });
     const recipes = await paginate(query, this.recipeRepository, {
-      relations: ['ingredients', 'doughtTypes', 'sizes'],
+      relations: ['ingredients', 'doughtTypes', 'sizes', 'categories'],
       sortableColumns: ['id', 'name', 'price'],
       nullSort: 'last',
       defaultSortBy: [['id', 'ASC']],
       searchableColumns: ['name'],
       filterableColumns: {
         name: [FilterOperator.EQ, FilterSuffix.NOT],
+        categories: [FilterOperator.EQ, FilterSuffix.NOT],
       },
     });
     return recipes;
