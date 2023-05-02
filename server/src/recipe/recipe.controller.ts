@@ -52,7 +52,7 @@ export class RecipeController {
   }
 
   @ApiOperation({ summary: 'Получение всех рецептов пицц' })
-  @ApiResponse({ status: 200, type: Recipe })
+  @ApiResponse({ status: 200, type: [Recipe] })
   @IPaginateQuery(...queryPaginate)
   @Roles('ADMIN')
   @UseGuards(RolesGuard)

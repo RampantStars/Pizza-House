@@ -7,12 +7,13 @@ import { Module } from '@nestjs/common';
 import { RecipeService } from './recipe.service';
 import { RecipeController } from './recipe.controller';
 import { AuthModule } from 'src/auth/auth.module';
+import { Category } from 'src/category/entities/category.entity';
 
 @Module({
   controllers: [RecipeController],
   providers: [RecipeService],
   imports: [
-    TypeOrmModule.forFeature([Recipe, Size, Ingredient, DoughType]),
+    TypeOrmModule.forFeature([Recipe, Size, Ingredient, DoughType, Category]),
     AuthModule,
   ],
   exports: [RecipeService],

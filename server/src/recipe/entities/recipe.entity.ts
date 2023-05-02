@@ -11,6 +11,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Category } from 'src/category/entities/category.entity';
 
 @Entity()
 export class Recipe {
@@ -70,6 +71,10 @@ export class Recipe {
   @ManyToMany(() => DoughType, { cascade: true })
   @JoinTable()
   doughtTypes: DoughType[];
+
+  @ManyToMany(() => Category, { cascade: true })
+  @JoinTable()
+  categories: Category[];
 
   @ApiProperty({
     type: [Ingredient],

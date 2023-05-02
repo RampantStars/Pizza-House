@@ -29,6 +29,8 @@ import { PizzaVariationModule } from './pizza-variation/pizza-variation.module';
 import { OrderLineModule } from './order-line/order-line.module';
 import { OrderModule } from './order/order.module';
 import { AuthModule } from './auth/auth.module';
+import { CategoryModule } from './category/category.module';
+import { Category } from './category/entities/category.entity';
 
 @Module({
   imports: [
@@ -60,6 +62,7 @@ import { AuthModule } from './auth/auth.module';
         PizzaVariation,
         OrderLine,
         Order,
+        Category,
       ],
       synchronize: true,
     }),
@@ -76,6 +79,7 @@ import { AuthModule } from './auth/auth.module';
     OrderLineModule,
     OrderModule,
     AuthModule,
+    CategoryModule,
   ],
 })
 export class AppModule {}

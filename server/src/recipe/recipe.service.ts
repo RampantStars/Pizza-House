@@ -15,6 +15,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import { Repository } from 'typeorm';
+import { CategoryService } from 'src/category/category.service';
+import { Category } from 'src/category/entities/category.entity';
 
 @Injectable()
 export class RecipeService {
@@ -27,6 +29,8 @@ export class RecipeService {
     private readonly doughtTypeRepository: Repository<DoughType>,
     @InjectRepository(Recipe)
     private readonly recipeRepository: Repository<Recipe>,
+    @InjectRepository(Category)
+    private readonly categoryRepository: Repository<Category>,
   ) {}
 
   async createRecipe(createRecipeDto: CreateRecipeDto): Promise<Recipe> {
@@ -42,13 +46,19 @@ export class RecipeService {
       ),
     )) as Size[];
 
+    const categories = (await Promise.all(
+      createRecipeDto.categories.map((categoryName) =>
+        this.categoryRepository.findOne({ where: { name: categoryName } }),
+      ),
+    )) as Category[];
+
     const doughtTypes = (await Promise.all(
       createRecipeDto.doughTypes.map((doughtTypeName) =>
         this.doughtTypeRepository.findOne({ where: { name: doughtTypeName } }),
       ),
     )) as DoughType[];
 
-    if (!ingredients || !sizes || !doughtTypes) {
+    if (!ingredients || !sizes || !doughtTypes || !categories) {
       throw new NotFoundException(`Ошибка в поиске`);
     }
     const recipe = this.recipeRepository.create({
@@ -62,6 +72,7 @@ export class RecipeService {
     recipe.ingredients = [...ingredients];
     recipe.sizes = [...sizes];
     recipe.doughtTypes = [...doughtTypes];
+    recipe.categories = [...categories];
 
     return this.recipeRepository.save(recipe);
   }

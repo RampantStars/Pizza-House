@@ -45,6 +45,13 @@ export class CreateRecipeDto {
 
   @ApiProperty({
     type: [String],
+    example: ['Мясная', 'Острая'],
+    description: 'Какие категории будут у рецепта пиццы',
+  })
+  readonly categories: string[];
+
+  @ApiProperty({
+    type: [String],
     example: ['капуста', 'картошка', 'сыр'],
     description: 'Какие ингредиенты будут в данном рецепте у пиццы',
   })
