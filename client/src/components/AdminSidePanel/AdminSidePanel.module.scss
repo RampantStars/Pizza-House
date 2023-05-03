@@ -1,0 +1,34 @@
+@import '../../scss/variables';
+
+.adminSidePanel {
+  max-width: max-content;
+  padding-right: 20px;
+  border-right: 3px black solid;
+  display: flex;
+}
+
+.list {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  background-color: $orange;
+  border: 2px #b53000 solid;
+}
+
+.item {
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  background-color: $orange;
+  color: white;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: darken($orange, 10%);
+  }
+}
+
+.item + .item {
+  border-top: 2px black solid;
+}

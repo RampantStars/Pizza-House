@@ -5,20 +5,20 @@ import styles from './Categories.module.scss';
 import { CategorySkeleton } from './Skeleton';
 
 export const Categories: React.FC = () => {
-  const { currentCategory, categories, selectCategory } = useCategoryStore(
-    ({ currentCategory, categories, selectCategory }) => ({
+  const { currentCategory, categories, selectCategory, isLoad } = useCategoryStore(
+    ({ currentCategory, categories, selectCategory, isLoad }) => ({
       currentCategory,
       categories,
       selectCategory,
+      isLoad,
     }),
     shallow,
   );
 
-  const isLoading = false;
   return (
     <div>
       <ul className={styles.list}>
-        {isLoading
+        {isLoad
           ? [...new Array(6)].map((_, index) => <CategorySkeleton key={index} />)
           : categories.map((category) => (
               <li
@@ -27,7 +27,7 @@ export const Categories: React.FC = () => {
                 className={`${styles.item} ${
                   currentCategory.id === category.id ? `${styles.active}` : ''
                 }`}>
-                {category.value}
+                {category.name}
               </li>
             ))}
       </ul>

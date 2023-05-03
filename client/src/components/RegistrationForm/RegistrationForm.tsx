@@ -18,7 +18,7 @@ export const RegistrationForm = () => {
 
   const schema = yup
     .object({
-      login: yup.string().required('Это обязательное поле'),
+      login: yup.string().max(8, 'больше 8 символов').required('Это обязательное поле'),
       FCs: yup.string().required('Это обязательное поле'),
       email: yup.string().email('Не корректный email').required('Это обязательное поле'),
       telephone: yup

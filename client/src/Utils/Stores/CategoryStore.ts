@@ -1,49 +1,50 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { Category } from '../types/types';
+import { ICategoryStore } from '../interface/interface';
+import { Category, Error } from '../types/types';
+import ky from 'ky';
 
-interface ICategoryStore {
-  categories: Category[];
-  currentCategory: Category;
-  selectCategory: (category: Category) => void;
-  addCategory: (newCategory: Category) => void;
-  deleteCategory: (id: string) => void;
-  updateCategory: (updateCategory: Category) => void;
-}
+export const useCategoryStore = create<ICategoryStore>()((set, get) => ({
+  categories: [],
+  Error: {} as Error,
+  currentCategory: {} as Category,
+  isLoad: true,
+  fetchCategories: async () => {
+    try {
+      const categories: Category[] = await ky.get('http://localhost:5000/category').json();
+      set({ categories: [...categories], currentCategory: { ...categories[0] }, isLoad: false });
+    } catch (error: any) {
+      const errorJson: Error = await error.response.json();
+      set({ Error: { ...errorJson } });
+      throw errorJson;
+    }
+  },
+  createCategory: async (name: string) => {
+    try {
+      const category: Category = await ky
+        .post('http://localhost:5000/category', {
+          json: name,
+        })
+        .json();
+      set((state) => ({ categories: [...state.categories, { ...category }] }));
+    } catch (error) {}
+  },
+  selectCategory: (category) => {
+    set({ currentCategory: category });
+  },
 
-export const useCategoryStore = create<ICategoryStore>()(
-  persist(
-    (set, get) => ({
-      categories: [
-        { id: '0', value: 'Все' },
-        { id: '1', value: 'Мясные' },
-        { id: '2', value: 'Вегетарианская' },
-        { id: '3', value: 'Гриль' },
-        { id: '4', value: 'Острые' },
-        { id: '5', value: 'Закрытые' },
-      ],
-      currentCategory: { id: '0', value: 'Все' },
+  addCategory: (newCategory) => {
+    set({ categories: [...get().categories, newCategory] });
+  },
 
-      selectCategory: (category) => {
-        set({ currentCategory: category });
-      },
+  deleteCategory: (id) => {
+    set((state) => ({ categories: state.categories.filter((category) => category.id !== id) }));
+  },
 
-      addCategory: (newCategory) => {
-        set({ categories: [...get().categories, newCategory] });
-      },
-
-      deleteCategory: (id) => {
-        set((state) => ({ categories: state.categories.filter((category) => category.id !== id) }));
-      },
-
-      updateCategory: (updateCategory) => {
-        set((state) => ({
-          categories: state.categories.map((category) =>
-            category.id === updateCategory.id ? updateCategory : category,
-          ),
-        }));
-      },
-    }),
-    { name: 'Category-Store', getStorage: () => sessionStorage },
-  ),
-);
+  updateCategory: (updateCategory) => {
+    set((state) => ({
+      categories: state.categories.map((category) =>
+        category.id === updateCategory.id ? updateCategory : category,
+      ),
+    }));
+  },
+}));

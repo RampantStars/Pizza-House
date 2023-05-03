@@ -11,16 +11,37 @@ import styles from './app.module.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import { Login } from './pages/Login';
 import { User } from './pages/User';
+import { Admin } from './pages/Admin';
+import { useCategoryStore } from './Utils/Stores/CategoryStore';
+import { useSizeStore } from './Utils/Stores/SizeStore';
+import { useDoughTypeStore } from './Utils/Stores/DoughType.Store';
+import { useIngredientStore } from './Utils/Stores/IngredientStore';
 
 export const SearchContext = React.createContext();
 
 function App() {
+  const fetchCategories = useCategoryStore((state) => state.fetchCategories);
+  const fetchSizes = useSizeStore((state) => state.fetchSizes);
+  const fetchDoughTypes = useDoughTypeStore((state) => state.fetchDoughTypes);
+  const fetchIngredients = useIngredientStore((state) => state.fetchIngredients);
+
+  const fetchData = async () => {
+    fetchDoughTypes();
+    fetchCategories();
+    fetchSizes();
+    fetchIngredients();
+  };
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.App}>
         <Header />
         <div className={styles.content}>
           <Routes>
+            <Route path="/admin" element={<Admin />} />
             <Route path="/user" element={<User />} />
             <Route path="/registration" element={<Registration />} />
             <Route path="/login" element={<Login />} />

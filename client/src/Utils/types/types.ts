@@ -1,6 +1,6 @@
 export type Category = {
   id: string;
-  value: string;
+  name: string;
 };
 
 export type Pizza = {

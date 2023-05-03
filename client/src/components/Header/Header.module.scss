@@ -72,8 +72,20 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+  transition: all 0.3s ease;
+
+  .login {
+    margin-left: 10px;
+  }
   &:hover .userBg {
     fill: #a6e0f0;
+  }
+  &:hover .login {
+    color: $orange;
+  }
+  &:hover .login,
+  .userBg {
+    transition: all 0.3s ease;
   }
 }
 

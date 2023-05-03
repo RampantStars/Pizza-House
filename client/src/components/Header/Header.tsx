@@ -178,6 +178,7 @@ export const Header: React.FC = () => {
                       </g>
                     </g>
                   </svg>
+                  <h4 className={styles.login}>{user.login}</h4>
                 </div>
               </Link>
             </>
