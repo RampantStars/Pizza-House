@@ -49,6 +49,11 @@ export interface IRecipeStore {
   createRecipe: (data: FormData) => void;
 }
 
+export interface ISizeCreate {
+  value: number;
+  price: number;
+}
+
 export interface IRecipeCreate {
   name: string;
   price: number;
@@ -75,12 +80,14 @@ export interface IRecipeCreateModify {
 
 export interface IModalFramesStore {
   recipeModalIsOpen: boolean;
-  setRecipeModalIsOpen: () => void;
+  sizeModalIsOpen: boolean;
+  setIsOpen: (name: string, value: boolean) => void;
 }
 
 export interface ISizeStore {
   sizes: Size[];
   Error: Error;
+  createSize: (data: ISizeCreate) => void;
   fetchSizes: () => void;
 }
 

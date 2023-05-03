@@ -27,7 +27,7 @@ export class CreateRecipeDto {
     description: 'Процент скидки на пиццу пиццы',
     required: false,
   })
-  readonly salePercent?: number;
+  readonly salePercent: number;
 
   @ApiProperty({
     type: [String],

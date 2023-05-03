@@ -17,7 +17,13 @@ import { useRecipeStore } from '../../../Utils/Stores/RecipeStore';
 export const RecipeCreateForm = () => {
   const animatedComponents = makeAnimated();
 
-  const setRecipeModalIsOpen = useModalFramesStore((state) => state.setRecipeModalIsOpen);
+  const { setIsOpen, sizeModalIsOpen, recipeModalIsOpen } = useModalFramesStore(
+    ({ setIsOpen, sizeModalIsOpen, recipeModalIsOpen }) => ({
+      setIsOpen,
+      sizeModalIsOpen,
+      recipeModalIsOpen,
+    }),
+  );
   const categories = useCategoryStore((state) => state.categories);
   const sizes = useSizeStore((state) => state.sizes);
   const doughTypes = useDoughTypeStore((state) => state.doughTypes);
@@ -66,7 +72,7 @@ export const RecipeCreateForm = () => {
       });
       newData.append('image', data.image[0]);
       createRecipe(newData);
-      setRecipeModalIsOpen();
+      setIsOpen('recipeModalIsOpen', !recipeModalIsOpen);
     } catch (e: any) {
       const error = { ...(e as Error) };
       onErrorToast({ ...error });
@@ -196,18 +202,32 @@ export const RecipeCreateForm = () => {
                 rules={{ required: 'Это поле обязательное' }}
                 render={({ field: { onChange }, fieldState: { error } }) => (
                   <div>
-                    <Select
-                      className={styles.select}
-                      options={sizes}
-                      getOptionLabel={(size: Size) => size.name}
-                      getOptionValue={(size: Size) => size.name}
-                      closeMenuOnSelect={false}
-                      onChange={(newValue) => onChange(newValue.map((value) => value.name))}
-                      components={animatedComponents}
-                      placeholder="Размеры пиццы"
-                      isMulti
-                      noOptionsMessage={() => 'Нет размера'}
-                    />
+                    <div className={styles.select__group}>
+                      <Select
+                        className={styles.select}
+                        options={sizes}
+                        getOptionLabel={(size: Size) => size.name}
+                        getOptionValue={(size: Size) => size.name}
+                        closeMenuOnSelect={false}
+                        onChange={(newValue) => onChange(newValue.map((value) => value.name))}
+                        components={animatedComponents}
+                        placeholder="Размеры пиццы"
+                        isMulti
+                        noOptionsMessage={() => 'Нет размера'}
+                      />
+                      <button
+                        type="button"
+                        className={styles.select__btn}
+                        onClick={() => setIsOpen('sizeModalIsOpen', !sizeModalIsOpen)}>
+                        <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
+                          <path
+                            fill="#000000"
+                            fillRule="evenodd"
+                            d="M9 17a1 1 0 102 0v-6h6a1 1 0 100-2h-6V3a1 1 0 10-2 0v6H3a1 1 0 000 2h6v6z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
                     <p className={styles.error}>{error?.message}</p>
                   </div>
                 )}
@@ -271,7 +291,7 @@ export const RecipeCreateForm = () => {
           </button>
           <button
             className={`${styles.btn} ${styles.cancel}`}
-            onClick={() => setRecipeModalIsOpen()}
+            onClick={() => setIsOpen('recipeModalIsOpen', !recipeModalIsOpen)}
             type="button">
             Отменить
           </button>

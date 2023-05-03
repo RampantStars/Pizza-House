@@ -3,8 +3,6 @@ import { IModalFramesStore } from '../interface/interface';
 
 export const useModalFramesStore = create<IModalFramesStore>()((set, get) => ({
   recipeModalIsOpen: false,
-  setRecipeModalIsOpen: () => {
-    const { recipeModalIsOpen } = get();
-    set({ recipeModalIsOpen: !recipeModalIsOpen });
-  },
+  sizeModalIsOpen: false,
+  setIsOpen: (name: string, value: boolean) => set((state) => ({ ...state, [name]: value })),
 }));

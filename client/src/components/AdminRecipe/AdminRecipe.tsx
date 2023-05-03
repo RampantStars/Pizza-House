@@ -1,14 +1,12 @@
 import styles from './AdminRecipe.module.scss';
-import { RecipeModal } from '../Modals/RecipeModal';
 import { useModalFramesStore } from '../../Utils/Stores/ModalFramesStore';
 
 export const AdminRecipe = () => {
-  const setRecipeModalIsOpen = useModalFramesStore((state) => state.setRecipeModalIsOpen);
+  const setIsOpen = useModalFramesStore((state) => state.setIsOpen);
 
   return (
     <div className={styles.adminRecipe}>
-      <RecipeModal />
-      <button onClick={() => setRecipeModalIsOpen()}>Добавить рецепт</button>
+      <button onClick={() => setIsOpen('recipeModalIsOpen', true)}>Добавить рецепт</button>
     </div>
   );
 };

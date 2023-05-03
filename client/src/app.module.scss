@@ -3,6 +3,7 @@
 
 body::-webkit-scrollbar {
   width: 5px; /* ширина scrollbar */
+  box-sizing: border-box;
 }
 body::-webkit-scrollbar-thumb {
   background-color: #f8b63c; /* цвет плашки */

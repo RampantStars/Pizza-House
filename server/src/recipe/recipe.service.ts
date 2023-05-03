@@ -61,11 +61,11 @@ export class RecipeService {
       throw new NotFoundException(`Ошибка в поиске`);
     }
     const recipe = this.recipeRepository.create({
-      price: createRecipeDto.price,
+      price: +createRecipeDto.price,
       name: createRecipeDto.name,
       description: createRecipeDto.description,
       imageUrl: createRecipeDto.imageUrl,
-      salePercent: createRecipeDto.salePercent,
+      salePercent: +createRecipeDto.salePercent,
     });
 
     recipe.ingredients = [...ingredients];
@@ -77,9 +77,6 @@ export class RecipeService {
   }
 
   async findAllRecipe(query: PaginateQuery): Promise<Paginated<Recipe>> {
-    // const recipes = await this.recipeRepository.find({
-    //   relations: { ingredients: true, doughtTypes: true, sizes: true },
-    // });
     const recipes = await paginate(query, this.recipeRepository, {
       relations: ['ingredients', 'doughtTypes', 'sizes', 'categories'],
       sortableColumns: ['id', 'name', 'price'],

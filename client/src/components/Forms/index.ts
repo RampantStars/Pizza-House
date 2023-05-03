@@ -1,1 +1,2 @@
-export { RecipeCreateForm } from './RecipeCreateForm/RecipeCreateForm';
+export { RecipeCreateForm } from './RecipeCreateForm';
+export { SizeCreateForm } from './SizeCreateForm';

@@ -6,14 +6,16 @@ import { useModalFramesStore } from '../../../Utils/Stores/ModalFramesStore';
 import { useRecipeStore } from '../../../Utils/Stores/RecipeStore';
 
 export const RecipeModal = () => {
-  const { recipeModalIsOpen, setRecipeModalIsOpen } = useModalFramesStore(
-    ({ recipeModalIsOpen, setRecipeModalIsOpen }) => ({ recipeModalIsOpen, setRecipeModalIsOpen }),
+  const { recipeModalIsOpen, setIsOpen } = useModalFramesStore(
+    ({ recipeModalIsOpen, setIsOpen }) => ({ recipeModalIsOpen, setIsOpen }),
   );
 
   const recipes = useRecipeStore((state) => state.recipes);
 
   return (
-    <Dialog open={recipeModalIsOpen} onClose={() => setRecipeModalIsOpen()}>
+    <Dialog
+      open={recipeModalIsOpen}
+      onClose={() => setIsOpen('recipeModalIsOpen', !recipeModalIsOpen)}>
       <div className={styles.bg} aria-hidden="true">
         <Dialog.Panel className={styles.modal}>
           <Dialog.Title className={styles.title}>Создание рецепта</Dialog.Title>
