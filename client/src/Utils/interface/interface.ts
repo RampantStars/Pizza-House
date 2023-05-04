@@ -7,6 +7,7 @@ import {
   Recipe,
   Role,
   Size,
+  TypeIngredient,
   User,
 } from '../types/types';
 
@@ -29,26 +30,6 @@ export interface IResLogIn {
   roles: Role[];
 }
 
-export interface IUserStore {
-  user: User;
-  orders: Order[];
-  token: string;
-  Error: Error;
-  isAuth: boolean;
-  registrationUser: (registration: IRegistration) => void;
-  logIn: (login: ILogin) => void;
-  logOut: () => void;
-  fetchOrder: (id: number) => void;
-  fetchUser: (id: number) => void;
-}
-
-export interface IRecipeStore {
-  recipes: Recipe[];
-  Error: Error;
-  fetchRecipes: () => void;
-  createRecipe: (data: FormData) => void;
-}
-
 export interface ISizeCreate {
   value: number;
   price: number;
@@ -66,22 +47,25 @@ export interface IRecipeCreate {
   ingredients: string[];
 }
 
-export interface IRecipeCreateModify {
+export interface IIngredientCreate {
   name: string;
-  price: number;
-  image: File;
-  description: string;
-  salePercent: number;
-  categories: string[];
-  sizes: string[];
-  doughTypes: string[];
-  ingredients: string[];
+  image: FileList;
+  typeIngredientId: TypeIngredient;
+}
+
+export interface IDeleteModal {
+  action: () => void;
+  name: string;
 }
 
 export interface IModalFramesStore {
   recipeModalIsOpen: boolean;
   sizeModalIsOpen: boolean;
+  ingredientModalIsOpen: boolean;
+  deleteModalIsOpen: boolean;
+  deleteObject: IDeleteModal;
   setIsOpen: (name: string, value: boolean) => void;
+  setDeleteObject: (obj: IDeleteModal) => void;
 }
 
 export interface ISizeStore {
@@ -95,6 +79,14 @@ export interface IIngredientStore {
   ingredients: Ingredient[];
   Error: Error;
   fetchIngredients: () => void;
+  deleteIngredient: (id: number) => void;
+  createIngredient: (data: FormData) => void;
+}
+
+export interface ITypeIngredientStore {
+  typeIngredients: TypeIngredient[];
+  Error: Error;
+  fetchTypeIngredients: () => void;
 }
 
 export interface IDoughTypeStore {
@@ -113,4 +105,24 @@ export interface ICategoryStore {
   addCategory: (newCategory: Category) => void;
   deleteCategory: (id: string) => void;
   updateCategory: (updateCategory: Category) => void;
+}
+
+export interface IUserStore {
+  user: User;
+  orders: Order[];
+  token: string;
+  Error: Error;
+  isAuth: boolean;
+  registrationUser: (registration: IRegistration) => void;
+  logIn: (login: ILogin) => void;
+  logOut: () => void;
+  fetchOrder: (id: number) => void;
+  fetchUser: (id: number) => void;
+}
+
+export interface IRecipeStore {
+  recipes: Recipe[];
+  Error: Error;
+  fetchRecipes: () => void;
+  createRecipe: (data: FormData) => void;
 }

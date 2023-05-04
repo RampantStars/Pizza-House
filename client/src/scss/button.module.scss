@@ -27,7 +27,8 @@
     transition: all $duration ease-in-out;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: darken($orange, 8%);
   }
 
@@ -70,7 +71,8 @@
     }
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: $orange;
 
     &,

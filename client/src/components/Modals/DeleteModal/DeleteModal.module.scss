@@ -1,0 +1,176 @@
+.bg {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  background-color: #333;
+  border-radius: 20px;
+  padding: 30px;
+  color: white;
+}
+
+.select {
+  color: #000000;
+}
+
+.title,
+.description {
+  color: white;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.text {
+  color: white;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.description {
+  border-bottom: 3px solid black;
+  margin-bottom: 15px;
+  padding: 5px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__container {
+    gap: 25px;
+    display: flex;
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+}
+
+.comboBox {
+  &__input {
+    position: relative;
+    width: 100%;
+    display: flex;
+    input {
+      padding: 5px;
+      border: none;
+      width: 100%;
+    }
+  }
+  &__list {
+    z-index: 1;
+    position: absolute;
+    padding: 5px 0;
+    top: 30px;
+    left: 0;
+    color: #000000;
+    width: 100%;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 5px;
+  }
+
+  &__item {
+    padding: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: darken(white, 20%);
+    }
+  }
+}
+
+.input {
+  &__img {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  &__svg {
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: #000000;
+      transition: all 0.5s ease;
+      path,
+      polyline,
+      line {
+        stroke: white;
+      }
+    }
+  }
+}
+
+.btn {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 2px;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  min-width: 100px;
+  max-width: fit-content;
+  &__inputs {
+    border: none;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    height: 24px;
+    height: inherit;
+    cursor: pointer;
+    &:hover {
+      background-color: darken(white, 10%);
+    }
+    svg {
+      width: 24px;
+      height: inherit;
+    }
+  }
+  &__container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+}
+
+.success {
+  color: black;
+  font-weight: bold;
+  background-color: rgb(36, 161, 36);
+  &:hover {
+    background-color: darken(rgb(36, 161, 36), 10%);
+  }
+}
+
+.cancel {
+  color: black;
+  font-weight: bold;
+  background-color: rgb(197, 53, 53);
+
+  &:hover {
+    background-color: darken(rgb(197, 53, 53), 10%);
+  }
+}

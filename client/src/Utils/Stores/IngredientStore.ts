@@ -16,4 +16,30 @@ export const useIngredientStore = create<IIngredientStore>()((set) => ({
       throw errorJson;
     }
   },
+  deleteIngredient: async (id: number) => {
+    try {
+      await ky.delete(`http://localhost:5000/ingredient/${id}`).json();
+      set((state) => ({
+        ingredients: state.ingredients.filter((ingredient) => ingredient.id !== id),
+      }));
+    } catch (error: any) {
+      const errorJson: Error = await error.response.json();
+      set({ Error: { ...errorJson } });
+      throw errorJson;
+    }
+  },
+  createIngredient: async (ingredientData: FormData) => {
+    try {
+      const ingredient: Ingredient = await ky
+        .post('http://localhost:5000/ingredient', {
+          body: ingredientData,
+        })
+        .json();
+      set((state) => ({ ingredients: [...state.ingredients, { ...ingredient }] }));
+    } catch (error: any) {
+      const errorJson: Error = await error.response.json();
+      set({ Error: { ...errorJson } });
+      throw errorJson;
+    }
+  },
 }));

@@ -1,0 +1,1 @@
+export { IngredientModal } from './IngredientModal';

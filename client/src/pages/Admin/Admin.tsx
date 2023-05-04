@@ -4,6 +4,8 @@ import { AdminSidePanel } from '../../components/AdminSidePanel';
 import { AdminController } from '../../components/AdminController';
 import { RecipeModal } from '../../components/Modals/RecipeModal';
 import { SizeModal } from '../../components/Modals/SizeModal';
+import { DeleteModal } from '../../components/Modals/DeleteModal';
+import { IngredientModal } from '../../components/Modals/IngredientModal';
 
 export const Admin = () => {
   const [controller, setController] = React.useState('Recipe');
@@ -14,6 +16,8 @@ export const Admin = () => {
       <AdminController controller={controller} />
       <RecipeModal />
       <SizeModal />
+      <DeleteModal />
+      <IngredientModal/>
     </div>
   );
 };

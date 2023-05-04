@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { IRecipeCreateModify, IRecipeStore } from '../interface/interface';
+import { IRecipeStore } from '../interface/interface';
 import { Error, Recipe } from '../types/types';
 import ky from 'ky';
 

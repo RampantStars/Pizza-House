@@ -1,0 +1,1 @@
+export { AdminIngredient } from './AdminIngredient';
