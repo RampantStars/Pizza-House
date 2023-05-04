@@ -17,7 +17,7 @@ export class IngredientService {
 
   async createIngredient(createIngredientDto: CreateIngredientDto) {
     const type = await this.typeIngredientService.findOneTypeIngredient(
-      createIngredientDto.typeIngredientId,
+      +createIngredientDto.typeIngredientId,
     );
     if (!type) {
       throw new NotFoundException(`Ingredient with not found`);

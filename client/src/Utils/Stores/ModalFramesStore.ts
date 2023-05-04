@@ -6,6 +6,7 @@ export const useModalFramesStore = create<IModalFramesStore>()((set, get) => ({
   sizeModalIsOpen: false,
   deleteModalIsOpen: false,
   ingredientModalIsOpen: false,
+  typeIngredientModalIsOpen: false,
   deleteObject: {} as IDeleteModal,
   setIsOpen: (name: string, value: boolean) => set((state) => ({ ...state, [name]: value })),
   setDeleteObject: (ojb: IDeleteModal) => {

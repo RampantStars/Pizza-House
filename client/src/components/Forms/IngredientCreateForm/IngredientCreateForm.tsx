@@ -10,11 +10,11 @@ import Select from 'react-select';
 import { useTypeIngredientStore } from '../../../Utils/Stores/TypeIngredientSrote';
 
 export const IngredientCreateForm = () => {
-  const { setIsOpen, ingredientModalIsOpen, recipeModalIsOpen } = useModalFramesStore(
-    ({ setIsOpen, ingredientModalIsOpen, recipeModalIsOpen }) => ({
+  const { setIsOpen, ingredientModalIsOpen, typeIngredientModalIsOpen } = useModalFramesStore(
+    ({ setIsOpen, ingredientModalIsOpen, typeIngredientModalIsOpen }) => ({
       setIsOpen,
       ingredientModalIsOpen,
-      recipeModalIsOpen,
+      typeIngredientModalIsOpen,
     }),
   );
 
@@ -154,13 +154,13 @@ export const IngredientCreateForm = () => {
                       placeholder="Тип ингредиента пиццы"
                       noOptionsMessage={() => 'Нет такого типа'}
                       onChange={(newValue) => onChange(newValue)}
-                      // value={(value: string) =>
-                      //   value
-                      //     ? typeIngredients.find((option) => option.id.toString() === value)
-                      //     : ''
-                      // }
                     />
-                    <button type="button" className={styles.select__btn}>
+                    <button
+                      onClick={() =>
+                        setIsOpen('typeIngredientModalIsOpen', !typeIngredientModalIsOpen)
+                      }
+                      type="button"
+                      className={styles.select__btn}>
                       <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
                         <path
                           fill="#000000"

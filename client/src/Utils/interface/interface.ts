@@ -53,6 +53,10 @@ export interface IIngredientCreate {
   typeIngredientId: TypeIngredient;
 }
 
+export interface ITypeIngredientCreate {
+  name: string;
+}
+
 export interface IDeleteModal {
   action: () => void;
   name: string;
@@ -62,6 +66,7 @@ export interface IModalFramesStore {
   recipeModalIsOpen: boolean;
   sizeModalIsOpen: boolean;
   ingredientModalIsOpen: boolean;
+  typeIngredientModalIsOpen: boolean;
   deleteModalIsOpen: boolean;
   deleteObject: IDeleteModal;
   setIsOpen: (name: string, value: boolean) => void;
@@ -87,6 +92,7 @@ export interface ITypeIngredientStore {
   typeIngredients: TypeIngredient[];
   Error: Error;
   fetchTypeIngredients: () => void;
+  createTypeIngredient: (ingredient: ITypeIngredientCreate) => void;
 }
 
 export interface IDoughTypeStore {

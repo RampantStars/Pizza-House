@@ -6,6 +6,7 @@ import { RecipeModal } from '../../components/Modals/RecipeModal';
 import { SizeModal } from '../../components/Modals/SizeModal';
 import { DeleteModal } from '../../components/Modals/DeleteModal';
 import { IngredientModal } from '../../components/Modals/IngredientModal';
+import { TypeIngredientModal } from '../../components/Modals/TypeIngredientModal';
 
 export const Admin = () => {
   const [controller, setController] = React.useState('Recipe');
@@ -17,7 +18,8 @@ export const Admin = () => {
       <RecipeModal />
       <SizeModal />
       <DeleteModal />
-      <IngredientModal/>
+      <IngredientModal />
+      <TypeIngredientModal />
     </div>
   );
 };

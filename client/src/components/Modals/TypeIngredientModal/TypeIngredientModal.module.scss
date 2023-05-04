@@ -1,0 +1,40 @@
+.bg {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  background-color: #333;
+  border-radius: 20px;
+  padding: 30px;
+  color: white;
+}
+
+.select {
+  color: #000000;
+}
+
+.title,
+.description {
+  color: white;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.description {
+  border-bottom: 3px solid black;
+  margin-bottom: 15px;
+  padding: 5px;
+}
