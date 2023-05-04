@@ -4,14 +4,17 @@ import { Category, Error } from '../types/types';
 import ky from 'ky';
 
 export const useCategoryStore = create<ICategoryStore>()((set, get) => ({
-  categories: [],
+  categories: [{ id: 0, name: 'Все' }],
   Error: {} as Error,
-  currentCategory: {} as Category,
+  currentCategory: { id: 0, name: 'Все' },
   isLoad: true,
   fetchCategories: async () => {
     try {
       const categories: Category[] = await ky.get('http://localhost:5000/category').json();
-      set({ categories: [...categories], currentCategory: { ...categories[0] }, isLoad: false });
+      set((state) => ({
+        categories: [...state.categories, ...categories],
+        isLoad: false,
+      }));
     } catch (error: any) {
       const errorJson: Error = await error.response.json();
       set({ Error: { ...errorJson } });
@@ -36,7 +39,7 @@ export const useCategoryStore = create<ICategoryStore>()((set, get) => ({
     set({ categories: [...get().categories, newCategory] });
   },
 
-  deleteCategory: (id) => {
+  deleteCategory: (id: number) => {
     set((state) => ({ categories: state.categories.filter((category) => category.id !== id) }));
   },
 

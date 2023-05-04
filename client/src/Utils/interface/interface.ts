@@ -109,7 +109,7 @@ export interface ICategoryStore {
   fetchCategories: () => void;
   selectCategory: (category: Category) => void;
   addCategory: (newCategory: Category) => void;
-  deleteCategory: (id: string) => void;
+  deleteCategory: (id: number) => void;
   updateCategory: (updateCategory: Category) => void;
 }
 
