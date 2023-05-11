@@ -64,7 +64,6 @@ export class RecipeService {
       price: +createRecipeDto.price,
       name: createRecipeDto.name,
       description: createRecipeDto.description,
-      imageUrl: createRecipeDto.imageUrl,
       salePercent: +createRecipeDto.salePercent,
     });
 
@@ -94,7 +93,12 @@ export class RecipeService {
   async findOneRecipe(id: number): Promise<Recipe> {
     const recipe = await this.recipeRepository.findOne({
       where: { id: id },
-      relations: { ingredients: true, doughtTypes: true, sizes: true },
+      relations: {
+        ingredients: true,
+        doughtTypes: true,
+        sizes: true,
+        categories: true,
+      },
     });
     if (!recipe) {
       throw new NotFoundException(`Recipe with ID=${id} not found`);
@@ -110,8 +114,8 @@ export class RecipeService {
       id: id,
       name: updateRecipeDto.name,
       description: updateRecipeDto.description,
-      imageUrl: updateRecipeDto.imageUrl,
       salePercent: updateRecipeDto.salePercent,
+      inStock: updateRecipeDto.inStock,
     });
 
     if (!recipe) {
@@ -132,6 +136,22 @@ export class RecipeService {
       }
 
       recipe.ingredients = [...ingredients];
+    }
+
+    if (updateRecipeDto.categories) {
+      const categories = (await Promise.all(
+        updateRecipeDto.categories.map((categoryName) =>
+          this.categoryRepository.findOne({
+            where: { name: categoryName },
+          }),
+        ),
+      )) as Category[];
+
+      if (!categories) {
+        throw new NotFoundException(`Ingredient with not found`);
+      }
+
+      recipe.categories = [...categories];
     }
 
     if (updateRecipeDto.sizes) {
@@ -171,6 +191,8 @@ export class RecipeService {
         }
         console.log('file deleted');
       });
+      recipe.imageUrl = updateRecipeDto.imageUrl;
+      console.log('recipe :>> ', recipe);
     }
     return this.recipeRepository.save(recipe);
   }

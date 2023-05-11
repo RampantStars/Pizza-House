@@ -17,6 +17,13 @@ export class CreateRecipeDto {
   imageUrl?: string;
 
   @ApiProperty({
+    example: 'true',
+    description: 'Есть ли в наличии дополнительного ингредиента',
+    required: false,
+  })
+  inStock?: boolean;
+
+  @ApiProperty({
     example: 'Для тех кто любит поострей',
     description: 'Описание пиццы',
   })

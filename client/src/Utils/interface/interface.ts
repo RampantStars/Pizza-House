@@ -47,6 +47,18 @@ export interface IRecipeCreate {
   ingredients: string[];
 }
 
+export interface IRecipeEdit {
+  name: string;
+  price: number;
+  image: string;
+  description: string;
+  salePercent: number;
+  categories: string[];
+  sizes: string[];
+  doughTypes: string[];
+  ingredients: string[];
+}
+
 export interface IIngredientCreate {
   name: string;
   image: FileList;
@@ -134,7 +146,13 @@ export interface IUserStore {
 
 export interface IRecipeStore {
   recipes: Recipe[];
+  editingRecipe: Recipe;
+  isEdit: boolean;
   Error: Error;
   fetchRecipes: () => void;
   createRecipe: (data: FormData) => void;
+  updateRecipe: (id: number, data: FormData) => void;
+  setInStock: (id: number, value: boolean) => void;
+  setEdit: (id: number) => void;
+  setIsEdit: (value: boolean) => void;
 }

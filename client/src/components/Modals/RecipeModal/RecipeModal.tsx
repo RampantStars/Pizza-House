@@ -1,5 +1,5 @@
 import { Dialog } from '@headlessui/react';
-import { RecipeCreateForm } from '../../Forms';
+import { RecipeCreateForm, RecipeEditForm } from '../../Forms';
 
 import styles from './RecipeModal.module.scss';
 import { useModalFramesStore } from '../../../Utils/Stores/ModalFramesStore';
@@ -10,19 +10,32 @@ export const RecipeModal = () => {
     ({ recipeModalIsOpen, setIsOpen }) => ({ recipeModalIsOpen, setIsOpen }),
   );
 
-  const recipes = useRecipeStore((state) => state.recipes);
+  const onClose = () => {
+    setIsEdit(false);
+    setIsOpen('recipeModalIsOpen', !recipeModalIsOpen);
+  };
+  const { isEdit, setIsEdit } = useRecipeStore(({ isEdit, setIsEdit }) => ({ isEdit, setIsEdit }));
 
   return (
-    <Dialog
-      open={recipeModalIsOpen}
-      onClose={() => setIsOpen('recipeModalIsOpen', !recipeModalIsOpen)}>
+    <Dialog open={recipeModalIsOpen} onClose={() => onClose()}>
       <div className={styles.bg} aria-hidden="true">
         <Dialog.Panel className={styles.modal}>
-          <Dialog.Title className={styles.title}>Создание рецепта</Dialog.Title>
-          <Dialog.Description className={styles.description}>
-            Создание рецепта пиццы
-          </Dialog.Description>
-          <RecipeCreateForm />
+          <Dialog.Title className={styles.title}>Рецепт</Dialog.Title>
+          {isEdit ? (
+            <>
+              <Dialog.Description className={styles.description}>
+                Изменение рецепта пиццы
+              </Dialog.Description>
+              <RecipeEditForm />
+            </>
+          ) : (
+            <>
+              <Dialog.Description className={styles.description}>
+                Создание рецепта пиццы
+              </Dialog.Description>
+              <RecipeCreateForm />
+            </>
+          )}
         </Dialog.Panel>
       </div>
     </Dialog>

@@ -82,10 +82,12 @@ export type Recipe = {
   imageUrl?: string;
   description: string;
   salePercent: number;
+  inStock: boolean;
   sizes: Size[];
   doughtTypes: DoughType[];
   ingredients: Ingredient[];
   pizzaVariations: PizzaVariation[];
+  categories: Category[];
 };
 
 export type AdditionalIngredient = {

@@ -1,0 +1,121 @@
+.recipeCardAdmin {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+}
+
+.info {
+  &__top,
+  &__bottom {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+.btn {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border: 1px solid transparent;
+  background-color: transparent;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  &__edit {
+    &:focus,
+    &:hover {
+      .btn__svg {
+        path {
+          transition: all 0.3s ease;
+          fill: red;
+        }
+      }
+    }
+  }
+
+  &__inStock {
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 12px;
+    background: #55f492;
+  }
+
+  &__disabled {
+    color: white;
+    background-color: #f45555;
+  }
+
+  &__inStock:focus,
+  &__inStock:hover {
+    background-color: darken($color: #55f492, $amount: 20);
+  }
+
+  &__disabled:focus,
+  &__disabled:hover {
+    background-color: darken($color: #f45555, $amount: 20);
+  }
+
+  &__container {
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    justify-content: end;
+    align-items: center;
+  }
+  &__svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+.recipe {
+  &__info {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    &__ingredients {
+      max-width: 350px;
+    }
+    &__description {
+      text-align: left;
+      max-width: 500px;
+    }
+  }
+}
+.list {
+  &__sizes {
+    width: 200px;
+    flex-wrap: wrap;
+    display: flex;
+    align-content: flex-start;
+    gap: 5px;
+    &__item {
+      max-height: fit-content;
+    }
+  }
+  &__ingredients {
+    flex-wrap: wrap;
+    display: flex;
+    align-content: flex-start;
+    gap: 5px;
+    &__item {
+      max-height: fit-content;
+    }
+  }
+  &__categories {
+    width: 200px;
+    flex-wrap: wrap;
+    display: flex;
+    align-content: flex-start;
+    gap: 5px;
+    &__item {
+      max-height: fit-content;
+    }
+  }
+}

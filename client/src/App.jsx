@@ -17,6 +17,7 @@ import { useSizeStore } from './Utils/Stores/SizeStore';
 import { useDoughTypeStore } from './Utils/Stores/DoughType.Store';
 import { useIngredientStore } from './Utils/Stores/IngredientStore';
 import { useTypeIngredientStore } from './Utils/Stores/TypeIngredientSrote';
+import { useRecipeStore } from './Utils/Stores/RecipeStore';
 
 export const SearchContext = React.createContext();
 
@@ -26,6 +27,7 @@ function App() {
   const fetchDoughTypes = useDoughTypeStore((state) => state.fetchDoughTypes);
   const fetchIngredients = useIngredientStore((state) => state.fetchIngredients);
   const fetchTypeIngredients = useTypeIngredientStore((state) => state.fetchTypeIngredients);
+  const fetchRecipes = useRecipeStore((state) => state.fetchRecipes);
 
   const fetchData = async () => {
     fetchDoughTypes();
@@ -33,6 +35,7 @@ function App() {
     fetchSizes();
     fetchIngredients();
     fetchTypeIngredients();
+    fetchRecipes();
   };
 
   React.useEffect(() => {

@@ -1,2 +1,35 @@
 .adminRecipe {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.btn {
+  width: fit-content;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: orange;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:focus,
+  &:hover {
+    color: orange;
+    background-color: transparent;
+    border-color: orange;
+  }
+}
+.recipeList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .item {
+    border: 1px solid black;
+  }
+  &:last-child {
+    margin-bottom: 20px;
+  }
 }

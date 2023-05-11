@@ -55,6 +55,14 @@ export class Recipe {
   salePercent: number;
 
   @ApiProperty({
+    example: 'true',
+    description: 'Есть ли в наличии дополнительного ингредиента',
+    required: false,
+  })
+  @Column({ default: true })
+  inStock: boolean;
+
+  @ApiProperty({
     type: [Size],
     example: Size,
     description: 'Какие размеры будут в данном рецепте у пиццы',

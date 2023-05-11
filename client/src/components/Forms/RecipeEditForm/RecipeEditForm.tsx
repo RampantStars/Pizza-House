@@ -12,9 +12,9 @@ import { IRecipeCreate } from '../../../Utils/interface/interface';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
-import styles from './RecipeCreateForm.module.scss';
+import styles from './RecipeEditForm.module.scss';
 
-export const RecipeCreateForm = () => {
+export const RecipeEditForm = () => {
   const animatedComponents = makeAnimated();
 
   const { setIsOpen, sizeModalIsOpen, recipeModalIsOpen, ingredientModalIsOpen } =
@@ -30,7 +30,9 @@ export const RecipeCreateForm = () => {
   const sizes = useSizeStore((state) => state.sizes);
   const doughTypes = useDoughTypeStore((state) => state.doughTypes);
   const ingredients = useIngredientStore((state) => state.ingredients);
-  const createRecipe = useRecipeStore((state) => state.createRecipe);
+  const { updateRecipe, editingRecipe, setIsEdit } = useRecipeStore(
+    ({ updateRecipe, editingRecipe, setIsEdit }) => ({ updateRecipe, editingRecipe, setIsEdit }),
+  );
 
   const [image, setImage] = useState<string>('');
 
@@ -51,7 +53,14 @@ export const RecipeCreateForm = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<IRecipeCreate>();
+  } = useForm<IRecipeCreate>({
+    defaultValues: {
+      name: editingRecipe.name || '',
+      price: editingRecipe.price || 0,
+      description: editingRecipe.description || '',
+      salePercent: editingRecipe.salePercent || 0,
+    },
+  });
 
   const onSubmit: SubmitHandler<IRecipeCreate> = async (data) => {
     try {
@@ -60,22 +69,28 @@ export const RecipeCreateForm = () => {
       newData.append('price', data.price.toString());
       newData.append('description', data.description);
       newData.append('salePercent', data.salePercent.toString());
-      data.sizes.forEach((str, index) => {
-        newData.append(`sizes[${index}]`, str.toString());
-      });
-      data.ingredients.forEach((str, index) => {
-        newData.append(`ingredients[${index}]`, str.toString());
-      });
-      data.doughTypes.forEach((str, index) => {
-        newData.append(`doughTypes[${index}]`, str.toString());
-      });
-      data.categories.forEach((str, index) => {
-        newData.append(`categories[${index}]`, str.toString());
-      });
-      newData.append('image', data.image[0]);
-      createRecipe(newData);
+      if (data.sizes)
+        data.sizes.forEach((str, index) => {
+          newData.append(`sizes[${index}]`, str.toString());
+        });
+      if (data.ingredients)
+        data.ingredients.forEach((str, index) => {
+          newData.append(`ingredients[${index}]`, str.toString());
+        });
+      if (data.doughTypes)
+        data.doughTypes.forEach((str, index) => {
+          newData.append(`doughTypes[${index}]`, str.toString());
+        });
+      if (data.categories)
+        data.categories.forEach((str, index) => {
+          newData.append(`categories[${index}]`, str.toString());
+        });
+      if (data.image) newData.append('image', data.image[0]);
+      await updateRecipe(editingRecipe.id, newData);
+      setIsEdit(false);
       setIsOpen('recipeModalIsOpen', !recipeModalIsOpen);
     } catch (e: any) {
+      console.log('error :>> ', e);
       const error = { ...(e as Error) };
       onErrorToast({ ...error });
     }
@@ -87,52 +102,12 @@ export const RecipeCreateForm = () => {
           <label className={styles.label}>
             Картинка рецепта
             {!image ? (
-              <svg
-                className={styles.input__svg}
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <title />
-
-                <g id="Complete">
-                  <g id="upload">
-                    <g>
-                      <path
-                        d="M3,12.3v7a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2v-7"
-                        fill="none"
-                        stroke="#000000"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                      />
-
-                      <g>
-                        <polyline
-                          data-name="Right"
-                          fill="none"
-                          id="Right-2"
-                          points="7.9 6.7 12 2.7 16.1 6.7"
-                          stroke="#000000"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                        />
-
-                        <line
-                          fill="none"
-                          stroke="#000000"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          x1="12"
-                          x2="12"
-                          y1="16.3"
-                          y2="4.8"
-                        />
-                      </g>
-                    </g>
-                  </g>
-                </g>
-              </svg>
+              <img
+                alt="Загруженная картинка"
+                className={styles.img}
+                src={`http://localhost:5000/${editingRecipe.imageUrl}`}
+                onLoad={handleImageLoad}
+              />
             ) : (
               <img
                 alt="Загруженная картинка"
@@ -175,7 +150,6 @@ export const RecipeCreateForm = () => {
               <Controller
                 control={control}
                 name="categories"
-                rules={{ required: 'Это поле обязательное' }}
                 render={({ field: { onChange }, fieldState: { error } }) => (
                   <div>
                     <div className={styles.select__group}>
@@ -184,6 +158,7 @@ export const RecipeCreateForm = () => {
                         options={categories}
                         getOptionLabel={(category: Category) => category.name}
                         getOptionValue={(category: Category) => category.name}
+                        defaultValue={editingRecipe.categories}
                         filterOption={(categories) => categories.label !== 'Все'}
                         closeMenuOnSelect={false}
                         onChange={(newValue) => onChange(newValue.map((value) => value.name))}
@@ -212,8 +187,7 @@ export const RecipeCreateForm = () => {
               <Controller
                 control={control}
                 name="sizes"
-                rules={{ required: 'Это поле обязательное' }}
-                render={({ field: { onChange }, fieldState: { error } }) => (
+                render={({ field: { value, onChange }, fieldState: { error } }) => (
                   <div>
                     <div className={styles.select__group}>
                       <Select
@@ -221,6 +195,7 @@ export const RecipeCreateForm = () => {
                         options={sizes}
                         getOptionLabel={(size: Size) => size.name}
                         getOptionValue={(size: Size) => size.name}
+                        defaultValue={editingRecipe.sizes}
                         closeMenuOnSelect={false}
                         onChange={(newValue) => onChange(newValue.map((value) => value.name))}
                         components={animatedComponents}
@@ -251,7 +226,6 @@ export const RecipeCreateForm = () => {
               <Controller
                 control={control}
                 name="doughTypes"
-                rules={{ required: 'Это поле обязательное' }}
                 render={({ field: { onChange }, fieldState: { error } }) => (
                   <div>
                     <div className={styles.select__group}>
@@ -260,6 +234,7 @@ export const RecipeCreateForm = () => {
                         options={doughTypes}
                         getOptionLabel={(doughType: DoughType) => doughType.name}
                         getOptionValue={(doughType: DoughType) => doughType.name}
+                        defaultValue={editingRecipe.doughtTypes}
                         closeMenuOnSelect={false}
                         onChange={(newValue) => onChange(newValue.map((value) => value.name))}
                         components={animatedComponents}
@@ -287,7 +262,6 @@ export const RecipeCreateForm = () => {
               <Controller
                 control={control}
                 name="ingredients"
-                rules={{ required: 'Это поле обязательное' }}
                 render={({ field: { onChange }, fieldState: { error } }) => (
                   <div>
                     <div className={styles.select__group}>
@@ -296,6 +270,7 @@ export const RecipeCreateForm = () => {
                         options={ingredients}
                         getOptionLabel={(ingredient: Ingredient) => ingredient.name}
                         getOptionValue={(ingredient: Ingredient) => ingredient.name}
+                        defaultValue={editingRecipe.ingredients}
                         closeMenuOnSelect={false}
                         onChange={(newValue) => onChange(newValue.map((value) => value.name))}
                         components={animatedComponents}
@@ -325,11 +300,14 @@ export const RecipeCreateForm = () => {
         </div>
         <div className={styles.btn__container}>
           <button className={`${styles.btn} ${styles.success}`} type="submit">
-            Создать
+            Сохранить
           </button>
           <button
             className={`${styles.btn} ${styles.cancel}`}
-            onClick={() => setIsOpen('recipeModalIsOpen', !recipeModalIsOpen)}
+            onClick={() => {
+              setIsEdit(false);
+              setIsOpen('recipeModalIsOpen', !recipeModalIsOpen);
+            }}
             type="button">
             Отменить
           </button>

@@ -54,8 +54,6 @@ export class RecipeController {
   @ApiOperation({ summary: 'Получение всех рецептов пицц' })
   @ApiResponse({ status: 200, type: [Recipe] })
   @IPaginateQuery(...queryPaginate)
-  @Roles('ADMIN')
-  @UseGuards(RolesGuard)
   @Get()
   findAll(@Paginate() query: PaginateQuery): Promise<Paginated<Recipe>> {
     return this.recipeService.findAllRecipe(query);
@@ -88,6 +86,7 @@ export class RecipeController {
     if (file) {
       updateRecipeDto.imageUrl = file.filename;
     }
+    console.log('updateRecipeDto :>> ', updateRecipeDto);
     return this.recipeService.updateRecipe(+id, updateRecipeDto);
   }
 
