@@ -19,7 +19,10 @@ export class SizeService {
 
   async findAllSize(): Promise<Size[]> {
     const sizes = await this.sizeRepository.find();
-    return sizes;
+    const filterSizes = sizes.sort((sizeF, sizeS) =>
+      sizeF.name.localeCompare(sizeS.name),
+    );
+    return filterSizes;
   }
 
   async findOneSize(id: number): Promise<Size> {

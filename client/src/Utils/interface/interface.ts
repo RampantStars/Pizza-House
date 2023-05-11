@@ -75,9 +75,15 @@ export interface IModalFramesStore {
 
 export interface ISizeStore {
   sizes: Size[];
+  editingSize: Size;
+  isEdit: boolean;
   Error: Error;
-  createSize: (data: ISizeCreate) => void;
   fetchSizes: () => void;
+  createSize: (data: ISizeCreate) => void;
+  deleteSize: (id: number) => void;
+  updateSize: (id: number, data: ISizeCreate) => void;
+  setEdit: (id: number) => void;
+  setIsEdit: (value: boolean) => void;
 }
 
 export interface IIngredientStore {
