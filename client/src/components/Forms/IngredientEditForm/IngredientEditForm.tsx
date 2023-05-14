@@ -57,7 +57,8 @@ export const IngredientEditForm = () => {
     try {
       const newData = new FormData();
       newData.append('name', data.name);
-      newData.append('typeIngredientId', data.typeIngredientId.id.toString());
+      if (data.typeIngredientId)
+        newData.append('typeIngredientId', data.typeIngredientId.id.toString());
       if (data.image) newData.append('image', data.image[0]);
       await updateIngredient(editingIngredient.id, newData);
       setIsEdit(false);
