@@ -17,15 +17,27 @@ import styles from './RecipeEditForm.module.scss';
 export const RecipeEditForm = () => {
   const animatedComponents = makeAnimated();
 
-  const { setIsOpen, sizeModalIsOpen, recipeModalIsOpen, ingredientModalIsOpen } =
-    useModalFramesStore(
-      ({ setIsOpen, sizeModalIsOpen, recipeModalIsOpen, ingredientModalIsOpen }) => ({
-        setIsOpen,
-        sizeModalIsOpen,
-        recipeModalIsOpen,
-        ingredientModalIsOpen,
-      }),
-    );
+  const {
+    setIsOpen,
+    sizeModalIsOpen,
+    recipeModalIsOpen,
+    ingredientModalIsOpen,
+    doughTypeModalIsOpen,
+  } = useModalFramesStore(
+    ({
+      setIsOpen,
+      sizeModalIsOpen,
+      recipeModalIsOpen,
+      ingredientModalIsOpen,
+      doughTypeModalIsOpen,
+    }) => ({
+      setIsOpen,
+      sizeModalIsOpen,
+      recipeModalIsOpen,
+      ingredientModalIsOpen,
+      doughTypeModalIsOpen,
+    }),
+  );
   const categories = useCategoryStore((state) => state.categories);
   const sizes = useSizeStore((state) => state.sizes);
   const doughTypes = useDoughTypeStore((state) => state.doughTypes);
@@ -242,7 +254,10 @@ export const RecipeEditForm = () => {
                         isMulti
                         noOptionsMessage={() => 'Нет типа теста'}
                       />
-                      <button type="button" className={styles.select__btn}>
+                      <button
+                        onClick={() => setIsOpen('doughTypeModalIsOpen', !doughTypeModalIsOpen)}
+                        type="button"
+                        className={styles.select__btn}>
                         <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
                           <path
                             fill="#000000"

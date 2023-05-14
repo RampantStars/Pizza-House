@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useUserStore } from '../../Utils/Stores/UserStore';
 
+import styles from './UserControls.module.scss';
+
 export const UserControls = () => {
   const user = useUserStore((state) => state.user);
   return (
-    <>
+    <div className={styles.userControls}>
       {user.roles.find((role) => role.value.toUpperCase() === 'ADMIN') ? (
         <Link to="/admin">
           <svg
@@ -115,6 +117,6 @@ export const UserControls = () => {
       ) : (
         ''
       )}
-    </>
+    </div>
   );
 };

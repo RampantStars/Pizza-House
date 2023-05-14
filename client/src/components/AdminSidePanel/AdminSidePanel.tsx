@@ -18,14 +18,14 @@ export const AdminSidePanel = ({
         <li className={styles.item} onClick={() => setController('AdditionalIngredient')}>
           Дополнительные ингредиенты
         </li>
-        <li className={styles.item} onClick={() => setController('Users')}>
-          Пользователи
-        </li>
         <li className={styles.item} onClick={() => setController('Size')}>
           Размер теста
         </li>
         <li className={styles.item} onClick={() => setController('DoughType')}>
           Тип теста
+        </li>
+        <li className={styles.item} onClick={() => setController('Users')}>
+          Пользователи
         </li>
       </ul>
     </div>

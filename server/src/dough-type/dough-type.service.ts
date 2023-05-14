@@ -20,7 +20,9 @@ export class DoughTypeService {
   }
 
   async findAllDoughType(): Promise<DoughType[]> {
-    const doughType = await this.doughTypeRepository.find();
+    const doughType = await this.doughTypeRepository.find({
+      relations: { pizzaVariations: true },
+    });
     return doughType;
   }
 

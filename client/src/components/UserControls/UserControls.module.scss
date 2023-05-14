@@ -1,2 +1,7 @@
 .userControls {
+  display: flex;
+  gap: 5px;
+  a {
+    display: flex;
+  }
 }

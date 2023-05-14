@@ -1,0 +1,118 @@
+@import '../../../scss/variables';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__container {
+    gap: 25px;
+    display: flex;
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .label {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input {
+    &__img {
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    &__svg {
+      width: 150px;
+      height: 150px;
+      background-color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: #000000;
+        transition: all 0.5s ease;
+        path,
+        polyline,
+        line {
+          stroke: white;
+        }
+      }
+    }
+  }
+
+  .error {
+    color: red;
+    padding: 5px;
+  }
+
+  .img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+
+  .btn {
+    cursor: pointer;
+    display: inline-flex;
+    column-gap: 2px;
+    align-items: center;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    min-width: 100px;
+    max-width: fit-content;
+    &__inputs {
+      border: none;
+      display: flex;
+      align-items: center;
+      background-color: white;
+      height: 24px;
+      height: inherit;
+      cursor: pointer;
+      &:hover {
+        background-color: darken(white, 10%);
+      }
+      svg {
+        width: 24px;
+        height: inherit;
+      }
+    }
+    &__container {
+      display: flex;
+      gap: 10px;
+      justify-content: end;
+    }
+  }
+
+  .success,
+  .cancel {
+    margin: 10px;
+    border: 2px solid transparent;
+    &:focus {
+      border: 2px solid white;
+    }
+  }
+
+  .success {
+    color: black;
+    font-weight: bold;
+    background-color: rgb(36, 161, 36);
+    &:hover {
+      background-color: darken(rgb(36, 161, 36), 10%);
+    }
+  }
+
+  .cancel {
+    color: black;
+    font-weight: bold;
+    background-color: rgb(197, 53, 53);
+
+    &:hover {
+      background-color: darken(rgb(197, 53, 53), 10%);
+    }
+  }
+}

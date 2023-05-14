@@ -9,14 +9,15 @@ export const SizeCard = (size: Size) => {
     setEdit,
     setIsEdit,
   }));
-  const { setDeleteObject, deleteModalIsOpen, setIsOpen, sizeModalIsOpen } = useModalFramesStore(
-    ({ setDeleteObject, deleteModalIsOpen, setIsOpen, sizeModalIsOpen }) => ({
-      setDeleteObject,
-      deleteModalIsOpen,
-      setIsOpen,
-      sizeModalIsOpen,
-    }),
-  );
+  const { setDeleteObject, deleteModalIsOpen, setIsOpen, doughTypeModalIsOpen } =
+    useModalFramesStore(
+      ({ setDeleteObject, deleteModalIsOpen, setIsOpen, doughTypeModalIsOpen }) => ({
+        setDeleteObject,
+        deleteModalIsOpen,
+        setIsOpen,
+        doughTypeModalIsOpen,
+      }),
+    );
 
   const onDelete = () => {
     setDeleteObject({
@@ -31,7 +32,7 @@ export const SizeCard = (size: Size) => {
   const onEdit = async (id: number) => {
     await setEdit(id);
     setIsEdit(true);
-    setIsOpen('sizeModalIsOpen', !sizeModalIsOpen);
+    setIsOpen('doughTypeModalIsOpen', !doughTypeModalIsOpen);
   };
 
   return (

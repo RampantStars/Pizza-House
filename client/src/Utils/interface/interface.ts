@@ -35,6 +35,11 @@ export interface ISizeCreate {
   price: number;
 }
 
+export interface IDoughTypeCreate {
+  name: string;
+  price: number;
+}
+
 export interface IRecipeCreate {
   name: string;
   price: number;
@@ -79,6 +84,7 @@ export interface IModalFramesStore {
   sizeModalIsOpen: boolean;
   ingredientModalIsOpen: boolean;
   typeIngredientModalIsOpen: boolean;
+  doughTypeModalIsOpen: boolean;
   deleteModalIsOpen: boolean;
   deleteObject: IDeleteModal;
   setIsOpen: (name: string, value: boolean) => void;
@@ -120,8 +126,15 @@ export interface ITypeIngredientStore {
 
 export interface IDoughTypeStore {
   doughTypes: DoughType[];
+  editingDoughType: DoughType;
+  isEdit: boolean;
   Error: Error;
   fetchDoughTypes: () => void;
+  createDoughType: (data: IDoughTypeCreate) => void;
+  deleteDoughType: (id: number) => void;
+  updateDoughType: (id: number, data: IDoughTypeCreate) => void;
+  setEdit: (id: number) => void;
+  setIsEdit: (value: boolean) => void;
 }
 export interface ICategoryStore {
   categories: Category[];
