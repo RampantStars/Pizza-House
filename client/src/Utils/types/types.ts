@@ -144,4 +144,5 @@ export type User = {
   email: string;
   address: string;
   roles: Role[];
+  orders: Order[];
 };

@@ -65,7 +65,12 @@ export const RegistrationForm = () => {
         </label>
         <label className={styles.label}>
           ФИО
-          <input type="text" {...register('FCs')} placeholder="ФИО" className={styles.input} />
+          <input
+            type="text"
+            {...register('FCs')}
+            placeholder="Иванов Иван Иванович"
+            className={styles.input}
+          />
           <p>{errors.FCs?.message}</p>
         </label>
         <label className={styles.label}>

@@ -1,0 +1,122 @@
+.userCard {
+  width: 200px;
+  padding: 5px;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  border-radius: 5px;
+}
+.user {
+  &__svg {
+    width: 100px;
+    height: 100px;
+    align-self: center;
+  }
+}
+
+.popover {
+  position: relative;
+  &__btn {
+    cursor: pointer;
+    padding: 5px;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    background: rgb(255, 200, 97);
+    font-weight: bold;
+    border-radius: 5px;
+    &:focus,
+    &:hover {
+      color: orange;
+      background-color: transparent;
+      border-color: rgb(255, 200, 97);
+    }
+    &Edit {
+      cursor: pointer;
+      display: flex;
+      padding: 3px;
+      background: transparent;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      background: rgb(255, 200, 97);
+      font-weight: bold;
+      border-radius: 5px;
+      &:focus,
+      &:hover {
+        color: orange;
+        background-color: transparent;
+        border-color: rgb(255, 200, 97);
+      }
+      svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+
+  &__panel {
+    margin-top: 5px;
+    position: absolute;
+    width: max-content;
+    padding: 5px;
+    background-color: white;
+    border: 1px solid orange;
+    border-radius: 5px;
+    z-index: 2;
+    &Role {
+      margin-top: 5px;
+      right: 0;
+      position: absolute;
+      width: max-content;
+      padding: 5px;
+      background-color: white;
+      border: 1px solid orange;
+      border-radius: 5px;
+      z-index: 2;
+    }
+    .info {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+}
+
+.select {
+  color: black;
+  &__btn {
+    cursor: pointer;
+    padding: 5px;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    background: rgb(255, 200, 97);
+    font-weight: bold;
+    border-radius: 5px;
+    &:focus,
+    &:hover {
+      color: orange;
+      background-color: transparent;
+      border-color: rgb(255, 200, 97);
+    }
+  }
+}
+
+.role {
+  &__title {
+    font-weight: bold;
+  }
+  &__list {
+    gap: 5px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+p {
+  span {
+    font-weight: bold;
+  }
+}

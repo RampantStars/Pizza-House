@@ -24,7 +24,7 @@ export class UserService {
 
   async createUser(createUserDto: CreateUserDto): Promise<User> {
     const user = this.userRepository.create(createUserDto);
-    const role = await this.roleService.findOneRoleByValue('ADMIN');
+    const role = await this.roleService.findOneRoleByValue('USER');
     user.roles = [role];
     return this.userRepository.save(user);
   }
@@ -48,7 +48,7 @@ export class UserService {
 
   async findAllUser(): Promise<User[]> {
     const users = await this.userRepository.find({
-      relations: ['roles'],
+      relations: { roles: true, orders: true },
     });
     return users;
   }
@@ -69,7 +69,7 @@ export class UserService {
   async findOneUser(id: number): Promise<User> {
     const user = await this.userRepository.findOne({
       where: { id: id },
-      relations: ['roles'],
+      relations: { roles: true, orders: true },
     });
     if (!user) {
       throw new NotFoundException(`User with ID=${id} not found`);

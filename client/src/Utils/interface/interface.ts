@@ -137,6 +137,8 @@ export interface ICategoryStore {
 }
 
 export interface IUserStore {
+  users: User[];
+  roles: Role[];
   user: User;
   orders: Order[];
   token: string;
@@ -146,7 +148,11 @@ export interface IUserStore {
   logIn: (login: ILogin) => void;
   logOut: () => void;
   fetchOrder: (id: number) => void;
-  fetchUser: (id: number) => void;
+  fetchUser: (id: number) => Promise<User>;
+  fetchRole: () => void;
+  fetchUsers: () => void;
+  setRole: (userId: number, roleId: number) => void;
+  removeRole: (userId: number, roleId: number) => void;
 }
 
 export interface IRecipeStore {

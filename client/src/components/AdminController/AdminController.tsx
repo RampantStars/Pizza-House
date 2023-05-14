@@ -2,6 +2,7 @@ import styles from './AdminController.module.scss';
 import { AdminRecipe } from '../AdminRecipe';
 import { AdminIngredient } from '../AdminIngredient';
 import { AdminSize } from '../AdminSize';
+import { AdminUser } from '../AdminUser';
 
 export const AdminController = ({ controller }: { controller: string }) => {
   return (
@@ -14,6 +15,8 @@ export const AdminController = ({ controller }: { controller: string }) => {
             return <AdminIngredient />;
           case 'Size':
             return <AdminSize />;
+          case 'Users':
+            return <AdminUser />;
           default:
             return null;
         }
