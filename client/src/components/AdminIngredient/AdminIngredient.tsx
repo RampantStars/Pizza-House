@@ -21,7 +21,7 @@ export const AdminIngredient = () => {
       </button>
       {typeIngredients.map((typeIngredient) => (
         <>
-          <h2 className={styles.title}>Тип ингредиента {typeIngredient.name}</h2>
+          <h2 className={styles.title}>{typeIngredient.name}</h2>
           <div className={styles.ingredientList}>
             {ingredients.map((ingredient) =>
               ingredient.typeIngredient.name === typeIngredient.name ? (

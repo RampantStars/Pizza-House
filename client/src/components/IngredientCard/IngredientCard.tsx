@@ -5,15 +5,20 @@ import { useIngredientStore } from '../../Utils/Stores/IngredientStore';
 import { useModalFramesStore } from '../../Utils/Stores/ModalFramesStore';
 
 export const IngredientCard: FC<Ingredient> = (ingredient) => {
-  const deleteIngredient = useIngredientStore((state) => state.deleteIngredient);
-
-  const { setDeleteObject, deleteModalIsOpen, setIsOpen } = useModalFramesStore(
-    ({ setDeleteObject, deleteModalIsOpen, setIsOpen }) => ({
-      setDeleteObject,
-      deleteModalIsOpen,
-      setIsOpen,
-    }),
+  const { deleteIngredient, setEdit, setIsEdit } = useIngredientStore(
+    ({ deleteIngredient, setEdit, setIsEdit }) => ({ deleteIngredient, setEdit, setIsEdit }),
   );
+
+  const { setDeleteObject, deleteModalIsOpen, setIsOpen, ingredientModalIsOpen } =
+    useModalFramesStore(
+      ({ setDeleteObject, deleteModalIsOpen, setIsOpen, ingredientModalIsOpen }) => ({
+        setDeleteObject,
+        deleteModalIsOpen,
+        setIsOpen,
+        ingredientModalIsOpen,
+      }),
+    );
+
   const onDelete = () => {
     setDeleteObject({
       action: () => {
@@ -24,10 +29,18 @@ export const IngredientCard: FC<Ingredient> = (ingredient) => {
     setIsOpen('deleteModalIsOpen', !deleteModalIsOpen);
   };
 
+  const onEdit = async (id: number) => {
+    await setEdit(id);
+    setIsEdit(true);
+    setIsOpen('ingredientModalIsOpen', !ingredientModalIsOpen);
+  };
+
   return (
     <div className={styles.ingredientCard}>
       <div className={styles.btn__container}>
-        <button className={`${styles.btn} ${styles.btn__edit} `}>
+        <button
+          onClick={() => onEdit(ingredient.id)}
+          className={`${styles.btn} ${styles.btn__edit} `}>
           <svg
             className={styles.btn__svg}
             viewBox="0 0 24 24"

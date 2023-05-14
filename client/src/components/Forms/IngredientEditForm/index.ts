@@ -1,0 +1,1 @@
+export { IngredientEditForm } from './IngredientEditForm';

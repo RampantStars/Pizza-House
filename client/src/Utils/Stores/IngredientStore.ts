@@ -3,8 +3,10 @@ import { IIngredientStore } from '../interface/interface';
 import { Error, Ingredient } from '../types/types';
 import ky from 'ky';
 
-export const useIngredientStore = create<IIngredientStore>()((set) => ({
+export const useIngredientStore = create<IIngredientStore>()((set, get) => ({
   ingredients: [],
+  editingIngredient: {} as Ingredient,
+  isEdit: false,
   Error: {} as Error,
   fetchIngredients: async () => {
     try {
@@ -41,5 +43,34 @@ export const useIngredientStore = create<IIngredientStore>()((set) => ({
       set({ Error: { ...errorJson } });
       throw errorJson;
     }
+  },
+  updateIngredient: async (id: number, data: FormData) => {
+    await ky.patch(`http://localhost:5000/ingredient/${id}`, { body: data }).json();
+    const ingredientData: Ingredient = await ky
+      .get(`http://localhost:5000/ingredient/${id}`)
+      .json();
+    const newIngredients = get().ingredients.map((ingredient) =>
+      ingredient.id === ingredientData.id ? { ...ingredientData } : { ...ingredient },
+    );
+    set({ ingredients: [...newIngredients] });
+    try {
+    } catch (error: any) {
+      const errorJson: Error = await error.response.json();
+      set({ Error: { ...errorJson } });
+      throw errorJson;
+    }
+  },
+  setEdit: async (id: number) => {
+    try {
+      const ingredient: Ingredient = await ky.get(`http://localhost:5000/ingredient/${id}`).json();
+      set({ editingIngredient: { ...ingredient } });
+    } catch (error: any) {
+      const errorJson: Error = await error.response.json();
+      set({ Error: { ...errorJson } });
+      throw errorJson;
+    }
+  },
+  setIsEdit: (value: boolean) => {
+    set({ isEdit: value });
   },
 }));

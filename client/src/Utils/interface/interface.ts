@@ -100,10 +100,15 @@ export interface ISizeStore {
 
 export interface IIngredientStore {
   ingredients: Ingredient[];
+  editingIngredient: Ingredient;
+  isEdit: boolean;
   Error: Error;
   fetchIngredients: () => void;
   deleteIngredient: (id: number) => void;
   createIngredient: (data: FormData) => void;
+  updateIngredient: (id: number, data: FormData) => void;
+  setEdit: (id: number) => void;
+  setIsEdit: (value: boolean) => void;
 }
 
 export interface ITypeIngredientStore {
