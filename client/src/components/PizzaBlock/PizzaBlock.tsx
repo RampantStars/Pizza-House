@@ -40,11 +40,11 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({
         <h4 className={styles.title}>{title}</h4>
         <div className={styles.selector}>
           <ul>
-            {types.map((typeId) => (
+            {types.map((typeId, index) => (
               <li
                 key={typeId}
-                onClick={() => setActiveTypeIndex(typeId)}
-                className={activeTypeIndex === typeId ? `${styles.active}` : ' '}>
+                onClick={() => setActiveTypeIndex(index)}
+                className={activeTypeIndex === index ? `${styles.active}` : ' '}>
                 {pizzaTypes[typeId]}
               </li>
             ))}

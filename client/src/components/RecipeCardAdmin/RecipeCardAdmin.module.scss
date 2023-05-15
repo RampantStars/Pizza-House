@@ -16,6 +16,9 @@
     display: flex;
     gap: 20px;
   }
+  &__top {
+    justify-content: space-between;
+  }
 }
 
 .btn {
@@ -80,17 +83,19 @@
     flex-direction: column;
     align-items: flex-start;
     &__ingredients {
-      max-width: 350px;
+      text-align: left;
+    }
+    &__size {
+      text-align: left;
+      max-width: 165px;
     }
     &__description {
       text-align: left;
-      max-width: 500px;
     }
   }
 }
 .list {
   &__sizes {
-    width: 200px;
     flex-wrap: wrap;
     display: flex;
     align-content: flex-start;
@@ -108,6 +113,7 @@
       max-height: fit-content;
     }
   }
+
   &__categories {
     width: 200px;
     flex-wrap: wrap;
@@ -116,6 +122,13 @@
     gap: 5px;
     &__item {
       max-height: fit-content;
+    }
+  }
+  &__sizes,
+  &__categories,
+  &__ingredients {
+    li {
+      font-size: 14px;
     }
   }
 }

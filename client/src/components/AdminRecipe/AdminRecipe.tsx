@@ -12,13 +12,34 @@ export const AdminRecipe = () => {
       <button className={styles.btn} onClick={() => setIsOpen('recipeModalIsOpen', true)}>
         Добавить рецепт
       </button>
+      <h2>В продаже</h2>
       <ul className={styles.recipeList}>
-        {recipes.map((recipe) => (
-          <li className={styles.item} key={recipe.id}>
-            <RecipeCardAdmin {...recipe} />
-          </li>
-        ))}
+        {recipes.map(
+          (recipe) =>
+            recipe.inStock && (
+              <li className={styles.item} key={recipe.id}>
+                <RecipeCardAdmin {...recipe} />
+              </li>
+            ),
+        )}
       </ul>
+      <div>
+        {!!recipes.filter((recipe) => !recipe.inStock).length && (
+          <>
+            <h2>Нет в продаже</h2>
+            <ul className={styles.recipeList}>
+              {recipes.map(
+                (recipe) =>
+                  !recipe.inStock && (
+                    <li className={styles.item} key={recipe.id}>
+                      <RecipeCardAdmin {...recipe} />
+                    </li>
+                  ),
+              )}
+            </ul>
+          </>
+        )}
+      </div>
     </div>
   );
 };

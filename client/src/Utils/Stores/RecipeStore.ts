@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { IRecipeEdit, IRecipeStore } from '../interface/interface';
+import { IRecipeStore } from '../interface/interface';
 import { Error, Recipe } from '../types/types';
 import ky from 'ky';
 
@@ -11,8 +11,6 @@ export const useRecipeStore = create<IRecipeStore>()((set, get) => ({
   fetchRecipes: async () => {
     try {
       const { data, meta }: any = await ky.get('http://localhost:5000/recipe').json();
-      console.log('recipes :>> ', data);
-      console.log('meta :>> ', meta);
       set({ recipes: [...data] });
     } catch (error: any) {
       const errorJson: Error = await error.response.json();

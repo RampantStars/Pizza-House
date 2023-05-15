@@ -32,7 +32,7 @@ export const useCategoryStore = create<ICategoryStore>()((set, get) => ({
     } catch (error) {}
   },
   selectCategory: (category) => {
-    set({ currentCategory: category });
+    set({ currentCategory: { ...category } });
   },
 
   addCategory: (newCategory) => {

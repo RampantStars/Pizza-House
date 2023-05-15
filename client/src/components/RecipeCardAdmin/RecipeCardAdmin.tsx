@@ -57,19 +57,22 @@ export const RecipeCardAdmin = (recipe: Recipe) => {
         <div className={styles.recipe__info}>
           <h3>{recipe.name}</h3>
           <p>Цена {recipe.price}руб.</p>
-          <p>Цена со скидкой {recipe.price * (1 - recipe.salePercent / 100)}руб.</p>
+          <p>Скидка {recipe.salePercent}%</p>
+          {!!recipe.salePercent && (
+            <p>Цена со скидкой {recipe.price * (1 - recipe.salePercent / 100)}руб.</p>
+          )}
         </div>
-        <div className={styles.recipe__info__ingredients}>
-          <h4>Ингредиенты</h4>
-          <ul className={styles.list__ingredients}>
-            {recipe.ingredients.map((ingredient) => (
-              <li className={styles.list__ingredients__item} key={ingredient.id}>
-                {ingredient.name}
+        <div className={styles.recipe__info}>
+          <h4>Тип теста</h4>
+          <ul className={styles.list__doughtTypes}>
+            {recipe.doughtTypes.map((doughtType) => (
+              <li className={styles.list__doughtTypes__item} key={doughtType.id}>
+                {doughtType.name}
               </li>
             ))}
           </ul>
         </div>
-        <div className={styles.recipe__info}>
+        <div className={styles.recipe__info__size}>
           <h4>Доступные размеры</h4>
           <ul className={styles.list__sizes}>
             {recipe.sizes.map((size) => (
@@ -90,21 +93,21 @@ export const RecipeCardAdmin = (recipe: Recipe) => {
           </ul>
         </div>
       </div>
-      <div className={styles.info__bottom}>
-        <div className={styles.recipe__info__description}>
-          <h3>Описание</h3>
-          <p>{recipe.description}</p>
-        </div>
 
-        <div className={styles.recipe__info}>
-          <h4>Тип теста</h4>
-          <ul className={styles.list__doughtTypes}>
-            {recipe.doughtTypes.map((doughtType) => (
-              <li className={styles.list__doughtTypes__item} key={doughtType.id}>
-                {doughtType.name}
+      <div className={styles.info__bottom}>
+        <div className={styles.recipe__info__ingredients}>
+          <h4>Ингредиенты</h4>
+          <ul className={styles.list__ingredients}>
+            {recipe.ingredients.map((ingredient) => (
+              <li className={styles.list__ingredients__item} key={ingredient.id}>
+                {ingredient.name}
               </li>
             ))}
           </ul>
+        </div>
+        <div className={styles.recipe__info__description}>
+          <h3>Описание</h3>
+          <p>{recipe.description}</p>
         </div>
       </div>
     </div>

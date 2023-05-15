@@ -6,7 +6,7 @@ interface IFilterStore {
   filters: Filter[];
   currentFilter: Filter;
   setSearch: (text: string) => void;
-  selectedFilter: (id: number) => void;
+  selectedFilter: (obj: Filter) => void;
 }
 
 export const useFilterStore = create<IFilterStore>()((set, get) => ({
@@ -23,7 +23,7 @@ export const useFilterStore = create<IFilterStore>()((set, get) => ({
   setSearch: (text) => {
     set({ search: text });
   },
-  selectedFilter: (id) => {
-    set({ currentFilter: get().filters[id] });
+  selectedFilter: (obj) => {
+    set({ currentFilter: { ...obj } });
   },
 }));

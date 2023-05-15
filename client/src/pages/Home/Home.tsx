@@ -12,7 +12,7 @@ import { useFilterStore } from '../../Utils/Stores/FilterStore';
 import { shallow } from 'zustand/shallow';
 
 export const Home: React.FC = () => {
-  const [pizzas, setPizzas] = React.useState<any>([]);
+  const [pizzas, setPizzas] = React.useState<any>({});
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
 
@@ -29,7 +29,7 @@ export const Home: React.FC = () => {
     setIsLoading(true);
     const category = currentCategory.name !== 'Все' ? `&category=${currentCategory.id}` : '';
     fetch(
-      `https://62e276b3e8ad6b66d85c02f7.mockapi.io/pizzas/?page=${currentPage}&limit=8&sortBy=${currentFilter.sortProperty}&order=${currentFilter.sortOrder}$&search=${search}${category}`,
+      `https://62e276b3e8ad6b66d85c02f7.mockapi.io/pizzas/?page=${currentPage}&limit=8&sortBy=${currentFilter.sortProperty}&order=${currentFilter.sortOrder}&search=${search}${category}`,
     )
       .then((response) => response.json())
       .then((json) => {
@@ -39,7 +39,6 @@ export const Home: React.FC = () => {
     window.scrollTo(0, 0);
   }, [currentCategory, currentFilter, search, currentPage]);
 
-  // console.log('categories :>> ', categories);
   return (
     <div className={styles.container}>
       <div className={styles.content__top}>
@@ -49,7 +48,7 @@ export const Home: React.FC = () => {
       <h2 className={styles.content__title}>Все пиццы</h2>
       <div className={styles.content__items}>
         {isLoading
-          ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+          ? [...new Array(6)].map((_, index) => <Skeleton key={`s-${index}`} />)
           : pizzas.items.map((item: any) => <PizzaBlock key={item.id} {...item} />)}
       </div>
       <Pagination

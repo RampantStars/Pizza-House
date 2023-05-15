@@ -65,6 +65,7 @@ export class RecipeService {
       name: createRecipeDto.name,
       description: createRecipeDto.description,
       salePercent: +createRecipeDto.salePercent,
+      imageUrl: createRecipeDto.imageUrl,
     });
 
     recipe.ingredients = [...ingredients];
