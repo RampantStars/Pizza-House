@@ -119,9 +119,15 @@ export interface IIngredientStore {
 
 export interface ITypeIngredientStore {
   typeIngredients: TypeIngredient[];
+  editingTypeIngredient: TypeIngredient;
+  isEdit: boolean;
   Error: Error;
   fetchTypeIngredients: () => void;
   createTypeIngredient: (ingredient: ITypeIngredientCreate) => void;
+  deleteTypeIngredient: (id: number) => void;
+  updateTypeIngredient: (id: number, data: ITypeIngredientCreate) => void;
+  setEdit: (id: number) => void;
+  setIsEdit: (value: boolean) => void;
 }
 
 export interface IDoughTypeStore {

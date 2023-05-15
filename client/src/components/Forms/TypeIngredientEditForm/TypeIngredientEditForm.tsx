@@ -1,12 +1,14 @@
-import styles from './TypeIngredientCreateForm.module.scss';
-import { useModalFramesStore } from '../../../Utils/Stores/ModalFramesStore';
+import React from 'react';
+import styles from './TypeIngredientEditForm.module.scss';
 import { useTypeIngredientStore } from '../../../Utils/Stores/TypeIngredientSrote';
+import { useModalFramesStore } from '../../../Utils/Stores/ModalFramesStore';
+import { ITypeIngredientCreate } from '../../../Utils/interface/interface';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { onErrorToast, onSuccessToast } from '../../../Utils/toast';
 import { Error } from '../../../Utils/types/types';
-import { ITypeIngredientCreate } from '../../../Utils/interface/interface';
+import { useIngredientStore } from '../../../Utils/Stores/IngredientStore';
 
-export const TypeIngredientCreateForm = () => {
+export const TypeIngredientEditForm = () => {
   const { setIsOpen, typeIngredientModalIsOpen } = useModalFramesStore(
     ({ setIsOpen, typeIngredientModalIsOpen }) => ({
       setIsOpen,
@@ -14,18 +16,31 @@ export const TypeIngredientCreateForm = () => {
     }),
   );
 
-  const createTypeIngredient = useTypeIngredientStore((state) => state.createTypeIngredient);
+  const fetchIngredients = useIngredientStore((state) => state.fetchIngredients);
+
+  const { updateTypeIngredient, editingTypeIngredient, setIsEdit, fetchTypeIngredients } =
+    useTypeIngredientStore(
+      ({ updateTypeIngredient, editingTypeIngredient, setIsEdit, fetchTypeIngredients }) => ({
+        updateTypeIngredient,
+        editingTypeIngredient,
+        setIsEdit,
+        fetchTypeIngredients,
+      }),
+    );
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ITypeIngredientCreate>();
+  } = useForm<ITypeIngredientCreate>({ defaultValues: { name: editingTypeIngredient.name || '' } });
 
   const onSubmit: SubmitHandler<ITypeIngredientCreate> = async (data) => {
     try {
-      await createTypeIngredient(data);
+      await updateTypeIngredient(editingTypeIngredient.id, data);
+      fetchIngredients();
+      fetchTypeIngredients();
+      setIsEdit(false);
       setIsOpen('typeIngredientModalIsOpen', !typeIngredientModalIsOpen);
-      onSuccessToast(`Тип ${data.name} успешно создан`);
+      onSuccessToast(`Тип ${data.name} успешно обновлен`);
     } catch (e: any) {
       const error = { ...(e as Error) };
       onErrorToast({ ...error });
@@ -47,7 +62,10 @@ export const TypeIngredientCreateForm = () => {
         </button>
         <button
           className={`${styles.btn} ${styles.cancel}`}
-          onClick={() => setIsOpen('typeIngredientModalIsOpen', !typeIngredientModalIsOpen)}
+          onClick={() => {
+            setIsOpen('typeIngredientModalIsOpen', !typeIngredientModalIsOpen);
+            setIsEdit(false);
+          }}
           type="button">
           Отменить
         </button>

@@ -12,6 +12,8 @@ export class TypeIngredient {
   @Column()
   name: string;
 
-  @OneToMany(() => Ingredient, (ingredient) => ingredient.typeIngredient)
+  @OneToMany(() => Ingredient, (ingredient) => ingredient.typeIngredient, {
+    cascade: true,
+  })
   ingredients: Ingredient[];
 }

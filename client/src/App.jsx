@@ -30,13 +30,10 @@ function App() {
   const fetchIngredients = useIngredientStore((state) => state.fetchIngredients);
   const fetchTypeIngredients = useTypeIngredientStore((state) => state.fetchTypeIngredients);
   const fetchRecipes = useRecipeStore((state) => state.fetchRecipes);
-  const { fetchUsers, fetchRole } = useUserStore(
-    ({ fetchUsers, fetchRole }) => ({
-      fetchUsers,
-      fetchRole,
-    }),
-    shallow,
-  );
+  const { fetchUsers, fetchRole } = useUserStore(({ fetchUsers, fetchRole }) => ({
+    fetchUsers,
+    fetchRole,
+  }));
 
   const fetchData = async () => {
     fetchDoughTypes();

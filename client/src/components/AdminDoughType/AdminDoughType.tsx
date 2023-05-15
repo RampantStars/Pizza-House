@@ -21,7 +21,7 @@ export const AdminDoughType = () => {
       </button>
       <div className={styles.doughTypeList}>
         {doughTypes.map((doughType) => (
-          <DoughTypeCard {...doughType} />
+          <DoughTypeCard key={doughType.id} {...doughType} />
         ))}
       </div>
     </div>

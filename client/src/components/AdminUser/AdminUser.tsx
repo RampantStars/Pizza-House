@@ -22,7 +22,7 @@ export const AdminUser = () => {
             className={({ selected }) =>
               `${styles.tab__item} ${selected ? `${styles.active}` : ''}`
             }>
-            Модераторы
+            Менеджеры
           </Tab>
           <Tab
             className={({ selected }) =>
@@ -35,39 +35,39 @@ export const AdminUser = () => {
           <Tab.Panel className={styles.tab__panel}>
             <ul className={styles.user__list}>
               {users.map((user) => (
-                <>
+                <div key={user.id}>
                   {user.roles.find((role) => role.value === 'USER') && (
-                    <li className={styles.user__item} key={user.id}>
+                    <li className={styles.user__item}>
                       <UserCard {...user} />
                     </li>
                   )}
-                </>
+                </div>
               ))}
             </ul>
           </Tab.Panel>
           <Tab.Panel className={styles.tab__panel}>
             <ul className={styles.user__list}>
               {users.map((user) => (
-                <>
-                  {user.roles.find((role) => role.value === 'MODERATOR') && (
+                <div key={user.id}>
+                  {user.roles.find((role) => role.value === 'MANAGER') && (
                     <li className={styles.user__item}>
-                      <UserCard {...user} key={user.id} />
+                      <UserCard {...user} />
                     </li>
                   )}
-                </>
+                </div>
               ))}
             </ul>
           </Tab.Panel>{' '}
           <Tab.Panel className={styles.tab__panel}>
             <ul className={styles.user__list}>
               {users.map((user) => (
-                <>
+                <div key={user.id}>
                   {user.roles.find((role) => role.value === 'ADMIN') && (
-                    <li className={styles.user__item} key={user.id}>
+                    <li className={styles.user__item}>
                       <UserCard {...user} />
                     </li>
                   )}
-                </>
+                </div>
               ))}
             </ul>
           </Tab.Panel>

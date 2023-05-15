@@ -16,7 +16,7 @@ export const AdminSize = () => {
       </button>
       <div className={styles.sizeList}>
         {sizes.map((size) => (
-          <SizeCard {...size} />
+          <SizeCard key={size.id} {...size} />
         ))}
       </div>
     </div>

@@ -52,12 +52,14 @@ export class TypeIngredientService {
     if (!typeIngredient) {
       throw new NotFoundException(`TypeIngredient with ID=${id} not found`);
     }
-    return this.typeIngredientRepository.save(typeIngredient);
+    this.typeIngredientRepository.save(typeIngredient);
+    return await this.findOneTypeIngredient(id);
   }
 
   async removeTypeIngredient(id: number) {
-    const typeIngredient = await this.typeIngredientRepository.findOneBy({
-      id,
+    const typeIngredient = await this.typeIngredientRepository.findOne({
+      where: { id: id },
+      relations: { ingredients: true },
     });
     if (!typeIngredient) {
       throw new NotFoundException(`TypeIngredient with ID=${id} not found`);
