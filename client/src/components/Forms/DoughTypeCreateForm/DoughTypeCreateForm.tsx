@@ -24,7 +24,7 @@ export const DoughTypeCreateForm = () => {
   const onSubmit: SubmitHandler<IDoughTypeCreate> = async (data) => {
     try {
       await createDoughType(data);
-      setIsOpen('doughTypeModalIsOpen', doughTypeModalIsOpen);
+      setIsOpen('doughTypeModalIsOpen', !doughTypeModalIsOpen);
       onSuccessToast(`Тип теста ${data.name} успешно создан`);
     } catch (e: any) {
       const error = { ...(e as Error) };

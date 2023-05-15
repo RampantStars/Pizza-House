@@ -103,7 +103,7 @@ export const IngredientCard: FC<Ingredient> = (ingredient) => {
         src={`http://localhost:5000/${ingredient.imageUrl}`}
         alt={ingredient.name}
       />
-      <h2>{ingredient.name}</h2>
+      <h2 className={styles.title}>{ingredient.name}</h2>
     </div>
   );
 };

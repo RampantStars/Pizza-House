@@ -25,11 +25,15 @@ export const useCategoryStore = create<ICategoryStore>()((set, get) => ({
     try {
       const category: Category = await ky
         .post('http://localhost:5000/category', {
-          json: name,
+          json: { name: name },
         })
         .json();
       set((state) => ({ categories: [...state.categories, { ...category }] }));
-    } catch (error) {}
+    } catch (error: any) {
+      const errorJson: Error = await error.response.json();
+      set({ Error: { ...errorJson } });
+      throw errorJson;
+    }
   },
   selectCategory: (category) => {
     set({ currentCategory: { ...category } });
