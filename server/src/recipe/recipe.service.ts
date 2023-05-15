@@ -84,8 +84,9 @@ export class RecipeService {
       defaultSortBy: [['id', 'ASC']],
       searchableColumns: ['name'],
       filterableColumns: {
-        name: [FilterOperator.EQ, FilterSuffix.NOT],
-        categories: [FilterOperator.EQ, FilterSuffix.NOT],
+        name: [FilterOperator.EQ],
+        'categories.name': [FilterOperator.EQ],
+        price: [FilterOperator.BTW],
       },
     });
     return recipes;

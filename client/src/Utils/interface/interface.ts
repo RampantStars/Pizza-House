@@ -86,6 +86,7 @@ export interface IModalFramesStore {
   typeIngredientModalIsOpen: boolean;
   doughTypeModalIsOpen: boolean;
   deleteModalIsOpen: boolean;
+  categoryModalIsOpen: boolean;
   deleteObject: IDeleteModal;
   setIsOpen: (name: string, value: boolean) => void;
   setDeleteObject: (obj: IDeleteModal) => void;

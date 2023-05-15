@@ -19,6 +19,7 @@ export const RecipeEditForm = () => {
 
   const {
     setIsOpen,
+    categoryModalIsOpen,
     sizeModalIsOpen,
     recipeModalIsOpen,
     ingredientModalIsOpen,
@@ -26,12 +27,14 @@ export const RecipeEditForm = () => {
   } = useModalFramesStore(
     ({
       setIsOpen,
+      categoryModalIsOpen,
       sizeModalIsOpen,
       recipeModalIsOpen,
       ingredientModalIsOpen,
       doughTypeModalIsOpen,
     }) => ({
       setIsOpen,
+      categoryModalIsOpen,
       sizeModalIsOpen,
       recipeModalIsOpen,
       ingredientModalIsOpen,
@@ -179,7 +182,10 @@ export const RecipeEditForm = () => {
                         isMulti
                         noOptionsMessage={() => 'Нет категории'}
                       />
-                      <button type="button" className={styles.select__btn}>
+                      <button
+                        onClick={() => setIsOpen('categoryModalIsOpen', !categoryModalIsOpen)}
+                        type="button"
+                        className={styles.select__btn}>
                         <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
                           <path
                             fill="#000000"

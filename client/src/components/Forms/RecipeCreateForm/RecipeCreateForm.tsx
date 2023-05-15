@@ -23,6 +23,7 @@ export const RecipeCreateForm = () => {
     recipeModalIsOpen,
     ingredientModalIsOpen,
     doughTypeModalIsOpen,
+    categoryModalIsOpen,
   } = useModalFramesStore(
     ({
       setIsOpen,
@@ -30,12 +31,14 @@ export const RecipeCreateForm = () => {
       recipeModalIsOpen,
       ingredientModalIsOpen,
       doughTypeModalIsOpen,
+      categoryModalIsOpen,
     }) => ({
       setIsOpen,
       sizeModalIsOpen,
       recipeModalIsOpen,
       ingredientModalIsOpen,
       doughTypeModalIsOpen,
+      categoryModalIsOpen,
     }),
   );
   const categories = useCategoryStore((state) => state.categories);
@@ -204,7 +207,10 @@ export const RecipeCreateForm = () => {
                         isMulti
                         noOptionsMessage={() => 'Нет категории'}
                       />
-                      <button type="button" className={styles.select__btn}>
+                      <button
+                        onClick={() => setIsOpen('categoryModalIsOpen', !categoryModalIsOpen)}
+                        type="button"
+                        className={styles.select__btn}>
                         <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none">
                           <path
                             fill="#000000"
