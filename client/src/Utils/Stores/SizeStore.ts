@@ -22,7 +22,11 @@ export const useSizeStore = create<ISizeStore>()((set, get) => ({
     const size: Size = await ky
       .post('http://localhost:5000/size', { json: { name: data.value + 'см', price: data.price } })
       .json();
-    set((state) => ({ sizes: [...state.sizes, { ...size }] }));
+    set((state) => ({
+      sizes: [...state.sizes, { ...size }].sort((sizeF, sizeS) =>
+        sizeF.name.localeCompare(sizeS.name),
+      ),
+    }));
     try {
     } catch (error: any) {
       const errorJson: Error = await error.response.json();

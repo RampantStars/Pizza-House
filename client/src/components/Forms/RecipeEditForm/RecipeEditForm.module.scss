@@ -24,13 +24,12 @@
     &__img {
       width: 0;
       height: 0;
-      overflow: hidden;
+      display: none;
     }
-
     &__svg {
       width: 150px;
       height: 150px;
-      background-color: white;
+      background-color: $modal-bg;
       border-radius: 5px;
       cursor: pointer;
       &:hover {
@@ -39,24 +38,23 @@
         path,
         polyline,
         line {
-          stroke: white;
+          stroke: $gray-line;
         }
       }
     }
   }
 
   .error {
-    color: red;
+    color: $red;
     padding: 5px;
   }
   .select {
-    color: #000000;
-    width: 350px;
+    color: $text;
+    width: 250px;
     &__group {
       display: flex;
       gap: 15px;
     }
-
     &__btn {
       cursor: pointer;
       border: 3px solid transparent;
@@ -65,12 +63,12 @@
       align-items: center;
 
       transition: all 0.5s ease;
-      background-color: $orange;
+      background-color: $btn__bg;
       border-radius: 5px;
       &:hover,
       &:focus {
-        background-color: white;
-        border-color: $orange;
+        background-color: $gray-line;
+        border-color: $btn__bg;
       }
       svg {
         width: 30px;
@@ -98,12 +96,12 @@
       border: none;
       display: flex;
       align-items: center;
-      background-color: white;
+      background-color: $gray-line;
       height: 24px;
       height: inherit;
       cursor: pointer;
       &:hover {
-        background-color: darken(white, 10%);
+        background-color: darken($gray-line, 10%);
       }
       svg {
         width: 24px;
@@ -119,29 +117,20 @@
 
   .success,
   .cancel {
+    font-weight: bold;
     margin: 10px;
     border: 2px solid transparent;
+    &:hover,
     &:focus {
-      border: 2px solid white;
+      border: 2px solid $text;
     }
   }
 
   .success {
-    color: black;
-    font-weight: bold;
-    background-color: rgb(36, 161, 36);
-    &:hover {
-      background-color: darken(rgb(36, 161, 36), 10%);
-    }
+    background-color: $success;
   }
 
   .cancel {
-    color: black;
-    font-weight: bold;
-    background-color: rgb(197, 53, 53);
-
-    &:hover {
-      background-color: darken(rgb(197, 53, 53), 10%);
-    }
+    background-color: $cancel;
   }
 }

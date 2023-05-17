@@ -1,15 +1,29 @@
 @import './scss/variables';
 @import './scss/libs/normalize';
 
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
+  height: 5px;
   width: 5px; /* ширина scrollbar */
   box-sizing: border-box;
+  border-radius: 20px;
 }
-body::-webkit-scrollbar-thumb {
-  background-color: #f8b63c; /* цвет плашки */
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 20px;
+}
+*::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 10px;
+}
+*::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  height: 80px;
+  background-color: $orange; /* цвет плашки */
   border-radius: 20px; /* закругления плашки */
 }
-
 .App {
   text-align: center;
 }

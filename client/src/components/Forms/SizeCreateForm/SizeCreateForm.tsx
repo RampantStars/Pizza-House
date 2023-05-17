@@ -35,13 +35,13 @@ export const SizeCreateForm = () => {
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.form__container}>
         <label className={styles.label}>
-          Размер
-          <input type="number" {...register('value')} />
+          <span>Размер</span>
+          <input type="number" placeholder="60" {...register('value')} />
           <p className={styles.error}>{errors.value?.message}</p>
         </label>
         <label className={styles.label}>
-          Цена
-          <input type="number" {...register('price')} />
+          <span>Цена</span>
+          <input type="number" placeholder="150" {...register('price')} />
           <p className={styles.error}>{errors.price?.message}</p>
         </label>
       </div>

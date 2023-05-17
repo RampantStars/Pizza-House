@@ -39,11 +39,18 @@ export const queryPaginate = [
     required: false,
   },
   {
-    name: 'filter',
+    name: 'filter.categories.name',
     type: String,
-    description: 'Строка фильтрации',
+    description: 'Строка фильтрации по категориям',
     required: false,
-    example: '$gte:3',
+    example: 'Грибная',
+  },
+  {
+    name: 'filter.price',
+    type: String,
+    description: 'Строка фильтрации по диапазону цены',
+    required: false,
+    example: '$btw:300,500',
   },
   {
     name: 'search',

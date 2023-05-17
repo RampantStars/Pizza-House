@@ -19,7 +19,6 @@ import { useIngredientStore } from './Utils/Stores/IngredientStore';
 import { useTypeIngredientStore } from './Utils/Stores/TypeIngredientSrote';
 import { useRecipeStore } from './Utils/Stores/RecipeStore';
 import { useUserStore } from './Utils/Stores/UserStore';
-import { shallow } from 'zustand/shallow';
 
 export const SearchContext = React.createContext();
 

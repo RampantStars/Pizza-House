@@ -200,6 +200,7 @@ export const RecipeCreateForm = () => {
                         getOptionLabel={(category: Category) => category.name}
                         getOptionValue={(category: Category) => category.name}
                         filterOption={(categories) => categories.label !== 'Все'}
+                        captureMenuScroll
                         closeMenuOnSelect={false}
                         onChange={(newValue) => onChange(newValue.map((value) => value.name))}
                         components={animatedComponents}

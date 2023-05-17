@@ -54,17 +54,17 @@ export const RegistrationForm = () => {
       <h1 className={styles.title}>Регистрация</h1>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <label className={styles.label}>
-          Логин
+          Логин*
           <input type="text" {...register('login')} placeholder="Логин" className={styles.input} />
           <p>{errors.login?.message}</p>
         </label>
         <label className={styles.label}>
-          Email
+          Email*
           <input type="email" {...register('email')} placeholder="Email" className={styles.input} />
           <p>{errors.email?.message}</p>
         </label>
         <label className={styles.label}>
-          ФИО
+          ФИО*
           <input
             type="text"
             {...register('FCs')}
@@ -74,12 +74,12 @@ export const RegistrationForm = () => {
           <p>{errors.FCs?.message}</p>
         </label>
         <label className={styles.label}>
-          Телефон
+          Телефон*
           <input type="tel" {...register('telephone')} placeholder="+7" className={styles.input} />
           <p>{errors.telephone?.message}</p>
         </label>
         <label className={styles.label}>
-          Пароль
+          Пароль*
           <input
             type="password"
             {...register('password')}
