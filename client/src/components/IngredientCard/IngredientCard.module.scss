@@ -1,3 +1,4 @@
+@import '../../scss/variables';
 .ingredientCard {
   padding: 5px;
   display: flex;
@@ -30,7 +31,7 @@
       .btn__svg {
         path {
           transition: all 0.3s ease;
-          fill: red;
+          fill: $cancel;
         }
       }
     }
@@ -42,7 +43,7 @@
       .btn__svg {
         path {
           transition: all 0.3s ease;
-          stroke: red;
+          stroke: $cancel;
         }
       }
     }

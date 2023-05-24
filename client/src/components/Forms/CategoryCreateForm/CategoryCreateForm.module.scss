@@ -3,17 +3,10 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 
   &__container {
     gap: 25px;
     display: flex;
-    justify-content: center;
-  }
-
-  &__right {
-    display: flex;
-    flex-direction: column;
   }
 
   .label {
@@ -47,7 +40,7 @@
   }
 
   .error {
-    color: red;
+    color: $red;
     padding: 5px;
   }
 
@@ -74,8 +67,7 @@
       height: 24px;
       height: inherit;
       cursor: pointer;
-      &:hover,
-      &:focus {
+      &:hover {
         background-color: darken(white, 10%);
       }
       svg {
@@ -85,8 +77,7 @@
     }
     &__container {
       display: flex;
-      gap: 10px;
-      justify-content: center;
+      justify-content: end;
     }
   }
 
@@ -100,21 +91,24 @@
   }
 
   .success {
-    color: black;
-    font-weight: bold;
-    background-color: rgb(36, 161, 36);
-    &:hover {
-      background-color: darken(rgb(36, 161, 36), 10%);
+    color: $text;
+    font-weight: bolder;
+    background-color: $success;
+    border: 2px solid transparent;
+    &:hover,
+    &:focus {
+      border: 2px solid $text;
     }
   }
 
   .cancel {
     color: black;
     font-weight: bold;
-    background-color: rgb(197, 53, 53);
+    background-color: $cancel;
 
-    &:hover {
-      background-color: darken(rgb(197, 53, 53), 10%);
+    &:hover,
+    &:focus {
+      border: 2px solid $text;
     }
   }
 }

@@ -1,3 +1,4 @@
+@import '../../scss/variables';
 .adminUser {
   display: flex;
   flex-direction: column;
@@ -23,8 +24,8 @@
   }
   &__item {
     background-color: transparent;
-    border: 1px solid transparent;
-    color: black;
+    border: 2px solid transparent;
+    color: $text;
     font-weight: bold;
     border-radius: 5px;
     padding: 5px;
@@ -32,13 +33,13 @@
     transition: all 0.3s ease;
     &:focus,
     &:hover {
-      background-color: rgb(248, 245, 245);
-      color: orange;
+      background-color: $gray-line;
+      color: $orange;
     }
   }
 }
 
 .active {
-  background-color: rgb(248, 245, 245);
-  color: orange;
+  background-color: $gray-line;
+  color: $orange;
 }

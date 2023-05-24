@@ -1,5 +1,4 @@
-import React, { FC } from 'react';
-import styles from './DeleteModal.module.scss';
+import styles from '../../../scss/modal.module.scss';
 import { useModalFramesStore } from '../../../Utils/Stores/ModalFramesStore';
 import { Dialog } from '@headlessui/react';
 import { onErrorToast, onSuccessToast } from '../../../Utils/toast';

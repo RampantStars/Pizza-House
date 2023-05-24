@@ -1,5 +1,4 @@
-import React from 'react';
-import styles from './DoughTypeModal.module.scss';
+import styles from '../../../scss/modal.module.scss';
 import { Dialog } from '@headlessui/react';
 import { useDoughTypeStore } from '../../../Utils/Stores/DoughType.Store';
 import { useModalFramesStore } from '../../../Utils/Stores/ModalFramesStore';

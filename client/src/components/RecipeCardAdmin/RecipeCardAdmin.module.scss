@@ -1,3 +1,4 @@
+@import '../../scss/variables';
 .recipeCardAdmin {
   display: flex;
   flex-wrap: wrap;
@@ -36,7 +37,7 @@
       .btn__svg {
         path {
           transition: all 0.3s ease;
-          fill: red;
+          fill: $cancel;
         }
       }
     }
@@ -46,22 +47,23 @@
     font-weight: bold;
     padding: 5px;
     border-radius: 12px;
-    background: #55f492;
+    color: $gray-line;
+    background: $cancel;
   }
 
   &__disabled {
-    color: white;
-    background-color: #f45555;
+    color: $text;
+    background-color: $success;
   }
 
   &__inStock:focus,
   &__inStock:hover {
-    background-color: darken($color: #55f492, $amount: 20);
+    background-color: darken($color: $cancel, $amount: 20);
   }
 
   &__disabled:focus,
   &__disabled:hover {
-    background-color: darken($color: #f45555, $amount: 20);
+    background-color: darken($color: $success, $amount: 20);
   }
 
   &__container {

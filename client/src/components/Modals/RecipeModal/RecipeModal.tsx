@@ -1,7 +1,7 @@
 import { Dialog } from '@headlessui/react';
 import { RecipeCreateForm, RecipeEditForm } from '../../Forms';
 
-import styles from './RecipeModal.module.scss';
+import styles from '../../../scss/modal.module.scss';
 import { useModalFramesStore } from '../../../Utils/Stores/ModalFramesStore';
 import { useRecipeStore } from '../../../Utils/Stores/RecipeStore';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './TypeIngredientModal.module.scss';
+import styles from '../../../scss/modal.module.scss';
 import { Dialog } from '@headlessui/react';
 import { useModalFramesStore } from '../../../Utils/Stores/ModalFramesStore';
 import { TypeIngredientCreateForm } from '../../Forms/TypeIngredientCreateForm';
