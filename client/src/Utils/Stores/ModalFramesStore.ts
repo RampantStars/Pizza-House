@@ -6,6 +6,7 @@ export const useModalFramesStore = create<IModalFramesStore>()((set, get) => ({
   sizeModalIsOpen: false,
   deleteModalIsOpen: false,
   ingredientModalIsOpen: false,
+  additionalIngredientModalIsOpen: false,
   typeIngredientModalIsOpen: false,
   doughTypeModalIsOpen: false,
   categoryModalIsOpen: false,

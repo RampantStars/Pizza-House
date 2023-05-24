@@ -19,6 +19,7 @@ import { useIngredientStore } from './Utils/Stores/IngredientStore';
 import { useTypeIngredientStore } from './Utils/Stores/TypeIngredientSrote';
 import { useRecipeStore } from './Utils/Stores/RecipeStore';
 import { useUserStore } from './Utils/Stores/UserStore';
+import { useAdditionalIngredientStore } from './Utils/Stores/AdditionalIngredientsStore';
 
 export const SearchContext = React.createContext();
 
@@ -27,6 +28,9 @@ function App() {
   const fetchSizes = useSizeStore((state) => state.fetchSizes);
   const fetchDoughTypes = useDoughTypeStore((state) => state.fetchDoughTypes);
   const fetchIngredients = useIngredientStore((state) => state.fetchIngredients);
+  const fetchAdditionalIngredients = useAdditionalIngredientStore(
+    (state) => state.fetchAdditionalIngredients,
+  );
   const fetchTypeIngredients = useTypeIngredientStore((state) => state.fetchTypeIngredients);
   const fetchRecipes = useRecipeStore((state) => state.fetchRecipes);
   const { fetchUsers, fetchRole } = useUserStore(({ fetchUsers, fetchRole }) => ({
@@ -35,14 +39,19 @@ function App() {
   }));
 
   const fetchData = async () => {
-    fetchDoughTypes();
-    fetchCategories();
-    fetchSizes();
-    fetchIngredients();
-    fetchTypeIngredients();
-    fetchRecipes();
-    fetchUsers();
-    fetchRole();
+    try {
+      fetchDoughTypes();
+      fetchCategories();
+      fetchSizes();
+      fetchIngredients();
+      fetchAdditionalIngredients();
+      fetchRecipes();
+      fetchTypeIngredients();
+      fetchUsers();
+      fetchRole();
+    } catch (error) {
+      console.log('error :>> ', error);
+    }
   };
 
   React.useEffect(() => {

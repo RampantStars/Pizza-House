@@ -43,6 +43,11 @@ export class AdditionalIngredientController {
     if (image) {
       createAdditionalIngredientDto.imageUrl = image.filename;
     }
+    console.log(
+      'createAdditionalIngredientDto :>> ',
+      createAdditionalIngredientDto,
+    );
+
     return this.additionalIngredientService.createAdditionalIngredient(
       createAdditionalIngredientDto,
     );

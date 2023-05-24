@@ -16,9 +16,12 @@ export class AdditionalIngredientService {
     createAdditionalIngredientDto: CreateAdditionalIngredientDto,
   ): Promise<AdditionalIngredient> {
     const additionalIngredient =
-      await this.additionalIngredientRepository.create(
-        createAdditionalIngredientDto,
-      );
+      await this.additionalIngredientRepository.create({
+        ...createAdditionalIngredientDto,
+        price: +createAdditionalIngredientDto.price,
+        weight: +createAdditionalIngredientDto.price,
+        maxCount: +createAdditionalIngredientDto.maxCount,
+      });
     return this.additionalIngredientRepository.save(additionalIngredient);
   }
 
@@ -53,7 +56,7 @@ export class AdditionalIngredientService {
         `AdditionalIngredient with ID=${id} not found`,
       );
     }
-    if (updateAdditionalIngredientDto) {
+    if (updateAdditionalIngredientDto.imageUrl) {
       unlink(`./uploads/${additionalIngredient.imageUrl}`, (err) => {
         if (err) {
           console.error(err);

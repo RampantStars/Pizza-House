@@ -1,4 +1,5 @@
 import {
+  AdditionalIngredient,
   Category,
   DoughType,
   Error,
@@ -69,6 +70,13 @@ export interface IIngredientCreate {
   image: FileList;
   typeIngredientId: TypeIngredient;
 }
+export interface IAdditionalIngredientCreate {
+  name: string;
+  image: FileList;
+  price: number;
+  weight: number;
+  maxCount: number;
+}
 
 export interface ITypeIngredientCreate {
   name: string;
@@ -83,6 +91,7 @@ export interface IModalFramesStore {
   recipeModalIsOpen: boolean;
   sizeModalIsOpen: boolean;
   ingredientModalIsOpen: boolean;
+  additionalIngredientModalIsOpen: boolean;
   typeIngredientModalIsOpen: boolean;
   doughTypeModalIsOpen: boolean;
   deleteModalIsOpen: boolean;
@@ -114,6 +123,19 @@ export interface IIngredientStore {
   deleteIngredient: (id: number) => void;
   createIngredient: (data: FormData) => void;
   updateIngredient: (id: number, data: FormData) => void;
+  setEdit: (id: number) => void;
+  setIsEdit: (value: boolean) => void;
+}
+
+export interface IAdditionalIngredientStore {
+  additionalIngredients: AdditionalIngredient[];
+  editingAdditionalIngredient: AdditionalIngredient;
+  isEdit: boolean;
+  Error: Error;
+  fetchAdditionalIngredients: () => void;
+  deleteAdditionalIngredient: (id: number) => void;
+  createAdditionalIngredient: (data: FormData) => void;
+  updateAdditionalIngredient: (id: number, data: FormData) => void;
   setEdit: (id: number) => void;
   setIsEdit: (value: boolean) => void;
 }

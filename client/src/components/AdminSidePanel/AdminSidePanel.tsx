@@ -15,7 +15,7 @@ export const AdminSidePanel = ({
         <li className={styles.item} onClick={() => setController('Ingredient')}>
           Ингредиенты
         </li>
-        <li className={styles.item} onClick={() => setController('AdditionalIngredient')}>
+        <li className={styles.item} onClick={() => setController('AdditionalIngredients')}>
           Дополнительные ингредиенты
         </li>
         <li className={styles.item} onClick={() => setController('Size')}>

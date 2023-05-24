@@ -30,7 +30,7 @@ export const DeleteModal = () => {
         <Dialog.Panel className={styles.modal}>
           <Dialog.Title className={styles.title}>Удаление {deleteObject.name}</Dialog.Title>
           <div>
-            <h1 className={styles.text}>Вы точно хотите удалить {deleteObject.name}?</h1>
+            <h3 className={styles.text}>Вы точно хотите удалить {deleteObject.name}?</h3>
             <div className={styles.btn__container}>
               <button
                 onClick={() => onClick()}

@@ -9,8 +9,9 @@ export class CreateAdditionalIngredientDto {
   @ApiProperty({
     example: 'url',
     description: 'Ссылка на картинку для дополнительного ингредиента',
+    required: false,
   })
-  imageUrl: string;
+  imageUrl?: string;
 
   @ApiProperty({
     example: '60',

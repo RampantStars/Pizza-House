@@ -1,10 +1,8 @@
-import React from 'react';
 import styles from './AdminIngredient.module.scss';
 import { useIngredientStore } from '../../Utils/Stores/IngredientStore';
 import { IngredientCard } from '../IngredientCard';
 import { useTypeIngredientStore } from '../../Utils/Stores/TypeIngredientSrote';
 import { useModalFramesStore } from '../../Utils/Stores/ModalFramesStore';
-import { shallow } from 'zustand/shallow';
 
 export const AdminIngredient = () => {
   const ingredients = useIngredientStore((state) => state.ingredients);

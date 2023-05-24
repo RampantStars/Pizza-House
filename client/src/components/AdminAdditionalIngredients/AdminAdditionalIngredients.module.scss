@@ -1,0 +1,94 @@
+@import '../../scss/variables';
+.adminIngredient {
+  display: flex;
+
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .empty,
+  .title {
+    width: fit-content;
+    text-align: start;
+  }
+  .title {
+    border-bottom: 3px solid black;
+  }
+}
+
+.doughType {
+  &__container {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+}
+.btnType {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border: 1px solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+  &__edit {
+    &:focus,
+    &:hover {
+      .btnType__svg {
+        path {
+          transition: all 0.3s ease;
+          fill: $cancel;
+        }
+      }
+    }
+  }
+  &:disabled {
+    display: none;
+  }
+
+  &__delete {
+    &:focus,
+    &:hover {
+      .btnType__svg {
+        path {
+          transition: all 0.3s ease;
+          stroke: $cancel;
+        }
+      }
+    }
+  }
+
+  &__container {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  &__svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+.ingredientList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.btn {
+  width: fit-content;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: $btn__bg;
+  border: 2px solid transparent;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:focus,
+  &:hover {
+    color: $btn__bg;
+    background-color: transparent;
+    border-color: $btn__bg;
+  }
+}
