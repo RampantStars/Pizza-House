@@ -1,33 +1,37 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { AdditionalIngredient } from 'src/additional-ingredient/entities/additional-ingredient.entity';
+import { DoughType } from 'src/dough-type/entities/dough-type.entity';
+import { Recipe } from 'src/recipe/entities/recipe.entity';
+import { Size } from 'src/size/entities/size.entity';
 export class CreatePizzaVariationDto {
-  @ApiProperty({
-    example: '640',
-    description: 'Стоимость собранной пиццы идентификатор',
-  })
-  price: number;
+  // @ApiProperty({
+  //   example: '640',
+  //   description: 'Стоимость собранной пиццы идентификатор',
+  // })
+  // price: number;
 
   @ApiProperty({
-    example: [1, 2, 3],
-    description: 'Массив id дополнительных ингредиентов',
+    example: [AdditionalIngredient],
+    description: 'Массив дополнительных ингредиентов',
     required: false,
   })
-  additionalIngredientsId: number[];
+  additionalIngredients?: AdditionalIngredient[];
 
   @ApiProperty({
-    example: 1,
-    description: 'Id размера пиццы',
+    example: Size,
+    description: 'Размер пиццы',
   })
-  sizeId: number;
+  size: Size;
 
   @ApiProperty({
-    example: 1,
-    description: 'Id типа пиццы',
+    example: DoughType,
+    description: 'Тип пиццы',
   })
-  doughTypeId: number;
+  doughType: DoughType;
 
   @ApiProperty({
     example: 1,
     description: 'Id рецепта пиццы',
   })
-  recipeId: number;
+  recipe: Recipe;
 }

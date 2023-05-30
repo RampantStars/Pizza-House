@@ -3,12 +3,12 @@ import React from 'react';
 import styles from './CartBlock.module.scss';
 import button from '../../scss/button.module.scss';
 import { shallow } from 'zustand/shallow';
-import { PizzaCart } from '../../Utils/types/types';
+import { PizzaVariation } from '../../Utils/types/types';
 import { useCartStore } from '../../Utils/Stores/CartStore';
 
 type CardBlockProps = {
   id: string;
-  item: PizzaCart;
+  item: PizzaVariation;
   quantity: number;
 };
 
@@ -26,11 +26,15 @@ export const CardBlock: React.FC<CardBlockProps> = ({ id, item, quantity }) => {
   return (
     <li className={styles.cart__item}>
       <div className={styles.cart__item_img}>
-        <img className="pizza-block__image" src={item.imageUrl} alt="Pizza" />
+        <img
+          className="pizza-block__image"
+          src={`http://localhost:5000/${item.recipe.imageUrl}`}
+          alt="Pizza"
+        />
       </div>
       <div className={styles.cart__itemInfo}>
-        <h3>{item.title}</h3>
-        <p>{` ${item.type}, ${item.size} см.`}</p>
+        <h3>{item.price}</h3>
+        <p>{` ${item.doughType.name}, ${item.size.name} см.`}</p>
       </div>
       <div className={styles.cart__itemCount}>
         <button

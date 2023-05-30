@@ -23,16 +23,20 @@ export type Filter = {
 export type PizzaCart = {
   id: number;
   imageUrl: string;
-  title: string;
-  type: string;
-  size: number;
+  name: string;
   price: number;
-  category: Category[];
+  description: string;
+  salePercent: number;
+  inStock: boolean;
+  size: Size;
+  doughtType: DoughType;
+  ingredients: Ingredient[];
+  categories: Category[];
 };
 
 export type CartItem = {
   id: string;
-  item: PizzaCart;
+  item: PizzaVariation;
   quantity: number;
 };
 
@@ -79,7 +83,7 @@ export type Recipe = {
   id: number;
   name: string;
   price: number;
-  imageUrl?: string;
+  imageUrl: string;
   description: string;
   salePercent: number;
   inStock: boolean;
@@ -103,7 +107,7 @@ export type AdditionalIngredient = {
 export type PizzaVariation = {
   id: number;
   price: number;
-  additionalIngredients: AdditionalIngredient[];
+  additionalIngredients?: AdditionalIngredient[];
   size: Size;
   doughType: DoughType;
   recipe: Recipe;

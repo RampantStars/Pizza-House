@@ -10,11 +10,18 @@ import styles from '../../app.module.scss';
 import { useCategoryStore } from '../../Utils/Stores/CategoryStore';
 import { useFilterStore } from '../../Utils/Stores/FilterStore';
 import { shallow } from 'zustand/shallow';
+import { useRecipeStore } from '../../Utils/Stores/RecipeStore';
+import { Recipe } from '../../Utils/types/types';
+import { RecipeVariationModal } from '../../components/Modals/RecipeVariationModal';
 
 export const Home: React.FC = () => {
-  const [pizzas, setPizzas] = React.useState<any>({});
-  const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
+
+  const { recipes, meta, isLoading } = useRecipeStore(({ recipes, meta, isLoading }) => ({
+    recipes,
+    meta,
+    isLoading,
+  }));
 
   const currentCategory = useCategoryStore((state) => state.currentCategory);
   const { search, currentFilter } = useFilterStore(
@@ -24,18 +31,9 @@ export const Home: React.FC = () => {
     }),
     shallow,
   );
+  console.log('isLoading :>> ', isLoading);
 
   React.useEffect(() => {
-    setIsLoading(true);
-    const category = currentCategory.name !== 'Все' ? `&category=${currentCategory.id}` : '';
-    fetch(
-      `https://62e276b3e8ad6b66d85c02f7.mockapi.io/pizzas/?page=${currentPage}&limit=8&sortBy=${currentFilter.sortProperty}&order=${currentFilter.sortOrder}&search=${search}${category}`,
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        setPizzas(json);
-        setIsLoading(false);
-      });
     window.scrollTo(0, 0);
   }, [currentCategory, currentFilter, search, currentPage]);
 
@@ -49,15 +47,17 @@ export const Home: React.FC = () => {
       <div className={styles.content__items}>
         {isLoading
           ? [...new Array(6)].map((_, index) => <Skeleton key={`s-${index}`} />)
-          : pizzas.items.map((item: any) => <PizzaBlock key={item.id} {...item} />)}
+          : recipes.map((item: Recipe) => <PizzaBlock key={item.id} {...item} />)}
       </div>
-      <Pagination
-        onChangePage={(number: number) => {
-          setCurrentPage(number);
-        }}
-        pizzasCount={pizzas.count}
-        currentPage={currentPage}
-      />
+      {!isLoading && (
+        <Pagination
+          onChangePage={(number: number) => {
+            setCurrentPage(number);
+          }}
+          meta={meta}
+        />
+      )}
+      <RecipeVariationModal />
     </div>
   );
 };

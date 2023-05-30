@@ -18,6 +18,7 @@ export const Cart: React.FC = () => {
     }),
     shallow,
   );
+  console.log('11:>> ', 11);
 
   return (
     <div className={`${styles.container} ${styles.container_cart}`}>

@@ -1,0 +1,156 @@
+@import '../../scss/variables';
+.container {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-direction: row;
+
+  .pizza__img {
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  .info {
+    padding: 5px;
+    overflow: scroll;
+    max-width: 330px;
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .popover {
+    position: relative;
+    font-size: 15px;
+    &__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      width: 25px;
+      height: 25px;
+      border: 2px solid $text;
+      border-radius: 50%;
+      background-color: transparent;
+    }
+    &__list {
+      flex-direction: row;
+    }
+    &__item {
+      position: relative;
+      font-size: 12px;
+
+      &:not(:last-child)::after {
+        position: absolute;
+        right: 4px;
+        top: 0;
+        transform: translate(0.5rem, 0px);
+
+        content: ',';
+      }
+      &:last-child::after {
+        position: absolute;
+        right: 4px;
+        top: 0;
+        transform: translate(0.5rem, 0px);
+
+        content: '.';
+      }
+    }
+    &__panel {
+      border-radius: 12px;
+      position: absolute;
+      padding: 5px;
+      border: 2px solid $info;
+      background-color: $gray-line;
+    }
+  }
+
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    &__title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    &__doughtType,
+    &__size {
+      background-color: $gray-line;
+      display: flex;
+      gap: 10px;
+      border-radius: 12px;
+      padding: 5px;
+      .item {
+        .doughtType,
+        .size {
+          cursor: pointer;
+          padding: 8px;
+          display: flex;
+          border-radius: 12px;
+          border: 2px solid transparent;
+          transition: all 0.3s ease;
+          &:hover,
+          :focus {
+            box-shadow: 0px 0px 20px 3px rgba(34, 60, 80, 0.2);
+          }
+          &__input {
+            position: absolute;
+            appearance: none;
+            border: none;
+            padding: 0;
+            &:checked + .doughtType,
+            &:checked + .size {
+              font-weight: bold;
+              box-shadow: 0px 0px 20px 3px rgba(34, 60, 80, 0.2);
+            }
+          }
+          &__info {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+    .item {
+      border-radius: 12px;
+      .additionalIngredient {
+        cursor: pointer;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 5px;
+        max-width: 100px;
+        border-radius: 12px;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        &:hover,
+        :focus {
+          box-shadow: 0px 0px 20px 3px rgba(34, 60, 80, 0.2);
+        }
+        &__input {
+          position: absolute;
+          appearance: none;
+          border: none;
+          padding: 0;
+          &:checked + .additionalIngredient {
+            border-color: $orange;
+          }
+        }
+        &__info {
+          font-size: 12px;
+        }
+        div {
+          display: flex;
+          gap: 5px;
+        }
+        &__img {
+          border-radius: 12px;
+          width: 80px;
+          height: 80px;
+        }
+      }
+    }
+  }
+}

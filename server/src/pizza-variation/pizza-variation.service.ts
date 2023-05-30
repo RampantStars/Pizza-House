@@ -23,33 +23,42 @@ export class PizzaVariationService {
   async createPizzaVariation(
     createPizzaVariationDto: CreatePizzaVariationDto,
   ): Promise<PizzaVariation> {
-    const additionalIngredients = (await Promise.all(
-      createPizzaVariationDto.additionalIngredientsId.map((ingredientNameId) =>
-        this.additionalIngredientService.findOneAdditionalIngredient(
-          ingredientNameId,
-        ),
-      ),
-    )) as AdditionalIngredient[];
-
     const doughType = await this.doughtTypeService.findOneDoughType(
-      createPizzaVariationDto.doughTypeId,
+      createPizzaVariationDto.doughType.id,
     );
 
     const size = await this.sizeService.findOneSize(
-      createPizzaVariationDto.sizeId,
+      createPizzaVariationDto.size.id,
     );
 
     const recipe = await this.recipeService.findOneRecipe(
-      createPizzaVariationDto.recipeId,
+      createPizzaVariationDto.recipe.id,
     );
+    const price = recipe.price + doughType.price + size.price;
 
     const pizzaVariation = await this.pizzaVariationRepository.create({
       ...createPizzaVariationDto,
-      additionalIngredients: additionalIngredients,
       doughType: doughType,
+      price: price,
       size: size,
       recipe: recipe,
     });
+
+    if (createPizzaVariationDto.additionalIngredients) {
+      const additionalIngredients = (await Promise.all(
+        createPizzaVariationDto.additionalIngredients.map((ingredient) =>
+          this.additionalIngredientService.findOneAdditionalIngredient(
+            ingredient.id,
+          ),
+        ),
+      )) as AdditionalIngredient[];
+      pizzaVariation.additionalIngredients = [...additionalIngredients];
+      const priceAdd = additionalIngredients.reduce(
+        (acc, y) => acc + y.price,
+        price,
+      );
+      pizzaVariation.price = priceAdd;
+    }
     return this.pizzaVariationRepository.save(pizzaVariation);
   }
 
@@ -84,13 +93,12 @@ export class PizzaVariationService {
       throw new NotFoundException(`PizzaVariation with ID=${id} not found`);
     }
 
-    if (updatePizzaVariationDto.additionalIngredientsId) {
+    if (updatePizzaVariationDto.additionalIngredients) {
       const additionalIngredients = (await Promise.all(
-        updatePizzaVariationDto.additionalIngredientsId.map(
-          (ingredientNameId) =>
-            this.additionalIngredientService.findOneAdditionalIngredient(
-              ingredientNameId,
-            ),
+        updatePizzaVariationDto.additionalIngredients.map((ingredient) =>
+          this.additionalIngredientService.findOneAdditionalIngredient(
+            ingredient.id,
+          ),
         ),
       )) as AdditionalIngredient[];
 
@@ -100,9 +108,9 @@ export class PizzaVariationService {
       pizzaVariation.additionalIngredients = [...additionalIngredients];
     }
 
-    if (updatePizzaVariationDto.doughTypeId) {
+    if (updatePizzaVariationDto.doughType) {
       const doughType = await this.doughtTypeService.findOneDoughType(
-        updatePizzaVariationDto.doughTypeId,
+        updatePizzaVariationDto.doughType.id,
       );
 
       if (!doughType) {
@@ -111,9 +119,9 @@ export class PizzaVariationService {
       pizzaVariation.doughType = doughType;
     }
 
-    if (updatePizzaVariationDto.sizeId) {
+    if (updatePizzaVariationDto.size) {
       const size = await this.sizeService.findOneSize(
-        updatePizzaVariationDto.sizeId,
+        updatePizzaVariationDto.size.id,
       );
       if (!size) {
         throw new NotFoundException(`Size with ID=${id} not found`);
@@ -121,9 +129,9 @@ export class PizzaVariationService {
       pizzaVariation.size = size;
     }
 
-    if (updatePizzaVariationDto.recipeId) {
+    if (updatePizzaVariationDto.recipe) {
       const recipe = await this.recipeService.findOneRecipe(
-        updatePizzaVariationDto.recipeId,
+        updatePizzaVariationDto.recipe.id,
       );
       if (!recipe) {
         throw new NotFoundException(`Recipe with ID=${id} not found`);

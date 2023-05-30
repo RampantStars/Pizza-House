@@ -4,16 +4,11 @@ import ReactPaginate from 'react-paginate';
 import styles from './Pagination.module.scss';
 
 type PaginationProps = {
-  pizzasCount: number;
-  currentPage: number;
+  meta: any;
   onChangePage: (number: number) => void;
 };
 
-export const Pagination: React.FC<PaginationProps> = ({
-  onChangePage,
-  pizzasCount,
-  currentPage,
-}) => {
+export const Pagination: React.FC<PaginationProps> = ({ meta, onChangePage }) => {
   const changePage = (number: number) => {
     onChangePage(number);
     return number;
@@ -26,8 +21,8 @@ export const Pagination: React.FC<PaginationProps> = ({
       previousLabel="<"
       onPageChange={(e) => onChangePage(e.selected + 1)}
       pageRangeDisplayed={8}
-      pageCount={pizzasCount / Math.round(8) > 1 ? pizzasCount / Math.round(8) : changePage(1)}
-      forcePage={currentPage - 1}
+      pageCount={meta.totalPages}
+      forcePage={meta.currentPage - 1}
     />
   );
 };

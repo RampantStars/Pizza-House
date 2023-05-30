@@ -5,13 +5,28 @@ import ky from 'ky';
 
 export const useRecipeStore = create<IRecipeStore>()((set, get) => ({
   recipes: [],
+  meta: {},
+  currentRecipe: {} as Recipe,
   editingRecipe: {} as Recipe,
+  isLoading: true,
   isEdit: false,
   Error: {} as Error,
   fetchRecipes: async () => {
     try {
-      const { data, meta }: any = await ky.get('http://localhost:5000/recipe').json();
-      set({ recipes: [...data] });
+      const { data, meta }: { data: Recipe[]; meta: any } = await ky
+        .get('http://localhost:5000/recipe')
+        .json();
+      set({ recipes: [...data], meta: { ...meta }, isLoading: false });
+    } catch (error: any) {
+      const errorJson: Error = await error.response.json();
+      set({ Error: { ...errorJson } });
+      throw errorJson;
+    }
+  },
+  selectRecipe: async (id: number) => {
+    try {
+      const recipe: Recipe = await ky.get(`http://localhost:5000/recipe/${id}`).json();
+      set({ currentRecipe: { ...recipe } });
     } catch (error: any) {
       const errorJson: Error = await error.response.json();
       set({ Error: { ...errorJson } });

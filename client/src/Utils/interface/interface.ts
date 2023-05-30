@@ -92,6 +92,7 @@ export interface IModalFramesStore {
   sizeModalIsOpen: boolean;
   ingredientModalIsOpen: boolean;
   additionalIngredientModalIsOpen: boolean;
+  recipeVariationModal: boolean;
   typeIngredientModalIsOpen: boolean;
   doughTypeModalIsOpen: boolean;
   deleteModalIsOpen: boolean;
@@ -200,9 +201,13 @@ export interface IUserStore {
 export interface IRecipeStore {
   recipes: Recipe[];
   editingRecipe: Recipe;
+  currentRecipe: Recipe;
+  isLoading: boolean;
   isEdit: boolean;
+  meta: {};
   Error: Error;
   fetchRecipes: () => void;
+  selectRecipe: (id: number) => void;
   createRecipe: (data: FormData) => void;
   updateRecipe: (id: number, data: FormData) => void;
   setInStock: (id: number, value: boolean) => void;

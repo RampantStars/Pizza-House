@@ -19,7 +19,7 @@ export class AdditionalIngredientService {
       await this.additionalIngredientRepository.create({
         ...createAdditionalIngredientDto,
         price: +createAdditionalIngredientDto.price,
-        weight: +createAdditionalIngredientDto.price,
+        weight: +createAdditionalIngredientDto.weight,
         maxCount: +createAdditionalIngredientDto.maxCount,
       });
     return this.additionalIngredientRepository.save(additionalIngredient);

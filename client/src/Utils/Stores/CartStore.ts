@@ -1,11 +1,11 @@
 import { nanoid } from 'nanoid';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { CartItem, PizzaCart } from '../types/types';
+import { CartItem, PizzaVariation } from '../types/types';
 
 interface ICartStore {
   cart: CartItem[];
-  addToCart: (newPizza: PizzaCart) => void;
+  addToCart: (newPizza: PizzaVariation) => void;
   removeFromCart: (id: string) => void;
   incrementQuantity: (id: string) => void;
   decrementQuantity: (id: string) => void;
@@ -20,7 +20,7 @@ export const useCartStore = create<ICartStore>()(
   persist(
     (set, get) => ({
       cart: [],
-      addToCart: (newPizza: PizzaCart) => {
+      addToCart: (newPizza: PizzaVariation) => {
         const { cart } = get();
         const itemInCart = cart.find((i) => JSON.stringify(i.item) === JSON.stringify(newPizza));
         const newCart = itemInCart
@@ -55,14 +55,21 @@ export const useCartStore = create<ICartStore>()(
       getTotalItems: () => get().cart.length,
       // метод для получения общего количества товаров, находящихся в корзине
       getTotalQuantity: () => get().cart.reduce((x, y) => x + y.quantity, 0),
-      // метод для получения общей стоимости товаров, находящихся в корзине
-      getTotalPrice: () => get().cart.reduce((x, y) => x + y.item.price * y.quantity, 0),
       //метод для получения стоимости товара одного наименования.
       getItemPrice: (id: string) => {
         const itemCart = get().cart.find((i) => i.id === id);
-        const totalPrice = itemCart ? itemCart.quantity * itemCart.item.price : 0;
+        let price = itemCart
+          ? itemCart.item.size.price + itemCart.item.doughType.price + itemCart.item.recipe.price
+          : 0;
+        price = itemCart?.item?.additionalIngredients
+          ? itemCart.item.additionalIngredients?.reduce((acc, x) => acc + x.price, price)
+          : price;
+        const totalPrice = itemCart ? itemCart.quantity * price : 0;
         return totalPrice;
       },
+      // метод для получения общей стоимости товаров, находящихся в корзине
+      getTotalPrice: () =>
+        get().cart.reduce((x, y) => x + get().getItemPrice(y.id) * y.quantity, 0),
     }),
     { name: 'cart-persist', getStorage: () => sessionStorage },
   ),
