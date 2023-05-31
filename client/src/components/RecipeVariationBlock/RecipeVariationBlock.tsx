@@ -1,11 +1,9 @@
-import React from 'react';
 import styles from './RecipeVariationBlock.module.scss';
 import { useRecipeStore } from '../../Utils/Stores/RecipeStore';
 import { useAdditionalIngredientStore } from '../../Utils/Stores/AdditionalIngredientsStore';
 import { Popover } from '@headlessui/react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AdditionalIngredient, DoughType, PizzaVariation } from '../../Utils/types/types';
-import ky from 'ky';
 import { useCartStore } from '../../Utils/Stores/CartStore';
 
 export const RecipeVariationBlock = () => {
@@ -68,7 +66,7 @@ export const RecipeVariationBlock = () => {
               </ul>
             </Popover.Panel>
           </Popover>
-          <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <form id="form" className={styles.form} onSubmit={handleSubmit(onSubmit)}>
             <p className={styles.list__title}>Размеры</p>
             <ul className={`${styles.list} ${styles.list__size}`}>
               {currentRecipe.sizes.map((size, index) => (
@@ -140,10 +138,12 @@ export const RecipeVariationBlock = () => {
                 </li>
               ))}
             </ul>
-            <button type="submit">Отправить</button>
           </form>
         </div>
       </div>
+      <button className={styles.btn} form="form" type="submit">
+        Добавить
+      </button>
     </div>
   );
 };
