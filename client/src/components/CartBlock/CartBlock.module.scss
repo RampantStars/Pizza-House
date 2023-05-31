@@ -283,3 +283,55 @@
     }
   }
 }
+.popover {
+  position: relative;
+  font-size: 15px;
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    border: 2px solid $text;
+    border-radius: 50%;
+    background-color: transparent;
+  }
+  &__list {
+    flex-direction: row;
+  }
+  &__item {
+    position: relative;
+    font-size: 12px;
+
+    &:not(:last-child)::after {
+      position: absolute;
+      right: 4px;
+      top: 0;
+      transform: translate(0.5rem, 0px);
+
+      content: ',';
+    }
+    &:last-child::after {
+      position: absolute;
+      right: 4px;
+      top: 0;
+      transform: translate(0.5rem, 0px);
+
+      content: '.';
+    }
+  }
+  &__panel {
+    border-radius: 12px;
+    position: absolute;
+    padding: 5px;
+    border: 2px solid $info;
+    background-color: $gray-line;
+  }
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}

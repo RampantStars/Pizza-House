@@ -33,9 +33,9 @@ export class OrderController {
 
   @ApiOperation({ summary: 'Получение всех заказов' })
   @ApiResponse({ status: 200 })
-  @ApiBearerAuth()
-  @Roles('MANAGER')
-  @UseGuards(RolesGuard)
+  // @ApiBearerAuth()
+  // @Roles('MANAGER')
+  // @UseGuards(RolesGuard)
   @Get()
   findAll(): Promise<Order[]> {
     return this.orderService.findAllOrder();

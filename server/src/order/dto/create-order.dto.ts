@@ -1,8 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { OrderLine } from 'src/order-line/entities/order-line.entity';
 export class CreateOrderDto {
-  @ApiProperty({ example: 1200, description: 'Общая цена заказа' })
-  readonly price: number;
-
   @ApiProperty({
     example: 'Иваново, ул. Парижской Коммуны д.56А',
     description: 'Адрес заказа',
@@ -42,5 +40,5 @@ export class CreateOrderDto {
     description: 'Id Строчек заказа',
     nullable: true,
   })
-  readonly orderLinesId: number[];
+  readonly orderLines: OrderLine[];
 }

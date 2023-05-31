@@ -1,7 +1,8 @@
 import { nanoid } from 'nanoid';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { CartItem, PizzaVariation } from '../types/types';
+import { CartItem, Order, OrderLine, PizzaVariation } from '../types/types';
+import ky from 'ky';
 
 interface ICartStore {
   cart: CartItem[];
@@ -14,7 +15,15 @@ interface ICartStore {
   getTotalPrice: () => number;
   getItemPrice: (id: string) => number;
   removeCart: () => void;
+  createRecipeVariation: (item: PizzaVariation) => Promise<PizzaVariation>;
+  createOrderLine: (item: CartItem) => Promise<OrderLine>;
+  createOrder: (item: Order) => void;
 }
+
+type Line = {
+  quantity: number;
+  pizzaVariation: PizzaVariation;
+};
 
 export const useCartStore = create<ICartStore>()(
   persist(
@@ -68,8 +77,39 @@ export const useCartStore = create<ICartStore>()(
         return totalPrice;
       },
       // метод для получения общей стоимости товаров, находящихся в корзине
-      getTotalPrice: () =>
-        get().cart.reduce((x, y) => x + get().getItemPrice(y.id) * y.quantity, 0),
+      getTotalPrice: () => get().cart.reduce((x, y) => get().getItemPrice(y.id) + x, 0),
+      createOrderLine: async (item: CartItem) => {
+        try {
+          const pizzaVariation: PizzaVariation = await get().createRecipeVariation(item.item);
+          const line: Line = {} as Line;
+          line.pizzaVariation = { ...pizzaVariation };
+          line.quantity = item.quantity;
+          const orderLine: OrderLine = await ky
+            .post('http://localhost:5000/orderLine', { json: line })
+            .json<OrderLine>();
+          return orderLine;
+        } catch (error: any) {
+          throw error;
+        }
+      },
+      createOrder: async (item: Order) => {
+        try {
+          await ky.post('http://localhost:5000/order', { json: { ...item } }).json<Order>();
+        } catch (error: any) {
+          throw error;
+        }
+      },
+      createRecipeVariation: async (item: PizzaVariation): Promise<PizzaVariation> => {
+        try {
+          const pizzaVariation: PizzaVariation = await ky
+            .post('http://localhost:5000/pizzaVariation', { json: { ...item } })
+            .json<PizzaVariation>();
+          console.log('item :>> ', pizzaVariation);
+          return pizzaVariation;
+        } catch (error: any) {
+          throw error;
+        }
+      },
     }),
     { name: 'cart-persist', getStorage: () => sessionStorage },
   ),

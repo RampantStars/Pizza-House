@@ -5,6 +5,7 @@ import button from '../../scss/button.module.scss';
 import { shallow } from 'zustand/shallow';
 import { PizzaVariation } from '../../Utils/types/types';
 import { useCartStore } from '../../Utils/Stores/CartStore';
+import { Popover } from '@headlessui/react';
 
 type CardBlockProps = {
   id: string;
@@ -33,8 +34,25 @@ export const CardBlock: React.FC<CardBlockProps> = ({ id, item, quantity }) => {
         />
       </div>
       <div className={styles.cart__itemInfo}>
-        <h3>{item.price}</h3>
-        <p>{` ${item.doughType.name}, ${item.size.name} см.`}</p>
+        <h3>{item.recipe.name}</h3>
+        <p>{` ${item.doughType.name}, ${item.size.name}`}</p>
+        {item.additionalIngredients?.length ? (
+          <Popover className={styles.popover}>
+            <Popover.Button className={styles.popover__btn}>ℹ️</Popover.Button>
+            <Popover.Panel className={styles.popover__panel}>
+              <p className={styles.list__title}>Дополнительные ингредиенты</p>
+              <ul className={`${styles.list} ${styles.popover__list}`}>
+                {item.additionalIngredients.map((ingredient) => (
+                  <li key={ingredient.id} className={styles.popover__item}>
+                    {ingredient.name}
+                  </li>
+                ))}
+              </ul>
+            </Popover.Panel>
+          </Popover>
+        ) : (
+          ''
+        )}
       </div>
       <div className={styles.cart__itemCount}>
         <button

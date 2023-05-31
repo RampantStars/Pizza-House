@@ -141,9 +141,7 @@ export const RecipeVariationBlock = () => {
           </form>
         </div>
       </div>
-      <button className={styles.btn} form="form" type="submit">
-        Добавить
-      </button>
+      <button className={styles.btn} form="form" type="submit"></button>
     </div>
   );
 };

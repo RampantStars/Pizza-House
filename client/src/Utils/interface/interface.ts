@@ -93,6 +93,7 @@ export interface IModalFramesStore {
   ingredientModalIsOpen: boolean;
   additionalIngredientModalIsOpen: boolean;
   recipeVariationModal: boolean;
+  payModalIsOpen: boolean;
   typeIngredientModalIsOpen: boolean;
   doughTypeModalIsOpen: boolean;
   deleteModalIsOpen: boolean;

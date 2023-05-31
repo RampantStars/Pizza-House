@@ -105,7 +105,7 @@ export type AdditionalIngredient = {
 };
 
 export type PizzaVariation = {
-  id: number;
+  id?: number;
   price: number;
   additionalIngredients?: AdditionalIngredient[];
   size: Size;
@@ -128,13 +128,11 @@ export type OrderStatus = {
 };
 
 export type Order = {
-  id: number;
   price: number;
-  date: Date;
   address: string;
   quantityItem: number;
   comment: string;
-  user: User;
+  userId: number;
   orderStatus: OrderStatus;
   orderLines: OrderLine[];
 };

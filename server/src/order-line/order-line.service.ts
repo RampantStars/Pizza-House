@@ -18,12 +18,15 @@ export class OrderLineService {
   ): Promise<OrderLine> {
     const pizzaVariation =
       await this.pizzaVariationService.findOnePizzaVariation(
-        createOrderLineDto.pizzaVariationId,
+        createOrderLineDto.pizzaVariation.id,
       );
 
-    const orderLine = this.orderLineRepository.create({
+    const price = pizzaVariation.price * createOrderLineDto.quantity;
+
+    const orderLine = await this.orderLineRepository.create({
       ...createOrderLineDto,
       pizzaVariation: pizzaVariation,
+      price: price,
     });
 
     return this.orderLineRepository.save(orderLine);

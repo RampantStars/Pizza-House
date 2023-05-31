@@ -7,6 +7,8 @@ import button from '../../scss/button.module.scss';
 import { CardBlock } from '../../components/CartBlock';
 import { CartItem } from '../../Utils/types/types';
 import { useCartStore } from '../../Utils/Stores/CartStore';
+import { useModalFramesStore } from '../../Utils/Stores/ModalFramesStore';
+import { PayModal } from '../../components/Modals/PayModal';
 
 export const Cart: React.FC = () => {
   const { cart, getTotalPrice, getTotalQuantity, removeCart } = useCartStore(
@@ -18,7 +20,11 @@ export const Cart: React.FC = () => {
     }),
     shallow,
   );
-  console.log('11:>> ', 11);
+
+  const { payModalIsOpen, setIsOpen } = useModalFramesStore(({ payModalIsOpen, setIsOpen }) => ({
+    payModalIsOpen,
+    setIsOpen,
+  }));
 
   return (
     <div className={`${styles.container} ${styles.container_cart}`}>
@@ -132,14 +138,15 @@ export const Cart: React.FC = () => {
 
               <span>Вернуться назад</span>
             </Link>
-            <div className={`${button.button} ${button.payBtn}`}>
-              <span>
-                <b>Оплатить сейчас ⟶</b>
-              </span>
-            </div>
+            <button
+              onClick={() => setIsOpen('payModalIsOpen', !payModalIsOpen)}
+              className={`${button.button} ${button.payBtn}`}>
+              Оплатить сейчас ⟶
+            </button>
           </div>
         </div>
       </div>
+      <PayModal />
     </div>
   );
 };

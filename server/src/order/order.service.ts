@@ -20,23 +20,23 @@ export class OrderService {
   ) {}
 
   async createOrder(createOrderDto: CreateOrderDto): Promise<Order> {
-    const orderStatus = await this.orderStatusService.findOne(
-      createOrderDto.orderStatusId,
-    );
+    const orderStatus = await this.orderStatusService.findOne(1);
 
     const user = await this.userService.findOneUser(createOrderDto.userId);
 
     const orderLines = (await Promise.all(
-      createOrderDto.orderLinesId.map((orderLineId) =>
-        this.orderLineService.findOneOrderLine(orderLineId),
+      createOrderDto.orderLines.map((orderLine) =>
+        this.orderLineService.findOneOrderLine(orderLine.id),
       ),
     )) as OrderLine[];
 
+    const price = await orderLines.reduce((acc, x) => acc + x.price, 0);
     const order = await this.orderRepository.create({
       ...createOrderDto,
       orderStatus: orderStatus,
       user: user,
       orderLines: orderLines,
+      price: price,
     });
     return this.orderRepository.save(order);
   }
@@ -112,10 +112,10 @@ export class OrderService {
       order.orderStatus = orderStatus;
     }
 
-    if (updateOrderDto.orderLinesId) {
+    if (updateOrderDto.orderLines) {
       const orderLines = (await Promise.all(
-        updateOrderDto.orderLinesId.map((orderLineId) =>
-          this.orderLineService.findOneOrderLine(orderLineId),
+        updateOrderDto.orderLines.map((orderLine) =>
+          this.orderLineService.findOneOrderLine(orderLine.id),
         ),
       )) as OrderLine[];
 
