@@ -5,6 +5,7 @@ import { Popover } from '@headlessui/react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { AdditionalIngredient, DoughType, PizzaVariation } from '../../Utils/types/types';
 import { useCartStore } from '../../Utils/Stores/CartStore';
+import { onSuccessToast } from '../../Utils/toast';
 
 export const RecipeVariationBlock = () => {
   const currentRecipe = useRecipeStore((state) => state.currentRecipe);
@@ -39,6 +40,7 @@ export const RecipeVariationBlock = () => {
         pizzaVariation.additionalIngredients = [];
       }
       addToCart(pizzaVariation);
+      onSuccessToast(`Пицца "${currentRecipe.name}" добавлена в корзину`);
     } catch (error) {
       console.log('error :>> ', error);
     }
@@ -141,7 +143,9 @@ export const RecipeVariationBlock = () => {
           </form>
         </div>
       </div>
-      <button className={styles.btn} form="form" type="submit"></button>
+      <button className={styles.btn} form="form" type="submit">
+        Добавит в корзину
+      </button>
     </div>
   );
 };

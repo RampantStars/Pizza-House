@@ -6,7 +6,7 @@ import RecipeVariationBlock from './RecipeVariationBlock';
 describe('<RecipeVariationBlock />', () => {
   test('it should mount', () => {
     render(<RecipeVariationBlock />);
-    
+
     const recipeVariationBlock = screen.getByTestId('RecipeVariationBlock');
 
     expect(recipeVariationBlock).toBeInTheDocument();

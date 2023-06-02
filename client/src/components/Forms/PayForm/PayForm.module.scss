@@ -7,6 +7,8 @@
   gap: 10px;
 
   .order {
+    overflow: scroll;
+    max-height: 400px;
     &__info {
       padding: 0 10px;
 
@@ -29,6 +31,7 @@
 
 .switch {
   width: fit-content;
+  height: 80px;
   display: flex;
   flex-direction: column;
   padding: 5px;

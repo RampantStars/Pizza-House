@@ -3,7 +3,7 @@ import { IRegistration } from '../../Utils/interface/interface';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useUserStore } from '../../Utils/Stores/UserStore';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import styles from './RegistrationForm.module.scss';
 import button from '../../scss/button.module.scss';
@@ -97,6 +97,9 @@ export const RegistrationForm = () => {
             className={styles.input}
           />
         </label>
+        <p className={styles.login}>
+          Уже есть аккаунт <Link to="/login">Войти</Link>
+        </p>
         <button type="submit" className={`${button.button} ${styles.button}`}>
           Зарегистрироваться
         </button>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'zustand/shallow';
-import { SearchContext } from '../../App';
 import { useFilterStore } from '../../Utils/Stores/FilterStore';
 
 import styles from './Search.module.scss';

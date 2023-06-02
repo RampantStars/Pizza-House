@@ -21,8 +21,6 @@ import { useRecipeStore } from './Utils/Stores/RecipeStore';
 import { useUserStore } from './Utils/Stores/UserStore';
 import { useAdditionalIngredientStore } from './Utils/Stores/AdditionalIngredientsStore';
 
-export const SearchContext = React.createContext();
-
 function App() {
   const fetchCategories = useCategoryStore((state) => state.fetchCategories);
   const fetchSizes = useSizeStore((state) => state.fetchSizes);

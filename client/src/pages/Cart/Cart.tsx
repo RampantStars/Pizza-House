@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { shallow } from 'zustand/shallow';
 
 import styles from './Cart.module.scss';
@@ -9,6 +9,8 @@ import { CartItem } from '../../Utils/types/types';
 import { useCartStore } from '../../Utils/Stores/CartStore';
 import { useModalFramesStore } from '../../Utils/Stores/ModalFramesStore';
 import { PayModal } from '../../components/Modals/PayModal';
+import { useUserStore } from '../../Utils/Stores/UserStore';
+import { onInfoToast } from '../../Utils/toast';
 
 export const Cart: React.FC = () => {
   const { cart, getTotalPrice, getTotalQuantity, removeCart } = useCartStore(
@@ -20,11 +22,22 @@ export const Cart: React.FC = () => {
     }),
     shallow,
   );
+  const isAuth = useUserStore((state) => state.isAuth);
 
   const { payModalIsOpen, setIsOpen } = useModalFramesStore(({ payModalIsOpen, setIsOpen }) => ({
     payModalIsOpen,
     setIsOpen,
   }));
+
+  const navigate = useNavigate();
+  const onOpen = () => {
+    if (isAuth) {
+      setIsOpen('payModalIsOpen', !payModalIsOpen);
+    } else {
+      onInfoToast('Перед оплатой необходимо авторизоваться');
+      navigate('/login');
+    }
+  };
 
   return (
     <div className={`${styles.container} ${styles.container_cart}`}>
@@ -138,9 +151,7 @@ export const Cart: React.FC = () => {
 
               <span>Вернуться назад</span>
             </Link>
-            <button
-              onClick={() => setIsOpen('payModalIsOpen', !payModalIsOpen)}
-              className={`${button.button} ${button.payBtn}`}>
+            <button onClick={() => onOpen()} className={`${button.button} ${button.payBtn}`}>
               Оплатить сейчас ⟶
             </button>
           </div>

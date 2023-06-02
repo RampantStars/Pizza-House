@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useUserStore } from '../../Utils/Stores/UserStore';
 import { onErrorToast, onSuccessToast } from '../../Utils/toast';
@@ -58,6 +58,10 @@ export const LoginForm = () => {
           />
           <p>{errors.password?.message}</p>
         </label>
+
+        <p className={styles.registration}>
+          У вас нет аккаунта? <Link to="/registration">Зарегистрироваться </Link>
+        </p>
         <button type="submit" className={`${button.button} ${styles.button}`}>
           Войти
         </button>
