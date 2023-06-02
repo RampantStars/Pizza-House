@@ -5,6 +5,8 @@ interface IFilterStore {
   search: string;
   filters: Filter[];
   currentFilter: Filter;
+  currentPage: number;
+  setPage: (page: number) => void;
   setSearch: (text: string) => void;
   selectedFilter: (obj: Filter) => void;
 }
@@ -12,16 +14,18 @@ interface IFilterStore {
 export const useFilterStore = create<IFilterStore>()((set, get) => ({
   search: '',
   filters: [
-    { name: 'Популярности ↑', sortProperty: 'rating', sortOrder: 'asc' },
-    { name: 'Популярности ↓', sortProperty: 'rating', sortOrder: 'desc' },
-    { name: 'Цене ↑', sortProperty: 'price', sortOrder: 'asc' },
-    { name: 'Цене ↓', sortProperty: 'price', sortOrder: 'desc' },
-    { name: 'Алфавиту ↑', sortProperty: 'title', sortOrder: 'desc' },
-    { name: 'Алфавиту ↓', sortProperty: 'title', sortOrder: 'asc' },
+    { name: 'Алфавиту ↑', sortProperty: 'name', sortOrder: 'DESC' },
+    { name: 'Алфавиту ↓', sortProperty: 'name', sortOrder: 'ASC' },
+    { name: 'Цене ↑', sortProperty: 'price', sortOrder: 'ASC' },
+    { name: 'Цене ↓', sortProperty: 'price', sortOrder: 'DESC' },
   ],
-  currentFilter: { name: 'Популярности ↑', sortProperty: 'rating', sortOrder: 'asc' },
+  currentPage: 1,
+  currentFilter: { name: 'Алфавиту ↑', sortProperty: 'name', sortOrder: 'DESC' },
   setSearch: (text) => {
     set({ search: text });
+  },
+  setPage: (page) => {
+    set({ currentPage: page });
   },
   selectedFilter: (obj) => {
     set({ currentFilter: { ...obj } });

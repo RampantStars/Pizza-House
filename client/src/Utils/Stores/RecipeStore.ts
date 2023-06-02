@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 import { IRecipeStore } from '../interface/interface';
-import { Error, Recipe } from '../types/types';
+import { Error, Filter, Recipe } from '../types/types';
 import ky from 'ky';
+import { queries } from '@testing-library/react';
 
 export const useRecipeStore = create<IRecipeStore>()((set, get) => ({
   recipes: [],
@@ -11,10 +12,23 @@ export const useRecipeStore = create<IRecipeStore>()((set, get) => ({
   isLoading: true,
   isEdit: false,
   Error: {} as Error,
-  fetchRecipes: async () => {
+  fetchRecipes: async (
+    search: string,
+    category: { id: number; name: string },
+    filter: Filter,
+    page: number,
+  ) => {
     try {
       const { data, meta }: { data: Recipe[]; meta: any } = await ky
-        .get('http://localhost:5000/recipe')
+        .get('http://localhost:5000/recipe', {
+          searchParams: {
+            page: page,
+            limit: 8,
+            search: search,
+            'filter.categories.name': category.id ? category.name : `$not:${category.name}`,
+            sortBy: `${filter.sortProperty}:${filter.sortOrder}`,
+          },
+        })
         .json();
       set({ recipes: [...data], meta: { ...meta }, isLoading: false });
     } catch (error: any) {

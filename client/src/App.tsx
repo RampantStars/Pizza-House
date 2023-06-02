@@ -17,7 +17,6 @@ import { useSizeStore } from './Utils/Stores/SizeStore';
 import { useDoughTypeStore } from './Utils/Stores/DoughType.Store';
 import { useIngredientStore } from './Utils/Stores/IngredientStore';
 import { useTypeIngredientStore } from './Utils/Stores/TypeIngredientSrote';
-import { useRecipeStore } from './Utils/Stores/RecipeStore';
 import { useUserStore } from './Utils/Stores/UserStore';
 import { useAdditionalIngredientStore } from './Utils/Stores/AdditionalIngredientsStore';
 
@@ -30,7 +29,6 @@ function App() {
     (state) => state.fetchAdditionalIngredients,
   );
   const fetchTypeIngredients = useTypeIngredientStore((state) => state.fetchTypeIngredients);
-  const fetchRecipes = useRecipeStore((state) => state.fetchRecipes);
   const { fetchUsers, fetchRole } = useUserStore(({ fetchUsers, fetchRole }) => ({
     fetchUsers,
     fetchRole,
@@ -43,7 +41,6 @@ function App() {
       fetchSizes();
       fetchIngredients();
       fetchAdditionalIngredients();
-      fetchRecipes();
       fetchTypeIngredients();
       fetchUsers();
       fetchRole();

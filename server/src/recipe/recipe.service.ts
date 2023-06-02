@@ -85,7 +85,7 @@ export class RecipeService {
       searchableColumns: ['name'],
       filterableColumns: {
         name: [FilterOperator.EQ],
-        'categories.name': [FilterOperator.EQ],
+        'categories.name': [FilterOperator.EQ, FilterSuffix.NOT],
         price: [FilterOperator.BTW],
       },
     });

@@ -15,27 +15,32 @@ import { Recipe } from '../../Utils/types/types';
 import { RecipeVariationModal } from '../../components/Modals/RecipeVariationModal';
 
 export const Home: React.FC = () => {
-  const [currentPage, setCurrentPage] = React.useState(1);
-
-  const { recipes, meta, isLoading } = useRecipeStore(({ recipes, meta, isLoading }) => ({
-    recipes,
-    meta,
-    isLoading,
-  }));
-
-  const currentCategory = useCategoryStore((state) => state.currentCategory);
-  const { search, currentFilter } = useFilterStore(
-    ({ search, currentFilter }) => ({
-      search,
-      currentFilter,
+  const { recipes, meta, isLoading, fetchRecipes } = useRecipeStore(
+    ({ recipes, meta, isLoading, fetchRecipes }) => ({
+      recipes,
+      meta,
+      isLoading,
+      fetchRecipes,
     }),
     shallow,
   );
-  console.log('isLoading :>> ', isLoading);
+
+  const currentCategory = useCategoryStore((state) => state.currentCategory);
+  const { search, currentFilter, currentPage } = useFilterStore(
+    ({ search, currentFilter, currentPage }) => ({
+      search,
+      currentFilter,
+      currentPage,
+    }),
+    shallow,
+  );
 
   React.useEffect(() => {
+    fetchRecipes(search, currentCategory, currentFilter, currentPage);
     window.scrollTo(0, 0);
   }, [currentCategory, currentFilter, search, currentPage]);
+
+  const isOnePage = meta.totalPages !== 1 ? false : true;
 
   return (
     <div className={styles.container}>
@@ -49,14 +54,7 @@ export const Home: React.FC = () => {
           ? [...new Array(6)].map((_, index) => <Skeleton key={`s-${index}`} />)
           : recipes.map((item: Recipe) => <PizzaBlock key={item.id} {...item} />)}
       </div>
-      {!isLoading && (
-        <Pagination
-          onChangePage={(number: number) => {
-            setCurrentPage(number);
-          }}
-          meta={meta}
-        />
-      )}
+      {!isLoading && !isOnePage && <Pagination meta={meta} />}
       <RecipeVariationModal />
     </div>
   );

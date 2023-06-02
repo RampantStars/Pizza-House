@@ -3,6 +3,7 @@ import {
   Category,
   DoughType,
   Error,
+  Filter,
   Ingredient,
   Order,
   Recipe,
@@ -205,9 +206,14 @@ export interface IRecipeStore {
   currentRecipe: Recipe;
   isLoading: boolean;
   isEdit: boolean;
-  meta: {};
+  meta: any;
   Error: Error;
-  fetchRecipes: () => void;
+  fetchRecipes: (
+    search: string,
+    category: { id: number; name: string },
+    filter: Filter,
+    page: number,
+  ) => void;
   selectRecipe: (id: number) => void;
   createRecipe: (data: FormData) => void;
   updateRecipe: (id: number, data: FormData) => void;

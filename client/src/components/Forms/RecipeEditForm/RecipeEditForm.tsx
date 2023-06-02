@@ -118,52 +118,12 @@ export const RecipeEditForm = () => {
             <label className={styles.label}>
               Картинка рецепта
               {!image ? (
-                <svg
-                  className={styles.input__svg}
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <title />
-
-                  <g id="Complete">
-                    <g id="upload">
-                      <g>
-                        <path
-                          d="M3,12.3v7a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2v-7"
-                          fill="none"
-                          stroke="#000000"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                        />
-
-                        <g>
-                          <polyline
-                            data-name="Right"
-                            fill="none"
-                            id="Right-2"
-                            points="7.9 6.7 12 2.7 16.1 6.7"
-                            stroke="#000000"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                          />
-
-                          <line
-                            fill="none"
-                            stroke="#000000"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            x1="12"
-                            x2="12"
-                            y1="16.3"
-                            y2="4.8"
-                          />
-                        </g>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
+                <img
+                  alt="Загруженная картинка"
+                  className={styles.img}
+                  src={`http://localhost:5000/${editingRecipe.imageUrl}`}
+                  onLoad={handleImageLoad}
+                />
               ) : (
                 <img
                   alt="Загруженная картинка"
@@ -211,7 +171,6 @@ export const RecipeEditForm = () => {
               <Controller
                 control={control}
                 name="categories"
-                rules={{ required: 'Это поле обязательное' }}
                 render={({ field: { onChange }, fieldState: { error } }) => (
                   <div>
                     <div className={styles.select__group}>
@@ -253,7 +212,6 @@ export const RecipeEditForm = () => {
               <Controller
                 control={control}
                 name="sizes"
-                rules={{ required: 'Это поле обязательное' }}
                 render={({ field: { onChange }, fieldState: { error } }) => (
                   <div>
                     <div className={styles.select__group}>
@@ -293,7 +251,6 @@ export const RecipeEditForm = () => {
               <Controller
                 control={control}
                 name="doughTypes"
-                rules={{ required: 'Это поле обязательное' }}
                 render={({ field: { onChange }, fieldState: { error } }) => (
                   <div>
                     <div className={styles.select__group}>
@@ -333,7 +290,6 @@ export const RecipeEditForm = () => {
               <Controller
                 control={control}
                 name="ingredients"
-                rules={{ required: 'Это поле обязательное' }}
                 render={({ field: { onChange }, fieldState: { error } }) => (
                   <div>
                     <div className={styles.select__group}>

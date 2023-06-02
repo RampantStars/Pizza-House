@@ -2,17 +2,14 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 
 import styles from './Pagination.module.scss';
+import { useFilterStore } from '../../Utils/Stores/FilterStore';
 
 type PaginationProps = {
   meta: any;
-  onChangePage: (number: number) => void;
 };
-
-export const Pagination: React.FC<PaginationProps> = ({ meta, onChangePage }) => {
-  const changePage = (number: number) => {
-    onChangePage(number);
-    return number;
-  };
+export const Pagination: React.FC<PaginationProps> = ({ meta }) => {
+  const setPage = useFilterStore((state) => state.setPage);
+  const onChangePage = (number: number) => (meta.totalPages !== 1 ? setPage(number) : '');
   return (
     <ReactPaginate
       className={styles.pagination}

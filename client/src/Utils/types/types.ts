@@ -16,8 +16,8 @@ export type Pizza = {
 
 export type Filter = {
   name: string;
-  sortProperty: 'rating' | 'price' | 'title';
-  sortOrder: 'asc' | 'desc';
+  sortProperty: 'name' | 'price';
+  sortOrder: 'ASC' | 'DESC';
 };
 
 export type PizzaCart = {
