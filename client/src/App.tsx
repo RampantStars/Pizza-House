@@ -13,37 +13,18 @@ import { Login } from './pages/Login';
 import { User } from './pages/User';
 import { Admin } from './pages/Admin';
 import { useCategoryStore } from './Utils/Stores/CategoryStore';
-import { useSizeStore } from './Utils/Stores/SizeStore';
-import { useDoughTypeStore } from './Utils/Stores/DoughType.Store';
-import { useIngredientStore } from './Utils/Stores/IngredientStore';
-import { useTypeIngredientStore } from './Utils/Stores/TypeIngredientSrote';
-import { useUserStore } from './Utils/Stores/UserStore';
 import { useAdditionalIngredientStore } from './Utils/Stores/AdditionalIngredientsStore';
 
 function App() {
   const fetchCategories = useCategoryStore((state) => state.fetchCategories);
-  const fetchSizes = useSizeStore((state) => state.fetchSizes);
-  const fetchDoughTypes = useDoughTypeStore((state) => state.fetchDoughTypes);
-  const fetchIngredients = useIngredientStore((state) => state.fetchIngredients);
   const fetchAdditionalIngredients = useAdditionalIngredientStore(
     (state) => state.fetchAdditionalIngredients,
   );
-  const fetchTypeIngredients = useTypeIngredientStore((state) => state.fetchTypeIngredients);
-  const { fetchUsers, fetchRole } = useUserStore(({ fetchUsers, fetchRole }) => ({
-    fetchUsers,
-    fetchRole,
-  }));
 
   const fetchData = async () => {
     try {
-      fetchDoughTypes();
       fetchCategories();
-      fetchSizes();
-      fetchIngredients();
       fetchAdditionalIngredients();
-      fetchTypeIngredients();
-      fetchUsers();
-      fetchRole();
     } catch (error) {
       console.log('error :>> ', error);
     }
@@ -52,6 +33,7 @@ function App() {
   React.useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.App}>
