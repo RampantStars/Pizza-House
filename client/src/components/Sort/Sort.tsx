@@ -35,11 +35,14 @@ export const Sort: React.FC = () => {
             {filters.map((obj, id) => (
               <li
                 key={id}
-                onClick={() => selectedFilter(obj)}
+                onClick={() => {
+                  selectedFilter(obj);
+                  setIsVisible(false);
+                }}
                 className={
                   currentFilter.sortProperty === obj.sortProperty &&
                   currentFilter.sortOrder === obj.sortOrder
-                    ? 'active'
+                    ? `${styles.active}`
                     : ''
                 }>
                 {obj.name}
