@@ -5,6 +5,7 @@ import { Disclosure, Popover } from '@headlessui/react';
 import Select from 'react-select';
 import { useState } from 'react';
 import { useUserStore } from '../../Utils/Stores/UserStore';
+import { useCartStore } from '../../Utils/Stores/CartStore';
 
 export const OrderCard = ({ order, isManager = false }: { order: Order; isManager?: boolean }) => {
   const [orderStatusId, setOrderStatusId] = useState<number>(0);
@@ -12,6 +13,7 @@ export const OrderCard = ({ order, isManager = false }: { order: Order; isManage
     orderStatus,
     setStatus,
   }));
+  const createOrder = useCartStore((state) => state.createOrder);
   const parseOrderDate = useOrderDateParser();
   const date = parseOrderDate(order.date);
   const onSave = () => {
@@ -73,6 +75,7 @@ export const OrderCard = ({ order, isManager = false }: { order: Order; isManage
           </ul>
         </Disclosure.Panel>
       </Disclosure>
+      <button onClick={() => createOrder(order)}>Повторить заказ</button>
       <p className={styles.order_status}>Статус: {order.orderStatus.name}</p>
       {isManager && (
         <>

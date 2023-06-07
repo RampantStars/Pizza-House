@@ -90,13 +90,16 @@ export const useCartStore = create<ICartStore>()(
             .json<OrderLine>();
           return orderLine;
         } catch (error: any) {
+          console.log('error :>> ', error);
           throw error;
         }
       },
       createOrder: async (item: Order) => {
         try {
+          console.log('item :>> ', item);
           await ky.post('http://localhost:5000/order', { json: { ...item } }).json<Order>();
         } catch (error: any) {
+          console.log('error :>> ', error);
           throw error;
         }
       },
@@ -108,6 +111,7 @@ export const useCartStore = create<ICartStore>()(
           console.log('item :>> ', pizzaVariation);
           return pizzaVariation;
         } catch (error: any) {
+          console.log('error :>> ', error);
           throw error;
         }
       },

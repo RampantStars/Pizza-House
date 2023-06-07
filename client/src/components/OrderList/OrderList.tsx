@@ -25,7 +25,7 @@ export const OrderList = () => {
           <h2>Текущий заказ</h2>
           <ul className={styles.list}>
             {currentOrders.map((order) => (
-              <OrderCard key={order.id} order={order} />
+              <OrderCard key={order.id} isManager order={order} />
             ))}
           </ul>
         </>
