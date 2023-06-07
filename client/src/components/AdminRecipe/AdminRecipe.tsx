@@ -3,9 +3,8 @@ import { useModalFramesStore } from '../../Utils/Stores/ModalFramesStore';
 import { useRecipeStore } from '../../Utils/Stores/RecipeStore';
 import { RecipeCardAdmin } from '../RecipeCardAdmin';
 import { shallow } from 'zustand/shallow';
-import { useCategoryStore } from '../../Utils/Stores/CategoryStore';
-import { useFilterStore } from '../../Utils/Stores/FilterStore';
 import React from 'react';
+import { useUserStore } from '../../Utils/Stores/UserStore';
 
 export const AdminRecipe = () => {
   const setIsOpen = useModalFramesStore((state) => state.setIsOpen);
@@ -18,6 +17,8 @@ export const AdminRecipe = () => {
     shallow,
   );
 
+  const user = useUserStore((state) => state.user);
+  const isAdmin = user.roles.find((role) => role.value === 'ADMIN');
   React.useEffect(() => {
     fetchRecipes(
       '',
@@ -33,9 +34,11 @@ export const AdminRecipe = () => {
 
   return (
     <div className={styles.adminRecipe}>
-      <button className={styles.btn} onClick={() => setIsOpen('recipeModalIsOpen', true)}>
-        Добавить рецепт
-      </button>
+      {isAdmin && (
+        <button className={styles.btn} onClick={() => setIsOpen('recipeModalIsOpen', true)}>
+          Добавить рецепт
+        </button>
+      )}
       <h2>В продаже</h2>
       <ul className={styles.recipeList}>
         {recipes.map(

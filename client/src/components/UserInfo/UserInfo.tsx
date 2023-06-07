@@ -12,7 +12,7 @@ export const UserInfo = () => {
         </li>
         <li className={styles.item}>
           {user.roles.map((role) => (
-            <p>
+            <p key={role.id}>
               <span>Роль: </span>
               {role.description}
             </p>

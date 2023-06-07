@@ -52,7 +52,7 @@ export const Home: React.FC = () => {
       <div className={styles.content__items}>
         {isLoading
           ? [...new Array(6)].map((_, index) => <Skeleton key={`s-${index}`} />)
-          : recipes.map((item: Recipe) => <PizzaBlock key={item.id} {...item} />)}
+          : recipes.map((item: Recipe) => item.inStock && <PizzaBlock key={item.id} {...item} />)}
       </div>
       {!isLoading && !isOnePage && <Pagination meta={meta} />}
       <RecipeVariationModal />

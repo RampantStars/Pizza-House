@@ -1,2 +1,213 @@
+@import '../../scss/variables';
 .order {
+  position: relative;
+  border: 2px solid $text;
+  border-radius: 12px;
+  padding: 10px;
+  width: 450px;
+  &__info {
+    padding: 0 10px;
+    text-align: left;
+  }
+  &__list {
+    overflow: scroll;
+    max-height: 200px;
+  }
+  &__btn {
+    padding: 5px;
+    width: 100%;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  &_status {
+    padding-top: 10px;
+  }
+}
+
+.cart {
+  &__item {
+    position: relative;
+    column-gap: 10px;
+    display: flex;
+    padding: 5px 0;
+    border-top: 1px solid $gray-line;
+    border-bottom: 1px solid $gray-line;
+
+    &_img {
+      display: flex;
+      align-items: center;
+
+      width: 80px;
+      height: 80px;
+    }
+
+    &Info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 40%;
+
+      h3 {
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 27px;
+        letter-spacing: 0.01em;
+      }
+
+      p {
+        font-size: 18px;
+        color: #8d8d8d;
+      }
+    }
+
+    &Count {
+      display: flex;
+      align-items: center;
+      b {
+        font-size: 22px;
+      }
+    }
+
+    &Price {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 33%;
+
+      b {
+        font-weight: bold;
+        font-size: 22px;
+        letter-spacing: 0.01em;
+      }
+    }
+
+    .popover {
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 15px;
+      &__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        width: 25px;
+        height: 25px;
+        border: 2px solid $text;
+        border-radius: 50%;
+        background-color: $gray-line;
+        &:focus,
+        &:hover {
+          color: $btn__bg;
+          background-color: white;
+          border-color: $btn__bg;
+        }
+      }
+      &__list {
+        flex-direction: row;
+      }
+      &__item {
+        position: relative;
+        font-size: 12px;
+
+        &:not(:last-child)::after {
+          position: absolute;
+          right: 4px;
+          top: 0;
+          transform: translate(0.5rem, 0px);
+
+          content: ',';
+        }
+        &:last-child::after {
+          position: absolute;
+          right: 4px;
+          top: 0;
+          transform: translate(0.5rem, 0px);
+
+          content: '.';
+        }
+      }
+      &__panel {
+        width: 300px;
+        z-index: 1;
+        border-radius: 12px;
+        position: absolute;
+        padding: 5px;
+        border: 2px solid $info;
+        background-color: $gray-line;
+        p {
+          color: $text;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.popover {
+  position: relative;
+  &__btn {
+    cursor: pointer;
+    padding: 5px;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    background: $btn__bg;
+    font-weight: bold;
+    border-radius: 5px;
+    &:focus,
+    &:hover {
+      color: $btn__bg;
+      background-color: transparent;
+      border-color: $btn__bg;
+    }
+    &Edit {
+      cursor: pointer;
+      display: flex;
+      padding: 3px;
+      background: transparent;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      background: $btn__bg;
+      font-weight: bold;
+      border-radius: 5px;
+      &:focus,
+      &:hover {
+        color: $btn__bg;
+        background-color: transparent;
+        border-color: $btn__bg;
+      }
+      svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+
+  &__panel {
+    margin-top: 5px;
+    position: absolute;
+    width: max-content;
+    padding: 5px;
+    background-color: $gray-line;
+    border: 1px solid $btn__bg;
+    border-radius: 5px;
+    z-index: 2;
+    &Role {
+      margin-top: 5px;
+      left: 0;
+      position: absolute;
+      width: max-content;
+      padding: 5px;
+      background-color: $gray-line;
+      border: 1px solid $btn__bg;
+      border-radius: 5px;
+      z-index: 2;
+    }
+    .info {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
 }

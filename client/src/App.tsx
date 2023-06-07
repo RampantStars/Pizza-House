@@ -14,6 +14,7 @@ import { User } from './pages/User';
 import { Admin } from './pages/Admin';
 import { useCategoryStore } from './Utils/Stores/CategoryStore';
 import { useAdditionalIngredientStore } from './Utils/Stores/AdditionalIngredientsStore';
+import { Manager } from './pages/Manager';
 
 function App() {
   const fetchCategories = useCategoryStore((state) => state.fetchCategories);
@@ -42,6 +43,7 @@ function App() {
           <Routes>
             <Route path="/admin" element={<Admin />} />
             <Route path="/user" element={<User />} />
+            <Route path="/manager" element={<Manager />} />
             <Route path="/registration" element={<Registration />} />
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />

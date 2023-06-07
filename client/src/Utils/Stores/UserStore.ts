@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Error, Order, Role, User } from '../types/types';
+import { Error, Order, OrderStatus, Role, User } from '../types/types';
 import ky from 'ky';
 import jwtDecode from 'jwt-decode';
 import { ILogin, IRegistration, IResLogIn, IUserStore } from '../interface/interface';
@@ -11,6 +11,7 @@ export const useUserStore = create<IUserStore>()(
       users: [] as User[],
       user: {} as User,
       orders: [] as Order[],
+      orderStatus: [] as OrderStatus[],
       token: '',
       Error: {} as Error,
       isAuth: false,
@@ -53,6 +54,33 @@ export const useUserStore = create<IUserStore>()(
         try {
           const roles: Role[] = await ky.get(`http://localhost:5000/role`).json();
           set({ roles: [...roles] });
+        } catch (error: any) {
+          const errorJson: Error = await error.response.json();
+          set({ Error: { ...errorJson } });
+          throw errorJson;
+        }
+      },
+      fetchOrderStatus: async () => {
+        try {
+          const orderStatus: OrderStatus[] = await ky
+            .get(`http://localhost:5000/orderStatus`)
+            .json();
+          set({ orderStatus: [...orderStatus] });
+        } catch (error: any) {
+          const errorJson: Error = await error.response.json();
+          set({ Error: { ...errorJson } });
+          throw errorJson;
+        }
+      },
+      setStatus: async (id: number, statusId: number) => {
+        try {
+          const orderData: Order = await ky
+            .patch(`http://localhost:5000/order/${id}`, { json: { orderStatusId: statusId } })
+            .json();
+          const newOrder = get().orders.map((order) =>
+            order.id === orderData.id ? { ...orderData } : { ...order },
+          );
+          set({ orders: [...newOrder] });
         } catch (error: any) {
           const errorJson: Error = await error.response.json();
           set({ Error: { ...errorJson } });

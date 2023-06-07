@@ -127,12 +127,23 @@ export type OrderStatus = {
   order: Order[];
 };
 
+export type OrderDate = {
+  year: number;
+  month: number;
+  day: number;
+  hour: number;
+  minute: number;
+};
+
 export type Order = {
+  id?: number;
+  date: string;
   price: number;
   address: string;
   quantityItem: number;
   comment: string;
   userId: number;
+  user: User;
   orderStatus: OrderStatus;
   orderLines: OrderLine[];
 };

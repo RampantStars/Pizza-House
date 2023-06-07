@@ -42,8 +42,7 @@ export const UserControls = () => {
         ''
       )}
       {user.roles.find((role) => role.value.toUpperCase() === 'MANAGER') ? (
-        <Link to="/order">
-          {' '}
+        <Link to="/manager">
           <svg width="50px" height="50px" viewBox="0 0 512 512">
             <path
               d="m493.061 79.407v252.333h-474.979v-252.333a29.677 29.677 0 0 1 29.686-29.686h415.607a29.677 29.677 0 0 1 29.686 29.686z"

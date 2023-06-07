@@ -6,6 +6,7 @@ import {
   Filter,
   Ingredient,
   Order,
+  OrderStatus,
   Recipe,
   Role,
   Size,
@@ -185,6 +186,7 @@ export interface IUserStore {
   users: User[];
   roles: Role[];
   user: User;
+  orderStatus: OrderStatus[];
   orders: Order[];
   token: string;
   Error: Error;
@@ -192,8 +194,10 @@ export interface IUserStore {
   registrationUser: (registration: IRegistration) => void;
   logIn: (login: ILogin) => void;
   logOut: () => void;
+  setStatus: (id: number, statusId: number) => void;
   fetchOrder: (id: number) => void;
   fetchUser: (id: number) => Promise<User>;
+  fetchOrderStatus: () => void;
   fetchRole: () => void;
   fetchUsers: () => void;
   setRole: (userId: number, roleId: number) => void;

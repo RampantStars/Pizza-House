@@ -76,6 +76,7 @@ export const useCartStore = create<ICartStore>()(
         const totalPrice = itemCart ? itemCart.quantity * price : 0;
         return totalPrice;
       },
+
       // метод для получения общей стоимости товаров, находящихся в корзине
       getTotalPrice: () => get().cart.reduce((x, y) => get().getItemPrice(y.id) + x, 0),
       createOrderLine: async (item: CartItem) => {
